@@ -9,7 +9,6 @@ import {
   YAxis,
   Tooltip,
   Legend,
-  BarChart,
   Bar,
   AreaChart,
   Area,
@@ -17,11 +16,37 @@ import {
   Pie,
   Cell,
   ResponsiveContainer,
+  ComposedChart,
+  Scatter,
 } from "recharts";
 
-type ChartType = "line" | "bar" | "area" | "pie";
+type ChartType = "line" | "bar" | "area" | "pie" | "composed";
 
 type GenericRecord = Record<string, unknown>;
+
+type SeriesConfig = {
+  kind: "line" | "bar" | "area" | "scatter";
+  dataKey: string;
+  name?: string;
+  yAxisId?: string; // defaults to 'left'
+  color?: string;
+  strokeWidth?: number;
+  dot?: boolean;
+  stackId?: string;
+  type?: "monotone" | "linear" | "step" | "natural";
+  barSize?: number;
+  fillOpacity?: number;
+};
+
+type YAxisConfig = {
+  id: string; // e.g. 'left', 'right'
+  orientation?: "left" | "right";
+  allowDecimals?: boolean;
+  domain?: [
+    number | "auto" | "dataMin" | "dataMax",
+    number | "auto" | "dataMin" | "dataMax"
+  ];
+};
 
 type ChartConfig = {
   chartType: ChartType;
@@ -31,6 +56,9 @@ type ChartConfig = {
   height?: number;
   xKey?: string;
   yKey?: string;
+  yKeys?: string[];
+  series?: SeriesConfig[];
+  yAxes?: YAxisConfig[];
   nameKey?: string; // for pie
   valueKey?: string; // for pie
   colors?: string[];
@@ -89,6 +117,7 @@ export default function ChartPage() {
     const chartType: ChartType = (payload.chartType as ChartType) ?? "line";
     const xKey = (payload.xKey as string) ?? "name";
     const yKey = (payload.yKey as string) ?? "value";
+    const yKeys = (payload.yKeys as string[] | undefined) ?? undefined;
     const nameKey = (payload.nameKey as string) ?? "name";
     const valueKey = (payload.valueKey as string) ?? "value";
     const width = (payload.width as number) ?? undefined;
@@ -103,7 +132,9 @@ export default function ChartPage() {
       "#d0ed57",
     ];
 
-    let data = Array.isArray(payload.data) ? (payload.data as GenericRecord[]) : [];
+    let data = Array.isArray(payload.data)
+      ? (payload.data as GenericRecord[])
+      : [];
     if (data.length === 0) {
       data = chartType === "pie" ? DEFAULT_PIE_DATA : DEFAULT_LINE_DATA;
     }
@@ -113,6 +144,9 @@ export default function ChartPage() {
       data,
       xKey,
       yKey,
+      yKeys,
+      series: (payload.series as SeriesConfig[] | undefined) ?? undefined,
+      yAxes: (payload.yAxes as YAxisConfig[] | undefined) ?? undefined,
       nameKey,
       valueKey,
       width,
@@ -130,9 +164,98 @@ export default function ChartPage() {
     const height = config.height;
     const xKey = config.xKey ?? "name";
     const yKey = config.yKey ?? "value";
+    const yKeys = config.yKeys;
     const nameKey = config.nameKey ?? "name";
     const valueKey = config.valueKey ?? "value";
     const colors = config.colors;
+    const series = config.series;
+    const yAxes = config.yAxes;
+    if (chartType === "composed") {
+      return (
+        <ResponsiveContainer width="100%" height={height ?? 360}>
+          <ComposedChart
+            data={data as any}
+            margin={{ top: 8, right: 16, bottom: 8, left: 0 }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey={xKey} />
+            {(yAxes && yAxes.length > 0
+              ? yAxes
+              : [{ id: "left", orientation: "left" as const }]
+            ).map((axis, idx) => (
+              <YAxis
+                key={axis.id}
+                yAxisId={axis.id}
+                orientation={axis.orientation ?? (idx === 0 ? "left" : "right")}
+                allowDecimals={axis.allowDecimals}
+                domain={axis.domain as any}
+              />
+            ))}
+            <Tooltip />
+            <Legend />
+            {(series ?? []).map((s, index) => {
+              const color =
+                s.color ?? colors?.[index % (colors?.length ?? 1)] ?? "#8884d8";
+              const yAxisId = s.yAxisId ?? "left";
+              if (s.kind === "line") {
+                return (
+                  <Line
+                    key={`s-${index}`}
+                    type={s.type ?? "monotone"}
+                    dataKey={s.dataKey}
+                    name={s.name}
+                    yAxisId={yAxisId}
+                    stroke={color}
+                    strokeWidth={s.strokeWidth ?? 2}
+                    dot={s.dot ?? false}
+                  />
+                );
+              }
+              if (s.kind === "bar") {
+                return (
+                  <Bar
+                    key={`s-${index}`}
+                    dataKey={s.dataKey}
+                    name={s.name}
+                    yAxisId={yAxisId}
+                    fill={color}
+                    stackId={s.stackId}
+                    barSize={s.barSize}
+                    fillOpacity={s.fillOpacity}
+                  />
+                );
+              }
+              if (s.kind === "area") {
+                return (
+                  <Area
+                    key={`s-${index}`}
+                    type={s.type ?? "monotone"}
+                    dataKey={s.dataKey}
+                    name={s.name}
+                    yAxisId={yAxisId}
+                    stroke={color}
+                    fill={color}
+                    strokeWidth={s.strokeWidth ?? 2}
+                    fillOpacity={s.fillOpacity ?? 0.3}
+                  />
+                );
+              }
+              // scatter
+              return (
+                <Scatter
+                  key={`s-${index}`}
+                  dataKey={s.dataKey}
+                  name={s.name}
+                  yAxisId={yAxisId}
+                  fill={color}
+                  fillOpacity={s.fillOpacity}
+                />
+              );
+            })}
+          </ComposedChart>
+        </ResponsiveContainer>
+      );
+    }
 
     if (chartType === "pie") {
       return (
@@ -148,7 +271,10 @@ export default function ChartPage() {
               label
             >
               {(data as any[]).map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={colors![index % colors!.length]} />
+                <Cell
+                  key={`cell-${index}`}
+                  fill={colors![index % colors!.length]}
+                />
               ))}
             </Pie>
             <Tooltip />
@@ -158,29 +284,25 @@ export default function ChartPage() {
       );
     }
 
-    if (chartType === "bar") {
-      return (
-        <ResponsiveContainer width="100%" height={height ?? 360}>
-          <BarChart data={data as any} margin={{ top: 8, right: 16, bottom: 8, left: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey={xKey} />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey={yKey} fill={colors?.[0] ?? "#8884d8"} />
-          </BarChart>
-        </ResponsiveContainer>
-      );
-    }
-
     if (chartType === "area") {
       return (
         <ResponsiveContainer width="100%" height={height ?? 360}>
-          <AreaChart data={data as any} margin={{ top: 8, right: 16, bottom: 8, left: 0 }}>
+          <AreaChart
+            data={data as any}
+            margin={{ top: 8, right: 16, bottom: 8, left: 0 }}
+          >
             <defs>
               <linearGradient id="colorY" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor={colors?.[0] ?? "#8884d8"} stopOpacity={0.8} />
-                <stop offset="95%" stopColor={colors?.[0] ?? "#8884d8"} stopOpacity={0.2} />
+                <stop
+                  offset="5%"
+                  stopColor={colors?.[0] ?? "#8884d8"}
+                  stopOpacity={0.8}
+                />
+                <stop
+                  offset="95%"
+                  stopColor={colors?.[0] ?? "#8884d8"}
+                  stopOpacity={0.2}
+                />
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" />
@@ -188,7 +310,13 @@ export default function ChartPage() {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Area type="monotone" dataKey={yKey} stroke={colors?.[0] ?? "#8884d8"} fillOpacity={1} fill="url(#colorY)" />
+            <Area
+              type="monotone"
+              dataKey={yKey}
+              stroke={colors?.[0] ?? "#8884d8"}
+              fillOpacity={1}
+              fill="url(#colorY)"
+            />
           </AreaChart>
         </ResponsiveContainer>
       );
@@ -197,13 +325,35 @@ export default function ChartPage() {
     // default: line
     return (
       <ResponsiveContainer width="100%" height={height ?? 360}>
-        <LineChart data={data as any} margin={{ top: 8, right: 16, bottom: 8, left: 0 }}>
+        <LineChart
+          data={data as any}
+          margin={{ top: 8, right: 16, bottom: 8, left: 0 }}
+        >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey={xKey} />
           <YAxis />
           <Tooltip />
           <Legend />
-          <Line type="monotone" dataKey={yKey} stroke={colors?.[0] ?? "#8884d8"} strokeWidth={2} dot={false} />
+          {Array.isArray(yKeys) && yKeys.length > 0 ? (
+            yKeys.map((key, index) => (
+              <Line
+                key={key}
+                type="monotone"
+                dataKey={key}
+                stroke={colors?.[index % (colors?.length ?? 1)] ?? "#8884d8"}
+                strokeWidth={2}
+                dot={false}
+              />
+            ))
+          ) : (
+            <Line
+              type="monotone"
+              dataKey={yKey}
+              stroke={colors?.[0] ?? "#8884d8"}
+              strokeWidth={2}
+              dot={false}
+            />
+          )}
         </LineChart>
       </ResponsiveContainer>
     );
@@ -217,7 +367,17 @@ export default function ChartPage() {
         <h2 className="text-xl font-semibold">Chart</h2>
       )}
       <div style={{ width: "100%", height: (config?.height ?? 360) + 24 }}>
-        {content}
+        {content ?? (
+          <div className="w-full h-full rounded-md border border-[color:var(--foreground)]/10 p-4 animate-pulse">
+            <div className="h-6 w-1/3 mb-4 bg-[color:var(--foreground)]/10 rounded" />
+            <div className="h-[260px] w-full bg-[color:var(--foreground)]/10 rounded" />
+            <div className="mt-4 flex items-center gap-2">
+              <div className="h-3 w-20 bg-[color:var(--foreground)]/10 rounded" />
+              <div className="h-3 w-20 bg-[color:var(--foreground)]/10 rounded" />
+              <div className="h-3 w-20 bg-[color:var(--foreground)]/10 rounded" />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
