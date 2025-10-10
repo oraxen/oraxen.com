@@ -76,6 +76,12 @@ The `<NextChatSDKBootstrap>` component patches browser APIs to work correctly wi
 
 **Note:** `suppressHydrationWarning` is currently required because ChatGPT modifies the initial HTML before the Next.js app hydrates, causing hydration mismatches.
 
+### 5. Recharts Chart Widget (`app/chart/page.tsx` and MCP tool `render_chart`)
+
+- `app/chart/page.tsx` renders charts using Recharts. It reads `window.openai.toolOutput` set by the MCP tool and supports `line`, `bar`, `area`, and `pie` types.
+- The MCP tool `render_chart` returns `structuredContent` with fields like `chartType`, `data`, `xKey`, `yKey`, `nameKey`, `valueKey`, `title`, `height`, `width`, and `colors`.
+- The widget resource is registered with `templateUri` `ui://widget/chart-template.html` and serves the `/chart` HTML for iframe rendering.
+
 ## Getting Started
 
 ### Installation
@@ -115,6 +121,8 @@ http://localhost:3000/mcp
 
 ```
 app/
+    ├── chart/
+    │   └── page.tsx          # Client page rendering Recharts charts
 ├── mcp/
 │   └── route.ts          # MCP server with tool/resource registration
 ├── layout.tsx            # Root layout with SDK bootstrap
@@ -131,6 +139,7 @@ next.config.ts            # Asset prefix configuration
 3. **Widget Rendering**: ChatGPT fetches the resource HTML and renders it in an iframe
 4. **Client Hydration**: Next.js hydrates the app inside the iframe with patched APIs
 5. **Navigation**: Client-side navigation uses patched `fetch` to load RSC payloads
+6. **Chart Rendering**: The chart page reads the tool's `structuredContent` and renders a Recharts chart accordingly
 
 ## Learn More
 
