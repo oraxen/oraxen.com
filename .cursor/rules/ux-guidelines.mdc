@@ -1,0 +1,363 @@
+---
+alwaysApply: true
+---
+
+# Build a Custom UX & UI Components for ChatGPT Apps
+
+## Overview
+
+**UI components** turn structured tool results into a human-friendly UI.  
+Apps SDK components are typically **React components** that run inside an iframe, communicate with the host via the `window.openai` API, and render inline within the conversation.
+
+This guide describes how to:
+- Structure your component project
+- Bundle it
+- Wire it up to your MCP server
+
+You can also check out the **examples repository** on GitHub for reference.
+
+---
+
+## Understand the `window.openai` API
+
+`window.openai` is the **bridge** between your frontend and ChatGPT.  
+It allows your UI to manage data, state, and layout interactions between your component and the ChatGPT host.
+
+### Type Declarations
+
+```ts
+declare global {
+  interface Window {
+    openai: API & OpenAiGlobals;
+  }
+
+  interface WindowEventMap {
+    [SET_GLOBALS_EVENT_TYPE]: SetGlobalsEvent;
+  }
+}
+
+type OpenAiGlobals<
+  ToolInput extends UnknownObject = UnknownObject,
+  ToolOutput extends UnknownObject = UnknownObject,
+  ToolResponseMetadata extends UnknownObject = UnknownObject,
+  WidgetState extends UnknownObject = UnknownObject
+> = {
+  theme: Theme;
+  userAgent: UserAgent;
+  locale: string;
+
+  // layout
+  maxHeight: number;
+  displayMode: DisplayMode;
+  safeArea: SafeArea;
+
+  // state
+  toolInput: ToolInput;
+  toolOutput: ToolOutput | null;
+  toolResponseMetadata: ToolResponseMetadata | null;
+  widgetState: WidgetState | null;
+};
+````
+
+### API Methods
+
+```ts
+type API<WidgetState extends UnknownObject> = {
+  /** Calls a tool on your MCP. Returns the full response. */
+  callTool: (name: string, args: Record<string, unknown>) => Promise<CallToolResponse>;
+
+  /** Triggers a follow-up turn in the ChatGPT conversation */
+  sendFollowUpMessage: (args: { prompt: string }) => Promise<void>;
+
+  /** Opens an external link, redirects web page or mobile app */
+  openExternal(payload: { href: string }): void;
+
+  /** Requests an alternate display mode (inline, PiP, fullscreen) */
+  requestDisplayMode: (args: { mode: DisplayMode }) => Promise<{ mode: DisplayMode }>;
+
+  /** Persists widget state */
+  setWidgetState: (state: WidgetState) => Promise<void>;
+};
+```
+
+### Event Handling
+
+```ts
+export const SET_GLOBALS_EVENT_TYPE = "openai:set_globals";
+
+export class SetGlobalsEvent extends CustomEvent<{
+  globals: Partial<OpenAiGlobals>;
+}> {
+  readonly type = SET_GLOBALS_EVENT_TYPE;
+}
+```
+
+---
+
+## React Hook: `useOpenAiGlobal`
+
+Many Apps SDK projects wrap `window.openai` access inside small **React hooks** for testability and reactivity.
+
+```ts
+export function useOpenAiGlobal<K extends keyof OpenAiGlobals>(
+  key: K
+): OpenAiGlobals[K] {
+  return useSyncExternalStore(
+    (onChange) => {
+      const handleSetGlobal = (event: SetGlobalsEvent) => {
+        const value = event.detail.globals[key];
+        if (value === undefined) return;
+        onChange();
+      };
+
+      window.addEventListener(SET_GLOBALS_EVENT_TYPE, handleSetGlobal, { passive: true });
+      return () => window.removeEventListener(SET_GLOBALS_EVENT_TYPE, handleSetGlobal);
+    },
+    () => window.openai[key]
+  );
+}
+```
+
+### Example Usage
+
+```ts
+export function useToolInput() {
+  return useOpenAiGlobal('toolInput');
+}
+
+export function useToolOutput() {
+  return useOpenAiGlobal('toolOutput');
+}
+
+export function useToolResponseMetadata() {
+  return useOpenAiGlobal('toolResponseMetadata');
+}
+```
+
+This hook allows your app to reactively respond to theme changes, display mode shifts, or tool updates.
+
+---
+
+## Persist Component State & Expose Context to ChatGPT
+
+`widgetState` persists user data across sessions and exposes it to ChatGPT.
+Everything passed to `setWidgetState` becomes visible to the model and hydrated into `window.openai.widgetState`.
+
+⚠️ **Performance Tip:** Keep widget state small — ideally under **4K tokens**.
+
+---
+
+## Trigger Server Actions
+
+Use `window.openai.callTool()` to directly invoke tools on your MCP server.
+
+```ts
+async function refreshPlaces(city: string) {
+  await window.openai?.callTool("refresh_pizza_list", { city });
+}
+```
+
+Ensure your tool is marked as **component-initiable**.
+
+---
+
+## Send Conversational Follow-Ups
+
+```ts
+await window.openai?.sendFollowUpMessage({
+  prompt: "Draft a tasting itinerary for the pizzerias I favorited.",
+});
+```
+
+This inserts a new message into the ChatGPT conversation as if the user had asked it.
+
+---
+
+## Request Alternate Layouts
+
+If your UI requires more space (e.g., maps, tables, editors), request fullscreen or PiP mode.
+
+```ts
+await window.openai?.requestDisplayMode({ mode: "fullscreen" });
+// Note: On mobile, PiP may be coerced to fullscreen
+```
+
+---
+
+## Use Host-Backed Navigation
+
+Skybridge (the sandbox runtime) mirrors the iframe’s navigation into ChatGPT’s UI.
+
+### React Router Example
+
+```tsx
+export default function PizzaListRouter() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<PizzaListApp />}>
+          <Route path="place/:placeId" element={<PizzaListApp />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+}
+```
+
+### Programmatic Navigation
+
+```ts
+const navigate = useNavigate();
+
+function openDetails(placeId: string) {
+  navigate(`place/${placeId}`, { replace: false });
+}
+
+function closeDetails() {
+  navigate("..", { replace: true });
+}
+```
+
+---
+
+## Scaffold the Component Project
+
+Keep frontend code separate from your MCP server logic.
+
+```
+app/
+  server/            # MCP server (Python or Node)
+  web/               # Component bundle source
+    package.json
+    tsconfig.json
+    src/component.tsx
+    dist/component.js   # Build output
+```
+
+### Initialize the Project
+
+```bash
+cd app/web
+npm init -y
+npm install react@^18 react-dom@^18
+npm install -D typescript esbuild
+```
+
+Keep dependencies minimal to reduce bundle size.
+
+---
+
+## Author the React Component
+
+Mount your app into the host shell and use the OpenAI globals for layout and data.
+
+### Example: “Pizza List” App
+
+1. **Mount the component**
+
+```ts
+createRoot(document.getElementById("pizzaz-list-root"))
+  .render(<PizzaListApp />);
+```
+
+2. **Subscribe to host globals**
+
+```ts
+const displayMode = useOpenAiGlobal("displayMode");
+const maxHeight = useOpenAiGlobal("maxHeight");
+```
+
+3. **Render from tool output**
+
+```ts
+const places = useOpenAiGlobal("toolOutput");
+```
+
+4. **Persist state & trigger actions**
+
+```ts
+await window.openai.setWidgetState(newFavorites);
+await window.openai.requestDisplayMode({ mode: "fullscreen" });
+await window.openai.callTool("refresh_pizza_list", { city });
+```
+
+---
+
+## Explore Example Components
+
+| Component           | Description                                           |
+| ------------------- | ----------------------------------------------------- |
+| **Pizzaz List**     | Ranked card list with favorites and CTA buttons       |
+| **Pizzaz Carousel** | Media-heavy horizontal scroller (embla-powered)       |
+| **Pizzaz Map**      | Mapbox integration with fullscreen inspector          |
+| **Pizzaz Album**    | Stacked gallery for single-item deep dives            |
+| **Pizzaz Video**    | Scripted player with overlays and fullscreen controls |
+
+Each example demonstrates asset bundling, host API usage, and state management for conversational UIs.
+
+---
+
+## React Helper Hook: `useWidgetState`
+
+Keeps host-persisted widget state synchronized with React local state.
+
+```ts
+export function useWidgetState<T extends WidgetState>(
+  defaultState?: T | (() => T | null) | null
+): readonly [T | null, (state: SetStateAction<T | null>) => void] {
+  const widgetStateFromWindow = useOpenAiGlobal("widgetState") as T;
+  const [widgetState, _setWidgetState] = useState<T | null>(() =>
+    widgetStateFromWindow ?? (typeof defaultState === "function"
+      ? defaultState()
+      : defaultState ?? null)
+  );
+
+  useEffect(() => {
+    _setWidgetState(widgetStateFromWindow);
+  }, [widgetStateFromWindow]);
+
+  const setWidgetState = useCallback((state: SetStateAction<T | null>) => {
+    _setWidgetState(prev => {
+      const newState = typeof state === "function" ? state(prev) : state;
+      if (newState != null) window.openai.setWidgetState(newState);
+      return newState;
+    });
+  }, []);
+
+  return [widgetState, setWidgetState] as const;
+}
+```
+
+---
+
+## Bundle for the Iframe
+
+Use **esbuild** to bundle your React component.
+
+```json
+{
+  "scripts": {
+    "build": "esbuild src/component.tsx --bundle --format=esm --outfile=dist/component.js"
+  }
+}
+```
+
+Run:
+
+```bash
+npm run build
+```
+
+If esbuild reports missing dependencies, recheck `npm install` and import paths.
+
+---
+
+## Embed the Component in the Server Response
+
+Refer to the **“Set up your server”** documentation to embed the component within your MCP server response.
+
+> ✅ **Recommendation:** Use component UI templates for production.
+
+During development, rebuild your component bundle whenever React code changes for live updates.
+
+---
