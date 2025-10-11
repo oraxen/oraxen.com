@@ -85,7 +85,9 @@ export default function ChartPage() {
     if (!value) return;
 
     // Accept either nested structuredContent or direct payload
-    const payload = value.structuredContent ?? value;
+    const payload = value.result.structuredContent ?? value;
+
+    console.log("Structured Content ==>", payload.structuredContent);
 
     const chartType: ChartType = (payload.chartType as ChartType) ?? "line";
     const xKey = (payload.xKey as string) ?? "name";
