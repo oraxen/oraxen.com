@@ -9,6 +9,7 @@ import {
   YAxis,
   Tooltip,
   Legend,
+  BarChart,
   Bar,
   AreaChart,
   Area,
@@ -16,37 +17,11 @@ import {
   Pie,
   Cell,
   ResponsiveContainer,
-  ComposedChart,
-  Scatter,
 } from "recharts";
 
-type ChartType = "line" | "bar" | "area" | "pie" | "composed";
+type ChartType = "line" | "bar" | "area" | "pie";
 
 type GenericRecord = Record<string, unknown>;
-
-type SeriesConfig = {
-  kind: "line" | "bar" | "area" | "scatter";
-  dataKey: string;
-  name?: string;
-  yAxisId?: string; // defaults to 'left'
-  color?: string;
-  strokeWidth?: number;
-  dot?: boolean;
-  stackId?: string;
-  type?: "monotone" | "linear" | "step" | "natural";
-  barSize?: number;
-  fillOpacity?: number;
-};
-
-type YAxisConfig = {
-  id: string; // e.g. 'left', 'right'
-  orientation?: "left" | "right";
-  allowDecimals?: boolean;
-  domain?: [
-    number | "auto" | "dataMin" | "dataMax",
-    number | "auto" | "dataMin" | "dataMax"
-  ];
-};
 
 type ChartConfig = {
   chartType: ChartType;
@@ -57,8 +32,6 @@ type ChartConfig = {
   xKey?: string;
   yKey?: string;
   yKeys?: string[];
-  series?: SeriesConfig[];
-  yAxes?: YAxisConfig[];
   nameKey?: string; // for pie
   valueKey?: string; // for pie
   colors?: string[];
@@ -145,8 +118,6 @@ export default function ChartPage() {
       xKey,
       yKey,
       yKeys,
-      series: (payload.series as SeriesConfig[] | undefined) ?? undefined,
-      yAxes: (payload.yAxes as YAxisConfig[] | undefined) ?? undefined,
       nameKey,
       valueKey,
       width,
@@ -168,94 +139,6 @@ export default function ChartPage() {
     const nameKey = config.nameKey ?? "name";
     const valueKey = config.valueKey ?? "value";
     const colors = config.colors;
-    const series = config.series;
-    const yAxes = config.yAxes;
-    if (chartType === "composed") {
-      return (
-        <ResponsiveContainer width="100%" height={height ?? 360}>
-          <ComposedChart
-            data={data as any}
-            margin={{ top: 8, right: 16, bottom: 8, left: 0 }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey={xKey} />
-            {(yAxes && yAxes.length > 0
-              ? yAxes
-              : [{ id: "left", orientation: "left" as const }]
-            ).map((axis, idx) => (
-              <YAxis
-                key={axis.id}
-                yAxisId={axis.id}
-                orientation={axis.orientation ?? (idx === 0 ? "left" : "right")}
-                allowDecimals={axis.allowDecimals}
-                domain={axis.domain as any}
-              />
-            ))}
-            <Tooltip />
-            <Legend />
-            {(series ?? []).map((s, index) => {
-              const color =
-                s.color ?? colors?.[index % (colors?.length ?? 1)] ?? "#8884d8";
-              const yAxisId = s.yAxisId ?? "left";
-              if (s.kind === "line") {
-                return (
-                  <Line
-                    key={`s-${index}`}
-                    type={s.type ?? "monotone"}
-                    dataKey={s.dataKey}
-                    name={s.name}
-                    yAxisId={yAxisId}
-                    stroke={color}
-                    strokeWidth={s.strokeWidth ?? 2}
-                    dot={s.dot ?? false}
-                  />
-                );
-              }
-              if (s.kind === "bar") {
-                return (
-                  <Bar
-                    key={`s-${index}`}
-                    dataKey={s.dataKey}
-                    name={s.name}
-                    yAxisId={yAxisId}
-                    fill={color}
-                    stackId={s.stackId}
-                    barSize={s.barSize}
-                    fillOpacity={s.fillOpacity}
-                  />
-                );
-              }
-              if (s.kind === "area") {
-                return (
-                  <Area
-                    key={`s-${index}`}
-                    type={s.type ?? "monotone"}
-                    dataKey={s.dataKey}
-                    name={s.name}
-                    yAxisId={yAxisId}
-                    stroke={color}
-                    fill={color}
-                    strokeWidth={s.strokeWidth ?? 2}
-                    fillOpacity={s.fillOpacity ?? 0.3}
-                  />
-                );
-              }
-              // scatter
-              return (
-                <Scatter
-                  key={`s-${index}`}
-                  dataKey={s.dataKey}
-                  name={s.name}
-                  yAxisId={yAxisId}
-                  fill={color}
-                  fillOpacity={s.fillOpacity}
-                />
-              );
-            })}
-          </ComposedChart>
-        </ResponsiveContainer>
-      );
-    }
 
     if (chartType === "pie") {
       return (
@@ -280,6 +163,24 @@ export default function ChartPage() {
             <Tooltip />
             <Legend />
           </PieChart>
+        </ResponsiveContainer>
+      );
+    }
+
+    if (chartType === "bar") {
+      return (
+        <ResponsiveContainer width="100%" height={height ?? 360}>
+          <BarChart
+            data={data as any}
+            margin={{ top: 8, right: 16, bottom: 8, left: 0 }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey={xKey} />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey={yKey} fill={colors?.[0] ?? "#8884d8"} />
+          </BarChart>
         </ResponsiveContainer>
       );
     }
