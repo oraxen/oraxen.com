@@ -7,7 +7,7 @@ const getAppsSdkCompatibleHtml = async (baseUrl: string, path: string) => {
   return await result.text();
 };
 
-type ContentWidget = {
+type ChartWidget = {
   id: string;
   title: string;
   templateUri: string;
@@ -17,7 +17,7 @@ type ContentWidget = {
   description: string;
 };
 
-function widgetMeta(widget: ContentWidget) {
+function widgetMeta(widget: ChartWidget) {
   return {
     "openai/outputTemplate": widget.templateUri,
     "openai/toolInvocation/invoking": widget.invoking,
@@ -28,47 +28,10 @@ function widgetMeta(widget: ContentWidget) {
 }
 
 const handler = createMcpHandler(async (server) => {
-  const html = await getAppsSdkCompatibleHtml(baseURL, "/");
   const chartHtml = await getAppsSdkCompatibleHtml(baseURL, "/chart");
 
-  const contentWidget: ContentWidget = {
-    id: "show_content",
-    title: "Show Content",
-    templateUri: "ui://widget/content-template.html",
-    invoking: "Loading content...",
-    invoked: "Content loaded",
-    html: html,
-    description: "Displays the homepage content",
-  };
-  server.registerResource(
-    "content-widget",
-    contentWidget.templateUri,
-    {
-      title: contentWidget.title,
-      description: contentWidget.description,
-      mimeType: "text/html+skybridge",
-      _meta: {
-        "openai/widgetDescription": contentWidget.description,
-        "openai/widgetPrefersBorder": true,
-      },
-    },
-    async (uri) => ({
-      contents: [
-        {
-          uri: uri.href,
-          mimeType: "text/html+skybridge",
-          text: `<html>${contentWidget.html}</html>`,
-          _meta: {
-            "openai/widgetDescription": contentWidget.description,
-            "openai/widgetPrefersBorder": true,
-          },
-        },
-      ],
-    })
-  );
-
   // Chart widget: renders Recharts-based charts at /chart using tool output
-  const chartWidget: ContentWidget = {
+  const chartWidget: ChartWidget = {
     id: "render_chart",
     title: "Render Chart",
     templateUri: "ui://widget/chart-template.html",
