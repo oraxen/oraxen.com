@@ -10,7 +10,7 @@ export const siteConfig = {
     home: "/",
     blog: "/blog",
   },
-  mainCta: "/tutorial",
+  mainCta: "/#how-it-works",
   relensUrl: "https://relens.ai/",
   chatgptPages: ["/chart", "/index.html"],
   blogTitle: "GraphGPT Blog",
