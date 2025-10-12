@@ -1,46 +1,46 @@
-import { Metadata } from "next"
-import Image from "next/image"
-import { notFound } from "next/navigation"
-import { SocialLinks } from "../../../../components/SocialLinks"
-import { siteConfig } from "../../../siteConfig"
-import authorsData from "../../authors/authors.json"
+import { Metadata } from "next";
+import Image from "next/image";
+import { notFound } from "next/navigation";
+import { SocialLinks } from "../../../components/SocialLinks";
+import { siteConfig } from "../../../siteConfig";
+import authorsData from "../../authors/authors.json";
 
 // Author data interface matching the JSON structure
 interface Author {
-  id: string
-  name: string
-  bio: string
-  jobTitle: string
-  profilePicture: string
-  email?: string
-  twitter?: string
-  linkedin?: string
+  id: string;
+  name: string;
+  bio: string;
+  jobTitle: string;
+  profilePicture: string;
+  email?: string;
+  twitter?: string;
+  linkedin?: string;
 }
 
 // Fetch author data from JSON file
 const getAuthorData = async (authorId: string): Promise<Author | null> => {
-  const authors = authorsData as Record<string, Author>
-  return authors[authorId] || null
-}
+  const authors = authorsData as Record<string, Author>;
+  return authors[authorId] || null;
+};
 
 // Generate metadata for SEO
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ id: string }>
+  params: Promise<{ id: string }>;
 }): Promise<Metadata> {
-  const { id } = await params
-  const author = await getAuthorData(id)
+  const { id } = await params;
+  const author = await getAuthorData(id);
 
   if (!author) {
     return {
       title: "Author Not Found",
       description: "The requested author profile could not be found.",
-    }
+    };
   }
 
-  const canonicalUrl = `${siteConfig.url}/blog/author/${id}`
-  const authorImageUrl = `${siteConfig.url}${author.profilePicture}`
+  const canonicalUrl = `${siteConfig.url}/blog/author/${id}`;
+  const authorImageUrl = `${siteConfig.url}${author.profilePicture}`;
 
   return {
     title: `${author.name} - Author Profile | ${siteConfig.name}`,
@@ -68,23 +68,23 @@ export async function generateMetadata({
       description: author.bio,
       images: [authorImageUrl],
     },
-  }
+  };
 }
 
 export default async function AuthorPage({
   params,
 }: {
-  params: Promise<{ id: string }>
+  params: Promise<{ id: string }>;
 }) {
-  const { id } = await params
-  const author = await getAuthorData(id)
+  const { id } = await params;
+  const author = await getAuthorData(id);
 
   if (!author) {
-    notFound()
+    notFound();
   }
 
-  const canonicalUrl = `${siteConfig.url}/blog/author/${id}`
-  const authorImageUrl = `${siteConfig.url}${author.profilePicture}`
+  const canonicalUrl = `${siteConfig.url}/blog/author/${id}`;
+  const authorImageUrl = `${siteConfig.url}${author.profilePicture}`;
 
   // JSON-LD structured data
   const jsonLd = {
@@ -101,7 +101,7 @@ export default async function AuthorPage({
       "@type": "WebPage",
       "@id": canonicalUrl,
     },
-  }
+  };
 
   return (
     <>
@@ -148,5 +148,5 @@ export default async function AuthorPage({
         </div>
       </div>
     </>
-  )
+  );
 }
