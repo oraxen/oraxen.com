@@ -4,8 +4,60 @@ import { siteConfig } from "./siteConfig";
 import Hero from "./components/ui/Hero";
 import HeroImage from "./components/ui/HeroImage";
 import HowItWorks from "./components/ui/HowItWorks";
+import { Faqs } from "./components/ui/Faqs";
+import { buildFaqJsonLd } from "./lib/utils";
 
 export default function Home() {
+  const faqItems = [
+    {
+      question: "What is GraphGPT?",
+      answer:
+        "GraphGPT lets you visualize and interact with structured data as charts directly inside ChatGPT. It renders fast, responsive charts without leaving the conversation.",
+    },
+    {
+      question: "How do I add GraphGPT to ChatGPT?",
+      answer:
+        "In ChatGPT, go to Settings → Connectors → Create. Set the name to GraphGPT, the URL to https://graphgpt.app/mcp, and authentication to No authentication. Then ask ChatGPT to render a chart.",
+    },
+    {
+      question: "Which chart types are supported?",
+      answer: "Line, bar, area, and pie.",
+    },
+    {
+      question: "How do I provide data to a chart?",
+      answer:
+        "Pass an array of objects and specify xKey and yKey for line/bar/area charts. For pie charts, use nameKey and valueKey.",
+    },
+    {
+      question: "Can I plot multiple series?",
+      answer:
+        "Yes. For line charts, provide yKeys with an array of field names to render multiple lines.",
+    },
+    {
+      question: "Can I customize the title, size, and colors?",
+      answer:
+        "Yes. You can set title, height, width, and colors (hex values) in your request.",
+    },
+    {
+      question: "Does GraphGPT store my data?",
+      answer:
+        "No. Data is passed from the conversation to the widget at render time; GraphGPT does not persist it on our servers.",
+    },
+    {
+      question: "What happens if I omit some options?",
+      answer:
+        "GraphGPT chooses sensible defaults: chartType defaults to 'line', xKey to 'name', yKey to 'value', and sample data is used if none is provided.",
+    },
+    {
+      question: "Does GraphGPT work on mobile?",
+      answer: "Yes. Charts are responsive and adapt to the available space.",
+    },
+    {
+      question: "Can ChatGPT convert my text or table into chart data?",
+      answer:
+        "Often yes. Describe your data or paste a small table and ask ChatGPT to render a chart—GraphGPT will visualize the structured output.",
+    },
+  ];
   return (
     <>
       <main className="flex flex-col overflow-hidden">
@@ -67,6 +119,7 @@ export default function Home() {
             },
           ]}
         />
+        <Faqs items={faqItems} jsonLd={buildFaqJsonLd(faqItems)} />
       </main>
     </>
   );
