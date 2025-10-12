@@ -2,12 +2,13 @@
 
 import { siteConfig } from "@/app/siteConfig";
 import useScroll from "../../lib/use-scroll";
-import { cx } from "../../lib/utils";
+import { anyRouteStartsWith, cx } from "../../lib/utils";
 import { RiCloseLine, RiMenuLine } from "@remixicon/react";
 import Link from "next/link";
 import { FC, useEffect, useState } from "react";
 import { BrandLogo } from "../BrandLogo";
 import { Button } from "../Button";
+import { usePathname } from "next/navigation";
 
 interface NavigationProps {
   sticky?: boolean;
@@ -21,8 +22,13 @@ interface NavigationProps {
 
 export const Navigation: FC<NavigationProps> = ({ sticky = true }) => {
   const scrolled = useScroll(15);
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   // const [solutionsOpen, setSolutionsOpen] = useState(false)
+
+  if (anyRouteStartsWith(siteConfig.chatgptPages, pathname)) {
+    return null;
+  }
 
   useEffect(() => {
     const mediaQuery: MediaQueryList = window.matchMedia("(min-width: 768px)");

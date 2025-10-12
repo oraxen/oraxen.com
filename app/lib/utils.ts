@@ -50,3 +50,7 @@ export function buildFaqJsonLd(items: { question: string; answer: string }[]) {
     })),
   };
 }
+
+export function anyRouteStartsWith(routes: string[], pathname: string) {
+  return routes.some((route) => pathname.startsWith(route));
+}

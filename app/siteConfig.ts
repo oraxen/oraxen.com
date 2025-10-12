@@ -10,6 +10,7 @@ export const siteConfig = {
   },
   mainCta: "/tutorial",
   relensUrl: "https://relens.ai/",
+  chatgptPages: ["/chart", "/index.html"],
 };
 
 export type siteConfig = typeof siteConfig;

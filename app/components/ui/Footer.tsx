@@ -1,7 +1,11 @@
+"use client";
+
 import { RiArrowRightUpLine } from "@remixicon/react";
 import Link from "next/link";
 import { BrandLogo } from "../BrandLogo";
 import { siteConfig } from "@/app/siteConfig";
+import { usePathname } from "next/navigation";
+import { anyRouteStartsWith } from "@/app/lib/utils";
 
 const navigation = {
   // product: [
@@ -31,6 +35,11 @@ const navigation = {
 };
 
 export default function Footer() {
+  const pathname = usePathname();
+  console.log("pathname", pathname);
+  if (anyRouteStartsWith(siteConfig.chatgptPages, pathname)) {
+    return null;
+  }
   return (
     <footer id="footer">
       <div className="mx-auto max-w-6xl px-3 pb-8 pt-16 sm:pt-24 lg:pt-32">

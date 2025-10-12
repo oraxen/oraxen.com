@@ -18,6 +18,7 @@ import {
   Cell,
   ResponsiveContainer,
 } from "recharts";
+import Loading from "./loading";
 
 type ChartType = "line" | "bar" | "area" | "pie";
 
@@ -85,7 +86,8 @@ export default function ChartPage() {
     if (!value) return;
 
     // Accept either nested structuredContent or direct payload
-    const payload = value.result.structuredContent ?? value;
+    console.log("Value ==>", value);
+    const payload = value?.result?.structuredContent ?? value;
 
     console.log("Structured Content ==>", payload.structuredContent);
 
