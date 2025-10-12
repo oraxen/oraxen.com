@@ -1,53 +1,40 @@
-"use client";
-
-import Image from "next/image";
+import { Button } from "./components/Button";
 import Link from "next/link";
+import { siteConfig } from "./siteConfig";
+import Hero from "./components/ui/Hero";
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Welcome to the ChatGPT Apps SDK Next.js Starter
-          </li>
-          <li className="mb-2 tracking-[-.01em]">
-            Name returned from tool call:
-          </li>
-          <li className="mb-2 tracking-[-.01em]">
-            MCP server path:{" "}
-            <Link href="/mcp" className="underline">
-              /mcp
-            </Link>
-          </li>
-        </ol>
+    <>
+      <main className="flex flex-col overflow-hidden">
+        <Hero title={siteConfig.heroTitle} description={siteConfig.description}>
+          <div
+            className="mt-8 flex animate-slide-up-fade flex-col justify-center gap-3 px-3 sm:flex-row"
+            style={{ animationDuration: "1100ms" }}
+          >
+            <Button className="h-10 font-semibold">
+              <Link
+                href={siteConfig.mainCta}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white"
+              >
+                try for free{" "}
+              </Link>
+            </Button>
+          </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <Link
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            prefetch={false}
-            href="/client-page"
+          <div
+            className="relative mx-auto ml-3 mt-20 h-fit max-w-6xl animate-slide-up-fade sm:ml-auto sm:w-full sm:px-2"
+            style={{ animationDuration: "1400ms" }}
           >
-            Visit another page
-          </Link>
-          <a
-            href="https://vercel.com/templates/ai/chatgpt-app-with-next-js"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline"
-          >
-            Deploy on Vercel
-          </a>
-        </div>
+            <div
+              className="absolute inset-x-0 -bottom-20 -mx-10 h-2/4 bg-gradient-to-t from-[#fff4dc] via-[#fff4dc] to-transparent lg:h-1/4 dark:from-gray-950 dark:via-gray-950"
+              aria-hidden="true"
+            />
+          </div>
+        </Hero>
       </main>
-    </div>
+    </>
   );
 }

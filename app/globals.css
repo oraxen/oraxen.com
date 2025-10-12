@@ -1,15 +1,10 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,8 +14,107 @@
   }
 }
 
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@font-face {
+  font-family: "NanumPenScript";
+  font-weight: 400;
+  font-display: block;
+  font-style: normal;
+  font-named-instance: "Regular";
+  src: url("/fonts/NanumPenScript.woff2") format("woff2");
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+.backdrop-blur {
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  background-color: color-mix(in srgb, var(--background) 80%, transparent);
+}
+
+.backdrop-blur-nav {
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  background-color: color-mix(in srgb, var(--background) 80%, transparent);
+}
+
+code {
+  counter-reset: step;
+  counter-increment: step 0;
+  color: var(--foreground);
+}
+
+code .line::before {
+  content: counter(step);
+  counter-increment: step;
+  @apply mr-8 inline-block w-4 text-right text-text-secondary;
+}
+
+.mask {
+  mask-image: radial-gradient(rgba(0, 0, 0, 1) 0%, transparent 80%);
+}
+
+a {
+  @apply scroll-my-24 transition-all;
+  color: var(--primary-color);
+  text-decoration-color: var(--primary-color);
+}
+
+.anchor-link {
+  @apply invisible absolute -ml-4 w-3/4 max-w-2xl cursor-pointer pr-2 no-underline;
+  color: var(--primary-color);
+}
+
+.anchor-link:hover {
+  @apply visible;
+}
+
+.anchor-link:after {
+  color: var(--primary-color);
+  content: "";
+}
+
+*:hover > .anchor-link {
+  @apply visible;
+}
+
+.image-fade-in {
+  animation: imageFadeIn 0.5s ease-in-out;
+}
+
+@keyframes imageFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+input:focus {
+  outline: none;
+  box-shadow: none;
+  border: none;
+}
+input {
+  outline: none;
+  box-shadow: none;
+  border: none;
 }
