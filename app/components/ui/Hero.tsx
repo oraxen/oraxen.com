@@ -16,7 +16,7 @@ export default function Hero({ title, description, children }: HeroProps) {
     >
       <h1
         id="hero-title"
-        className="mb-10 text-4xl font-bold tracking-tighter text-text sm:text-6xl md:text-6xl"
+        className="mb-10 text-4xl font-bold tracking-tighter text-[var(--foreground)] sm:text-6xl md:text-6xl"
         style={{
           animationDuration: "700ms",
         }}
@@ -25,7 +25,7 @@ export default function Hero({ title, description, children }: HeroProps) {
       </h1>
 
       <p
-        className="mt-6 max-w-xl animate-slide-up-fade text-lg text-text-secondary px-6 sm:px-0"
+        className="mt-6 max-w-xl animate-slide-up-fade text-lg text-[var(--foreground-secondary)] px-6 sm:px-0"
         style={{ animationDuration: "900ms" }}
       >
         {description}

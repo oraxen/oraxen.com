@@ -8,15 +8,18 @@ interface FeaturedPostProps {
 }
 
 export function FeaturedPost({ post }: FeaturedPostProps) {
+  if (!post) {
+    return null;
+  }
   return (
     <section className="mb-20">
       <article className="group cursor-pointer overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-xl transition-shadow hover:shadow-2xl">
-        <Link href={`/blog/${post.slug}`} className="block">
+        <Link href={`/blog/${post?.slug}`} className="block">
           <div className="lg:flex">
             <div className="lg:w-1/2">
               <Image
-                src={post.image || "/blog/introducing-relens.webp"}
-                alt={`Cover image for ${post.title}`}
+                src={post?.image || "/blog/introducing-relens.webp"}
+                alt={`Cover image for ${post?.title}`}
                 width={700}
                 height={500}
                 className="h-80 w-full object-cover lg:h-full"
@@ -26,11 +29,11 @@ export function FeaturedPost({ post }: FeaturedPostProps) {
               <Badge>Featured</Badge>
 
               <h2 className="mb-6 mt-4 text-4xl font-bold leading-tight text-text-secondary-dark transition-colors group-hover:text-primary lg:text-5xl">
-                {post.title}
+                {post?.title}
               </h2>
 
               <p className="mb-8 text-xl leading-relaxed text-text-secondary">
-                {post.description}
+                {post?.description}
               </p>
 
               <div className="flex items-center gap-4">

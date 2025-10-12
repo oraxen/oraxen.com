@@ -12,11 +12,11 @@ export default function Footer() {
   }
   return (
     <footer id="footer">
-      <div className="mx-auto max-w-6xl px-3 pb-8 ">
+      <div className="mx-auto max-w-6xl px-3 pb-8 mt-12">
         <div className="flex flex-col items-center justify-between gap-4 border-t border-light pt-8  sm:flex-row dark:border-gray-800">
           <a
             href={siteConfig.relensUrl}
-            className="dark:text-secondary-light text-sm leading-5 text-text-secondary-semi-light"
+            className="dark:text-secondary-light text-sm leading-5 text-[var(--foreground-secondary)]"
           >
             &copy; {new Date().getFullYear()} ReLens, LLC. All rights reserved.
           </a>

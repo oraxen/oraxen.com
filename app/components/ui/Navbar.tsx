@@ -66,18 +66,8 @@ export const Navigation: FC<NavigationProps> = ({ sticky = true }) => {
             className="flex items-center gap-4"
           >
             <BrandLogo size={40} />
-            <span className="sr-only">Relens AI logo</span>
+            <span className="sr-only">{siteConfig.name} logo</span>
           </Link>
-          {/*<nav className="hidden md:absolute md:left-1/2 md:top-1/2 md:block md:-translate-x-1/2 md:-translate-y-1/2 md:transform">
-            <div className="flex items-center gap-10 font-medium">
-              <Link
-                className="px-2 py-1 text-text transition-colors hover:text-primary"
-                href={siteConfig.baseLinks.blog}
-              >
-                Blog
-              </Link>
-            </div>
-          </nav>*/}
           <div className="flex items-center gap-x-2">
             <Button
               asChild
