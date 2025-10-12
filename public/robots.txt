@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Update this to your production sitemap location if different
+Sitemap: https://graphgpt.app/sitemap.xml
+
+

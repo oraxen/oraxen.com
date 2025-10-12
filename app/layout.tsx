@@ -26,8 +26,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: siteConfig.name,
-  description: siteConfig.description,
+  title: siteConfig.metaTitle,
+  description: siteConfig.metaDescription,
 };
 
 export default function RootLayout({

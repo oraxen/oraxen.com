@@ -1,0 +1,34 @@
+# GraphGPT
+
+GraphGPT lets you generate and interact with charts and graphs directly inside ChatGPT. It turns structured data into polished visualizations using a native widget powered by the Apps SDK.
+
+---
+
+## Overview
+
+Describe the chart you want and GraphGPT renders it inline in the conversation. Update your data or refine the prompt and the chart updates without leaving ChatGPT.
+
+---
+
+## Product & Features
+
+- **Charts inside ChatGPT**: Render line, bar, area, and pie charts inline.
+- **Natural language to visuals**: Describe your desired chart; GraphGPT handles config and rendering.
+- **Interactive and responsive**: Tooltips, legends, and responsive layout work in the chat UI.
+- **Flexible data**: Accepts arrays of objects; specify `xKey`, `yKey`, `yKeys`, `nameKey`, `valueKey`.
+- **Customizable**: Set `title`, `height`, `width`, and `colors` for precise control.
+- **Apps SDK + MCP**: Backed by a Model Context Protocol tool that returns `structuredContent` to render charts.
+
+---
+
+## How it works
+
+1. ChatGPT calls the `render_chart` tool.
+2. The tool returns `structuredContent` with fields like `chartType`, `data`, `xKey`, `yKey`, `yKeys`, `nameKey`, `valueKey`, `title`, `height`, `width`, and `colors`.
+3. The `/chart` widget renders the visualization using Recharts.
+
+---
+
+## Learn more
+
+- Website: https://graphgpt.app

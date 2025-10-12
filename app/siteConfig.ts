@@ -3,7 +3,9 @@ export const siteConfig = {
   url: "https://graphgpt.app",
   description:
     "GraphGPT is a GPT app allowing you to visualize and interact with data in a graph.",
-  heroTitle: "Interactive Data Visualization withing ChatGPT",
+  heroTitle: "Create beautiful graphs in ChatGPT",
+  metaTitle: "Graph GPT - Create Graph in Chatgpt",
+  metaDescription: "Generate awesome graphs and charts inside of ChatGPT",
   baseLinks: {
     home: "/",
     blog: "/blog",
