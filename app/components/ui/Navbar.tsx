@@ -100,6 +100,14 @@ export const Navigation: FC<NavigationProps> = ({ sticky = true }) => {
             open ? "block" : "hidden"
           )}
         >
+          <li onClick={() => setOpen(false)}>
+            <Link
+              className="block py-2 text-text transition-colors hover:text-primary"
+              href={siteConfig.baseLinks.blog}
+            >
+              Blog
+            </Link>
+          </li>
           <ul className="space-y-4 font-medium">
             <li onClick={() => setOpen(false)}>
               <Button
