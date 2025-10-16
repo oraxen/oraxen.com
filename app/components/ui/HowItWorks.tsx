@@ -74,10 +74,10 @@ export default function HowItWorks({
               </div>
             </div>
             <div className="order-2">
-              <h3 className="text-2xl font-semibold text-[var(--foreground-secondary)] sm:text-3xl dark:text-gray-50">
+              <h3 className="text-2xl font-semibold text-[var(--foreground)] sm:text-3xl dark:text-gray-50">
                 {step.title}
               </h3>
-              <p className="mt-4 max-w-md text-justify leading-7 text-[var(--foreground-secondary)]">
+              <p className="mt-4 max-w-md text-justify leading-7 text-[var(--foreground)]">
                 {step.description}
               </p>
               {(step.ctaText || step.ctaLink) && (
