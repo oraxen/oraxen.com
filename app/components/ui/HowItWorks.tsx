@@ -68,13 +68,13 @@ export default function HowItWorks({
                   src={step.imagePath || "/images/preview.png"}
                   alt={step.title}
                   fill
-                  className="object-cover"
+                  className="object-scale-down"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
             </div>
             <div className="order-2">
-              <h3 className="text-2xl font-semibold text-[var(--foreground)] sm:text-3xl dark:text-gray-50">
+              <h3 className="text-2xl font-semibold bg-gradient-to-br from-[var(--foreground)] to-[var(--foreground-secondary)] bg-clip-text text-transparent sm:text-3xl dark:from-gray-50 dark:to-gray-300">
                 {step.title}
               </h3>
               <p className="mt-4 max-w-md text-justify leading-7 text-[var(--foreground)]">

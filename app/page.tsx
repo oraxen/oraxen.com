@@ -94,28 +94,30 @@ export default function Home() {
           title={"How to install " + siteConfig.name}
           steps={[
             {
-              title: "Enable dev mode",
+              title: "🧩 Step 1: Open “Apps & Connectors”",
               description:
-                "In the connectors settings, scroll down to advanced settings and enable developer mode.",
-              ctaText: "Access connectors",
+                "Go to Settings → Apps & Connectors. This page lists all apps currently enabled (for example Ahrefs, Booking.com, Canva, GitHub, Graph GPT, etc.). Click the “Create” button in the top-right corner to add a new custom connector.",
+              ctaText: "Open connectors",
               ctaLink: "https://chatgpt.com/#settings/Connectors",
-              imagePath: "/tutorial/dev-mode.png",
+              imagePath: "/tutorial/graphGPT_installation_step1.webp",
             },
             {
-              title: "Create a new connector",
+              title: "⚙️ Step 2: Choose the App to Add",
               description:
-                "Return to the connectors settings and click the create button.",
-              imagePath: "/tutorial/create-connector.png",
+                "After clicking Create, a gallery of available integrations opens — services like Google Drive, Notion, Slack, Teams, and more. At the bottom of this view, click “Advanced settings” to open the area where you can manually add a developer connector.",
+              imagePath: "/tutorial/graphGPT_installation_step2.webp",
             },
             {
-              title: "Configure the connector",
+              title: "🧠 Step 3: Create the Developer Connector",
               description:
-                "Set the name to " +
-                siteConfig.name +
-                ", set the url to " +
-                siteConfig.url +
-                "/mcp and set authentication to no authentication.",
-              imagePath: "/tutorial/configure-connector.png",
+                "A form titled “New Connector (BETA)” appears. Fill it in as follows: Name: GraphGPT. Description (optional): “An app to make beautiful graphs directly in ChatGPT.” MCP Server URL: https://graphgpt.app/mcp. Authentication: Select No authentication. Then tick “I trust this application” and click Create.",
+              imagePath: "/tutorial/graphGPT_installation_step4.webp",
+            },
+            {
+              title: "📊 Step 4: Use the Connector in Chat",
+              description:
+                "Once created, the new app appears in your message composer. Open the “+” menu (paperclip icon) → Add sources / tools, then select GraphGPT (DEV). You can now type prompts such as: “Visualize the relationship between revenue and expenses over time.” GraphGPT will generate the chart directly within ChatGPT.",
+              imagePath: "/tutorial/graphGPT_installation_step3.webp",
             },
           ]}
         />

@@ -67,7 +67,7 @@ export function Faqs({ items, jsonLd }: FaqsProps) {
                   className="py-3 first:pb-3 first:pt-0"
                 >
                   <AccordionTrigger>
-                    <span className="w-full text-center sm:text-left text-[var(--foreground-secondary)]">
+                    <span className="w-full text-center sm:text-left bg-gradient-to-br from-[var(--foreground)] to-[var(--foreground-secondary)] bg-clip-text text-transparent dark:from-gray-50 dark:to-gray-300">
                       {item.question}
                     </span>
                   </AccordionTrigger>
