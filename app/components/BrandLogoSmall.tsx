@@ -9,11 +9,12 @@ export function BrandLogoSmall({
 }: BrandLogoSmallProps) {
   return (
     <img
-      src="/logo.svg"
+      src="/logo_lowres.png"
       alt="Brand Logo"
       className={className}
       width={size}
       height={size}
+      style={{ imageRendering: "pixelated" }}
     />
   );
 }

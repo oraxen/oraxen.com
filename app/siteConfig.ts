@@ -1,21 +1,21 @@
 export const siteConfig = {
-  name: "GraphGPT",
-  url: "https://graphgpt.app",
+  name: "Oraxen",
+  url: "https://oraxen.com",
   description:
-    "Create charts and visualize data in ChatGPT. GraphGPT turns your prompts into line, bar, area, and pie charts.",
-  heroTitle: "Create charts in ChatGPT",
-  metaTitle: "GraphGPT — Create Charts in ChatGPT (Line, Bar, Pie, Area)",
+    "A Minecraft plugin that allows the creation of custom items & blocks using custom textures and models. Open source with extensible API.",
+  heroTitle: "Create custom items & blocks in Minecraft",
+  metaTitle: "Oraxen — Custom Items & Blocks for Minecraft Servers",
   metaDescription:
-    "Visualize data and generate beautiful charts directly inside ChatGPT using GraphGPT. Supports line, bar, area, and pie charts.",
+    "Powerful Minecraft plugin for creating custom items, blocks, furniture, glyphs, and more. Fully open source with automatic resourcepack generation.",
   baseLinks: {
     home: "/",
     blog: "/blog",
   },
-  mainCta: "/#how-it-works",
+  mainCta: "https://docs.oraxen.com/",
   relensUrl: "https://relens.ai/",
   chatgptPages: ["/chart", "/index.html"],
-  blogTitle: "GraphGPT Blog",
-  blogDescription: "Discover insights on GraphGPT and how to use it.",
+  blogTitle: "Oraxen Blog",
+  blogDescription: "Discover insights on Oraxen and how to use it.",
 };
 
 export type siteConfig = typeof siteConfig;

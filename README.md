@@ -1,110 +1,105 @@
-# GraphGPT — Create Charts in ChatGPT | Visualize Data with AI
+# Oraxen — Custom Items & Blocks for Minecraft
 
-**Create beautiful, responsive charts and graphs directly inside ChatGPT.** GraphGPT is the easiest way to visualize data in ChatGPT. Generate line charts, bar graphs, pie charts, and area charts from your conversations without leaving the chat interface.
+**Create unlimited custom items, blocks, furniture, and more for your Minecraft server.** Oraxen is the most powerful and flexible plugin for adding custom content to Spigot and Paper servers. Generate resource packs automatically, create custom textures and models, and enhance your server with unique content.
 
-**[Try GraphGPT Now →](https://graphgpt.app)** | **[Installation Guide →](https://graphgpt.app/#how-it-works)**
+**[Download Oraxen Now →](https://oraxen.com)** | **[View Documentation →](https://docs.oraxen.com)**
 
-![GraphGPT creating a chart in ChatGPT - Data visualization tool](https://graphgpt.app/tutorial/graphGPT_installation_step3.webp)
+![Oraxen custom items showcase](https://oraxen.com/assets/demo.png)
 
 ---
 
 ## Features
 
-- **Visualize Data Instantly**: Generate charts from pasted tables, CSV files, or natural language descriptions—perfect for ChatGPT data visualization.
-- **Multiple Chart Types**: Supports line charts, bar graphs, pie charts, and area charts for comprehensive data analysis.
-- **Simple Install**: Connect to the MCP server in seconds with no authentication required—works with any ChatGPT account.
-- **Interactive & Responsive**: Charts are rendered with Recharts in a secure iframe and adapt to desktop, tablet, and mobile screens.
-- **Customizable**: Tweak the title, colors, dimensions, axes labels, and data keys to match your brand or analysis needs.
+- **Custom Items & Blocks**: Create unlimited custom items and blocks with custom textures and models using simple YAML configuration files.
+- **Automatic Resourcepack**: Oraxen generates resource packs automatically and uploads them to Polymath (or your own hosting) for seamless player distribution.
+- **Custom Furniture**: Build custom furniture with precise positioning, custom models, and display-entity support for immersive server experiences.
+- **Custom Armor**: Create custom armor sets with component-based (1.21.2+) or trim-based (1.20-1.21.1) systems.
+- **Glyphs & Emoji**: Add custom glyphs and emoji to enhance server communication and player engagement.
+- **Extensible API**: Full API support for developers to create custom mechanics, add plugin compatibility, and build custom integrations.
 
 ---
 
-## How to Use GraphGPT
+## How to Use Oraxen
 
-GraphGPT can visualize data from your prompts. Simply describe what you want to chart in ChatGPT:
+Oraxen makes adding custom content to your Minecraft server simple. Configure items using YAML files:
 
-- "Plot monthly revenue from this table."
-- "Show revenue vs expenses as a multi-line chart."
-- "Create a pie chart of category shares."
-- "Visualize sales data as a bar graph."
-- "Turn this CSV into a line chart showing trends over time."
+1. Create item files in `/plugins/oraxen/items/`
+2. Define textures, models, and properties
+3. Use Oraxen mechanics for furniture, farming, note blocks, and more
+4. Players automatically receive the resource pack when joining
 
-**Learn more:** [Browse example use cases →](https://graphgpt.app)
+**Learn more:** [Browse documentation →](https://docs.oraxen.com)
 
 ---
 
-## How to Install GraphGPT in ChatGPT
+## How to Install Oraxen
 
-Get GraphGPT set up in under 2 minutes:
+Get Oraxen set up on your server in minutes:
 
-1.  In ChatGPT, navigate to **Settings → Apps & Connectors**.
-2.  Click **Create** → **Advanced settings**.
-3.  Create a new developer connector with these details:
-    -   **Name**: `GraphGPT`
-    -   **MCP Server URL**: `https://graphgpt.app/mcp`
-    -   **Authentication**: `No authentication`
+1.  Download **CommandAPI** (required dependency) from [CommandAPI releases](https://commandapi.jorel.dev/downloads)
+2.  Download **Oraxen** from [Spigot](https://www.spigotmc.org/resources/oraxen.72448/) or [Polymart](https://polymart.org/resource/oraxen.629)
+3.  Place both `.jar` files in your server's `/plugins/` folder
+4.  Restart your server
+5.  Configure items in `/plugins/oraxen/items/`
 
-Once connected, select **GraphGPT** from the `+` menu in the message composer and ask it to create a chart.
+> **Server Compatibility:**  
+> Works with Spigot and Paper servers running Minecraft 1.18 through 1.21.4. ProtocolLib is recommended but optional.
 
-> **Example Prompt:**  
-> _"Create a line chart of monthly revenue: Jan 10, Feb 14, Mar 18. Set xKey to 'month' and yKey to 'value'."_
-
-**📖 Full installation guide:** [Step-by-step tutorial with screenshots →](https://graphgpt.app)
+**📖 Full installation guide:** [Documentation →](https://docs.oraxen.com)
 
 ---
 
 ## Frequently Asked Questions
 
-### What is GraphGPT?
-GraphGPT is a ChatGPT app that enables you to create charts and graphs directly inside your ChatGPT conversations. Simply describe your data, and GraphGPT generates beautiful visualizations.
+### What is Oraxen?
+Oraxen is a Minecraft plugin that allows server owners to create custom items, blocks, furniture, armor, and more using custom textures and models. It's open source and includes automatic resourcepack generation.
 
-### What chart types does GraphGPT support?
-GraphGPT supports four chart types: **line charts**, **bar graphs**, **pie charts**, and **area charts**. Each chart type is fully customizable with custom colors, titles, and data keys.
+### What features does Oraxen support?
+Oraxen supports custom items, custom blocks, custom armor, custom furniture, glyphs, emoji, custom GUI, custom HUD, and various mechanics like farming, note blocks, string blocks, and more.
 
-### How do I add GraphGPT to ChatGPT?
-Navigate to Settings → Apps & Connectors → Create → Advanced settings, then add GraphGPT using the MCP URL `https://graphgpt.app/mcp`. No authentication required.
+### What dependencies are required?
+CommandAPI is required. ProtocolLib is recommended but optional. Simply drop the Oraxen and CommandAPI .jar files into your /plugins/ folder and restart your server.
 
-### Can I visualize data from files or tables?
-Yes! GraphGPT can generate charts from pasted tables, CSV data, or natural language descriptions. Just paste your data into ChatGPT and ask GraphGPT to visualize it.
+### Does Oraxen work with other plugins?
+Yes! Oraxen integrates with many popular plugins including BossShopPro, CrateReloaded, MythicMobs, ModelEngine, TrMenu, HappyHUD, MMoItems, and various world generators.
 
-### Is GraphGPT free to use?
-Yes, GraphGPT is completely free. Simply install the MCP connector and start creating charts in ChatGPT.
+### Is Oraxen free?
+Yes, Oraxen is open source and completely free. You can download it from Spigot or Polymart. The default Polymath instance is free, or you can host your own.
 
-### Does GraphGPT work on mobile?
-Yes, all charts are responsive and adapt to mobile, tablet, and desktop screens. GraphGPT works seamlessly across all devices.
+### What Minecraft versions are supported?
+Oraxen works with Spigot and Paper servers running Minecraft 1.18 through 1.21.4. For Minecraft 1.21.2+, using the latest version of Oraxen is advised.
 
-**More questions?** [Visit our FAQ page →](https://graphgpt.app)
+**More questions?** [Visit our FAQ page →](https://oraxen.com)
 
 ---
 
 ## Technical Overview
 
-This repository contains a Next.js application that provides the charting widget and the MCP server.
+This repository contains the official Oraxen website built with Next.js.
 
--   **MCP Server (`app/mcp/route.ts`)**: Exposes a `render_chart` tool that accepts chart parameters.
--   **Chart Widget (`app/chart/page.tsx`)**: A client page that renders a Recharts chart from `window.openai.toolOutput`.
--   **Host Integration (`app/layout.tsx`)**: Includes bootstrap scripts to ensure correct asset loading and navigation inside the ChatGPT iframe.
--   **CORS Middleware (`middleware.ts`)**: Handles cross-origin requests required for client-side navigation.
+-   **Framework**: Next.js 15 with App Router
+-   **Styling**: Tailwind CSS
+-   **Components**: Radix UI for accessible components
+-   **Content**: MDX for blog posts
+-   **Deployment**: Optimized for Vercel
 
-The `render_chart` tool returns `structuredContent` with fields like `chartType`, `data`, `xKey`, `yKey`, and other options, which the widget page consumes to render the visualization.
+The website showcases Oraxen's features, provides installation guides, FAQs, and links to the documentation and download pages.
 
----
+### Example Item Configuration
 
-### Example Tool Payload
-
-```json
-{
-  "chartType": "line",
-  "title": "Monthly Revenue",
-  "xKey": "month",
-  "yKey": "revenue",
-  "height": 360,
-  "colors": ["#4f46e5"],
-  "data": [
-    { "month": "Jan", "revenue": 10 },
-    { "month": "Feb", "revenue": 14 },
-    { "month": "Mar", "revenue": 18 }
-  ]
-}
+```yaml
+items:
+  my_custom_item:
+    displayname: "<i:bold>Awesome Sword</i>"
+    material: GOLDEN_SWORD
+    texture: items/my_sword
+    generate_model: GENERATE_ITEM
+    Pack:
+      generate_model: GENERATE_ITEM
+    mechanics:
+      click_action:
+        left: player_command "give %player% minecraft:diamond 1"
+        right: player_command "tell %player% You clicked right!"
 ```
 
 ---
@@ -114,27 +109,27 @@ The `render_chart` tool returns `structuredContent` with fields like `chartType`
 1.  Clone the repository.
 2.  Install dependencies:
     ```bash
-    npm install
+    pnpm install
     ```
 3.  Run the development server:
     ```bash
-    npm run dev
+    pnpm run dev
     ```
 
-The application will be available at `http://localhost:3000`, and the MCP server will be at `http://localhost:3000/mcp`.
+The application will be available at `http://localhost:3000`.
 
 ---
 
 ## Deployment
 
-This project is optimized for deployment on [Vercel](https://vercel.com). The production deployment at **graphgpt.app** demonstrates the full ChatGPT chart visualization capabilities.
+This project is optimized for deployment on [Vercel](https://vercel.com). The production deployment at **oraxen.com** showcases Oraxen's features and provides access to downloads and documentation.
 
 The repository includes:
--   `baseUrl.ts` and `next.config.ts` for correct asset origins in iframes.
--   `middleware.ts` for handling CORS on client-side RSC fetches.
+-   `baseUrl.ts` and `next.config.ts` for correct asset origins.
+-   `middleware.ts` for handling routing.
 -   `app/sitemap.ts` and `public/robots.txt` configured for SEO.
 
-After deploying, connect ChatGPT to your production MCP URL: `https://your-app.vercel.app/mcp`. Live example: [GraphGPT Production →](https://graphgpt.app)
+Live example: [Oraxen Website →](https://oraxen.com)
 
 ---
 
@@ -142,33 +137,35 @@ After deploying, connect ChatGPT to your production MCP URL: `https://your-app.v
 
 ```
 app/
-  chart/              # Client page that renders Recharts from tool output
-  mcp/                # MCP server exposing tools and resources
-  layout.tsx          # Root layout with metadata & iframe bootstrap
-  page.tsx            # Landing page with install steps and FAQs
-middleware.ts         # CORS handling for RSC
-next.config.ts        # Asset prefixing for iframe compatibility
+  blog/              # Blog pages and MDX posts
+  components/        # React components (UI and blog-specific)
+  lib/               # Utility functions (blog helpers, hooks)
+  layout.tsx         # Root layout with metadata
+  page.tsx           # Landing page with features and FAQs
+public/              # Static assets (images, fonts)
+middleware.ts        # Routing middleware
+next.config.ts       # Next.js configuration
 ```
 
 ---
 
-## Why GraphGPT?
+## Why Oraxen?
 
-**GraphGPT** is the **simplest way to create charts in ChatGPT**. Unlike external chart tools that require you to leave your conversation, GraphGPT renders visualizations directly inside ChatGPT's interface using the Model Context Protocol (MCP).
+**Oraxen** is the **most powerful plugin for custom Minecraft content**. Unlike other plugins that require manual resource pack creation and distribution, Oraxen handles everything automatically with a simple YAML configuration.
 
 **Perfect for:**
-- 📊 **Data analysts** who want quick visualizations during ChatGPT conversations
-- 💼 **Business professionals** creating charts from reports and tables
-- 🎓 **Students** visualizing data for projects and presentations
-- 🧪 **Researchers** turning data into insights without switching tools
+- 🎮 **Server owners** who want unique custom content without complexity
+- 🏗️ **Server builders** creating immersive experiences with custom furniture and blocks
+- 💼 **Developers** building custom plugins and integrations
+- 🎨 **Creators** designing custom items, armor, and glyphs
 
-**[Get started with GraphGPT →](https://graphgpt.app)**
+**[Get started with Oraxen →](https://oraxen.com)**
 
 ---
 
 ## Related Resources
 
-- [OpenAI Apps SDK Documentation](https://developers.openai.com/apps-sdk)
-- [Model Context Protocol (MCP)](https://modelcontextprotocol.io)
+- [Oraxen Documentation](https://docs.oraxen.com)
+- [Oraxen on Spigot](https://www.spigotmc.org/resources/oraxen.72448/)
+- [Oraxen on Polymart](https://polymart.org/resource/oraxen.629)
 - [Next.js Documentation](https://nextjs.org/docs)
-- [Recharts Documentation](https://recharts.org)

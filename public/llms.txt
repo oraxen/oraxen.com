@@ -1,34 +1,36 @@
-# GraphGPT
+# Oraxen
 
-GraphGPT lets you generate and interact with charts and graphs directly inside ChatGPT. It turns structured data into polished visualizations using a native widget powered by the Apps SDK.
+Oraxen is a Minecraft plugin that allows the creation of custom items & blocks using custom textures and models. It handles resourcepack generation, upload and storage automatically, and is entirely open source with an extensible API.
 
 ---
 
 ## Overview
 
-Describe the chart you want and GraphGPT renders it inline in the conversation. Update your data or refine the prompt and the chart updates without leaving ChatGPT.
+Oraxen empowers Minecraft server owners to create unlimited custom content including items, blocks, furniture, armor, glyphs, and more. With automatic resourcepack generation and distribution, Oraxen makes adding custom content to your server simple and efficient.
 
 ---
 
 ## Product & Features
 
-- **Charts inside ChatGPT**: Render line, bar, area, and pie charts inline.
-- **Natural language to visuals**: Describe your desired chart; GraphGPT handles config and rendering.
-- **Interactive and responsive**: Tooltips, legends, and responsive layout work in the chat UI.
-- **Flexible data**: Accepts arrays of objects; specify `xKey`, `yKey`, `yKeys`, `nameKey`, `valueKey`.
-- **Customizable**: Set `title`, `height`, `width`, and `colors` for precise control.
-- **Apps SDK + MCP**: Backed by a Model Context Protocol tool that returns `structuredContent` to render charts.
+- **Custom Items & Blocks**: Create unlimited custom items and blocks with custom textures and models.
+- **Automatic Resourcepack**: Oraxen generates resource packs automatically and uploads them to Polymath or your own hosting.
+- **Custom Furniture**: Build custom furniture with precise positioning and display-entity support.
+- **Custom Armor**: Create custom armor with component-based or trim-based systems.
+- **Glyphs & Emoji**: Add custom glyphs and emoji to enhance server communication.
+- **Extensible API**: Full API support for developers to create custom mechanics and integrations.
 
 ---
 
 ## How it works
 
-1. ChatGPT calls the `render_chart` tool.
-2. The tool returns `structuredContent` with fields like `chartType`, `data`, `xKey`, `yKey`, `yKeys`, `nameKey`, `valueKey`, `title`, `height`, `width`, and `colors`.
-3. The `/chart` widget renders the visualization using Recharts.
+1. Install Oraxen and CommandAPI on your Spigot/Paper server.
+2. Configure custom items using YAML files in `/plugins/oraxen/items/`.
+3. Oraxen generates models and texture mappings automatically.
+4. A resource pack is created and distributed to players automatically via Polymath.
 
 ---
 
 ## Learn more
 
-- Website: https://graphgpt.app
+- Website: https://oraxen.com
+- Documentation: https://docs.oraxen.com

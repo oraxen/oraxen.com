@@ -62,15 +62,22 @@ export default function HowItWorks({
             viewport={{ once: true }}
             className="grid grid-cols-1 items-center gap-8 md:grid-cols-2"
           >
-            <div className="order-1">
-              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl border border-light bg-gray-50 dark:border-gray-800 dark:bg-gray-900">
-                <Image
-                  src={step.imagePath || "/images/preview.png"}
-                  alt={step.title}
-                  fill
-                  className="object-scale-down"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
+            <div className="order-1 relative">
+              <div
+                className="absolute inset-x-0 -bottom-4 -mx-4 h-1/4 bg-gradient-to-t from-[var(--background)] via-[var(--background)] to-transparent opacity-60 dark:from-gray-950 dark:via-gray-950"
+                aria-hidden="true"
+              />
+              <div className="inline-block rounded-2xl bg-slate-50/20 px-1 pt-1 pb-0 ring-1 ring-inset ring-slate-200/25 dark:bg-gray-900/40 dark:ring-white/5">
+                <div className="inline-block rounded-xl bg-white ring-1 ring-slate-900/5 dark:bg-slate-950 dark:ring-white/15">
+                  <Image
+                    src={step.imagePath || "/images/preview.png"}
+                    alt={step.title}
+                    width={800}
+                    height={500}
+                    className="block rounded-xl shadow-2xl sepia-[0.05] dark:shadow-indigo-600/10"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
               </div>
             </div>
             <div className="order-2">

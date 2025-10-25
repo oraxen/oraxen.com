@@ -1,0 +1,72 @@
+---
+alwaysApply: true
+---
+
+## Product Website Architecture
+
+- **Framework**: Next.js 15.1.4 (App Router) + React 19 + TypeScript 5.
+- **Runtime/PM**: pnpm (see `package.json`). Prefer `pnpm run` for scripts.
+- **Purpose**: Product landing page with purchase links, documentation links, and blog for SEO.
+
+### Routing & Rendering
+
+- `app/page.tsx`: Main landing page with product information.
+- `app/blog/page.tsx`: Blog listing page.
+- `app/blog/[id]/page.tsx`: Individual blog post pages.
+- `app/blog/author/[id]/page.tsx`: Author pages.
+- `app/privacy/page.tsx` & `app/terms/page.tsx`: Legal pages.
+- `app/layout.tsx`: Root layout with Navigation and Footer components.
+- `app/chart/page.tsx`: Client-side chart rendering page (from GraphGPT fork).
+
+### Content Organization
+
+- `app/blog/posts/`: MDX blog posts with frontmatter.
+- `app/blog/authors/authors.json`: Author metadata (name, profile picture).
+- `public/`: Static assets (images, fonts, etc.).
+- Blog posts support frontmatter: `title`, `description`, `date`, `author`, `tags`, `image`, `featured`.
+
+### MDX Setup
+
+- Uses `next-mdx-remote` (RSC) for MDX compilation.
+- `mdx-components.tsx`: Custom MDX components (H1, H2, H3, P, Bold, links, etc.).
+- Custom components: `BlogEntry`, `ArticleImage`, `AiMarketShareChart`.
+- Posts are compiled server-side with `compileMDX` from `next-mdx-remote/rsc`.
+
+### Blog Features
+
+- `app/lib/blog.ts`: Blog utilities (`getAllPosts`, `getBlogPosts`, `getPostBySlug`).
+- Automatic reading time estimation.
+- Featured post support.
+- Author linking and profiles.
+- Tag support.
+
+### Configuration
+
+- `next.config.ts`: Basic config with asset prefixing via `baseUrl.ts`.
+- `tsconfig.json`: Strict TypeScript, modern ESM (`moduleResolution: Bundler`).
+- `tailwind.config.ts`: Tailwind CSS configuration.
+- `siteConfig.ts`: Site-wide configuration (name, URL, metadata).
+
+### Styling
+
+- Tailwind CSS for styling.
+- Radix UI components for accessible primitives.
+- `@tailwindcss/typography` for prose content.
+- Custom CSS variables for theming.
+
+### Components
+
+- `app/components/ui/`: UI components (Navbar, Footer, Hero, FAQs, etc.).
+- `app/components/blog/`: Blog-specific components (BlogPostCard, FeaturedPost, etc.).
+- Server components by default; add `"use client"` only when needed.
+
+### Build & Commands
+
+- Scripts: `pnpm run dev`, `pnpm run build`, `pnpm run start`.
+- Build generates static pages from MDX posts.
+
+### Notes
+
+- This is a product landing page, not a documentation site.
+- Blog is for SEO and content marketing.
+- Forked from GraphGPT but repurposed for Oraxen product.

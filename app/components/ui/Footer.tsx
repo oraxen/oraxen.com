@@ -14,12 +14,16 @@ export default function Footer() {
     <footer id="footer">
       <div className="mx-auto max-w-6xl px-3 pb-8 mt-12">
         <div className="flex flex-col items-center justify-between gap-4 border-t border-light pt-8  sm:flex-row dark:border-gray-800">
-          <a
-            href={siteConfig.relensUrl}
-            className="dark:text-secondary-light text-sm leading-5 text-[var(--foreground-secondary)]"
-          >
-            &copy; {new Date().getFullYear()} ReLens, LLC. All rights reserved.
-          </a>
+          <div className="dark:text-secondary-light text-sm leading-5 text-[var(--foreground-secondary)]">
+            &copy; {new Date().getFullYear()}{" "}
+            <a
+              href="https://thomas.md/"
+              className="hover:underline transition-colors"
+            >
+              Thomas Marchand
+            </a>
+            . All rights reserved.
+          </div>
         </div>
       </div>
     </footer>

@@ -10,52 +10,54 @@ import { buildFaqJsonLd } from "./lib/utils";
 export default function Home() {
   const faqItems = [
     {
-      question: "What is GraphGPT?",
+      question: "What is Oraxen?",
       answer:
-        "GraphGPT lets you visualize and interact with structured data as charts directly inside ChatGPT. It renders fast, responsive charts without leaving the conversation.",
+        "Oraxen is a Minecraft plugin that allows the creation of custom items & blocks using custom textures and models. It handles resourcepack generation, upload and storage automatically, and is entirely open source with an extensible API.",
     },
     {
-      question: "How do I add GraphGPT to ChatGPT?",
+      question: "What servers are supported?",
       answer:
-        "In ChatGPT, go to Settings → Connectors → Create. Set the name to GraphGPT, the URL to https://graphgpt.app/mcp, and authentication to No authentication. Then ask ChatGPT to render a chart.",
+        "Oraxen works with Spigot and Paper servers running Minecraft 1.18 through 1.21.4. For Minecraft 1.21.2+, using the latest version of Oraxen is advised.",
     },
     {
-      question: "Which chart types are supported?",
-      answer: "Line, bar, area, and pie.",
-    },
-    {
-      question: "How do I provide data to a chart?",
+      question: "What dependencies are required?",
       answer:
-        "Pass an array of objects and specify xKey and yKey for line/bar/area charts. For pie charts, use nameKey and valueKey.",
+        "CommandAPI is required. ProtocolLib is recommended but optional. Simply drop the Oraxen and CommandAPI .jar files into your /plugins/ folder and restart your server.",
     },
     {
-      question: "Can I plot multiple series?",
+      question: "What features does Oraxen support?",
       answer:
-        "Yes. For line charts, provide yKeys with an array of field names to render multiple lines.",
+        "Oraxen supports custom items, custom blocks, custom armor, custom furniture, glyphs, emoji, custom GUI, custom HUD, and various mechanics like farming, note blocks, string blocks, and more.",
     },
     {
-      question: "Can I customize the title, size, and colors?",
+      question: "Does Oraxen support resource packs?",
       answer:
-        "Yes. You can set title, height, width, and colors (hex values) in your request.",
+        "Yes! Oraxen automatically generates resource packs using your custom textures and models, then uploads them to a Polymath instance (or your own) and distributes them to players automatically.",
     },
     {
-      question: "Does GraphGPT store my data?",
+      question: "Is Oraxen free?",
       answer:
-        "No. Data is passed from the conversation to the widget at render time; GraphGPT does not persist it on our servers.",
+        "Oraxen is open source and available for free. You can download it from Spigot or Polymart. The default Polymath instance is free, or you can host your own.",
     },
     {
-      question: "What happens if I omit some options?",
+      question: "Can I customize furniture and items?",
       answer:
-        "GraphGPT chooses sensible defaults: chartType defaults to 'line', xKey to 'name', yKey to 'value', and sample data is used if none is provided.",
+        "Absolutely! Oraxen allows you to create custom furniture with custom models, position them precisely, and even create display-entity furniture. You can also customize item appearance, make dyeable items, and more.",
     },
     {
-      question: "Does GraphGPT work on mobile?",
-      answer: "Yes. Charts are responsive and adapt to the available space.",
-    },
-    {
-      question: "Can ChatGPT convert my text or table into chart data?",
+      question: "Does Oraxen work with other plugins?",
       answer:
-        "Often yes. Describe your data or paste a small table and ask ChatGPT to render a chart—GraphGPT will visualize the structured output.",
+        "Yes! Oraxen integrates with many popular plugins including BossShopPro, CrateReloaded, MythicMobs, ModelEngine, TrMenu, HappyHUD, MMoItems, and various world generators.",
+    },
+    {
+      question: "How do I get started?",
+      answer:
+        "Install CommandAPI and Oraxen in your /plugins/ folder, restart your server, then configure your items in the /plugins/oraxen/items/ directory. Check the documentation for detailed guides!",
+    },
+    {
+      question: "Is there an API for developers?",
+      answer:
+        "Yes! Oraxen has a comprehensive API for developers. You can create custom mechanics, add compatibility with other plugins, and even create custom hosting services. See the developer documentation for details.",
     },
   ];
   return (
@@ -66,14 +68,24 @@ export default function Home() {
             className="mt-8 flex animate-slide-up-fade flex-col justify-center gap-3 px-3 sm:flex-row"
             style={{ animationDuration: "1100ms" }}
           >
-            <Button className="h-10 font-semibold">
+            <Button className="h-10 font-semibold bg-primary hover:bg-primary/90">
               <Link
-                href={siteConfig.mainCta}
+                href="https://www.spigotmc.org/resources/oraxen.72448/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white"
+                className="text-white no-underline"
               >
-                try for free{" "}
+                Get on Spigot
+              </Link>
+            </Button>
+            <Button className="h-10 font-semibold border-2 border-primary bg-transparent text-primary hover:bg-primary/10">
+              <Link
+                href="https://polymart.org/resource/oraxen.629"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="no-underline"
+              >
+                Get on Polymart
               </Link>
             </Button>
           </div>
@@ -83,41 +95,41 @@ export default function Home() {
             style={{ animationDuration: "1400ms" }}
           >
             <div
-              className="absolute inset-x-0 -bottom-20 -mx-10 h-2/4 bg-gradient-to-t from-[var(--background)] via-[var(--background)] to-transparent lg:h-1/4 dark:from-gray-950 dark:via-gray-950"
+              className="absolute inset-x-0 -bottom-12 -mx-10 h-1/3 bg-gradient-to-t from-[var(--background)] via-[var(--background)] to-transparent opacity-80 lg:h-1/5 dark:from-gray-950 dark:via-gray-950"
               aria-hidden="true"
             />
             <HeroImage />
           </div>
         </Hero>
         <HowItWorks
-          badgeText="how to install"
-          title={"How to install " + siteConfig.name}
+          badgeText="features"
+          title={"Why choose " + siteConfig.name}
           steps={[
             {
-              title: "🧩 Step 1: Open “Apps & Connectors”",
+              title: "🎨 Premium Artist-Made Textures",
               description:
-                "Go to Settings → Apps & Connectors. This page lists all apps currently enabled (for example Ahrefs, Booking.com, Canva, GitHub, Graph GPT, etc.). Click the “Create” button in the top-right corner to add a new custom connector.",
-              ctaText: "Open connectors",
-              ctaLink: "https://chatgpt.com/#settings/Connectors",
-              imagePath: "/tutorial/graphGPT_installation_step1.webp",
+                "Access hundreds of dollars worth of beautiful, professionally crafted textures created by talented artists. Transform your server with high-quality custom items that stand out from the crowd.",
+              imagePath: "/assets/beautiful_items.png",
             },
             {
-              title: "⚙️ Step 2: Choose the App to Add",
+              title: "🖥️ Custom Menus & GUI",
               description:
-                "After clicking Create, a gallery of available integrations opens — services like Google Drive, Notion, Slack, Teams, and more. At the bottom of this view, click “Advanced settings” to open the area where you can manually add a developer connector.",
-              imagePath: "/tutorial/graphGPT_installation_step2.webp",
+                "Create stunning custom menus and user interfaces for your server. Build immersive experiences with fully customizable GUIs that guide and engage your players.",
+              imagePath: "/assets/custom_menu.jpg",
             },
             {
-              title: "🧠 Step 3: Create the Developer Connector",
+              title: "🪑 Furniture & Custom Blocks",
               description:
-                "A form titled “New Connector (BETA)” appears. Fill it in as follows: Name: GraphGPT. Description (optional): “An app to make beautiful graphs directly in ChatGPT.” MCP Server URL: https://graphgpt.app/mcp. Authentication: Select No authentication. Then tick “I trust this application” and click Create.",
-              imagePath: "/tutorial/graphGPT_installation_step4.webp",
+                "Enhance your server world with custom furniture and decorative blocks. Place interactive items, create immersive environments, and bring your server's aesthetic to life.",
+              imagePath: "/assets/furnitures.png",
             },
             {
-              title: "📊 Step 4: Use the Connector in Chat",
+              title: "⚡ Easy, Modular & Open Source",
               description:
-                "Once created, the new app appears in your message composer. Open the “+” menu (paperclip icon) → Add sources / tools, then select GraphGPT (DEV). You can now type prompts such as: “Visualize the relationship between revenue and expenses over time.” GraphGPT will generate the chart directly within ChatGPT.",
-              imagePath: "/tutorial/graphGPT_installation_step3.webp",
+                "Oraxen is designed to be easy to configure with simple YAML files. It's fully modular, allowing you to enable only what you need. Best of all, it's completely open source, giving you full control and transparency.",
+              ctaText: "View Documentation",
+              ctaLink: "https://docs.oraxen.com/",
+              imagePath: "/assets/demo.png",
             },
           ]}
         />

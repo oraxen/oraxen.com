@@ -1,0 +1,67 @@
+---
+alwaysApply: true
+---
+
+## Project Conventions
+
+- **Tech Stack**: Next.js 15.1.4 (App Router), React 19, TypeScript 5, pnpm.
+- **Run commands**: use pnpm
+  - `pnpm run dev`, `pnpm run build`, `pnpm run start`.
+- **Directory layout**:
+  - `app/`: Next App Router routes and components.
+  - `app/blog/posts/`: MDX blog posts.
+  - `app/components/`: React components (UI and blog-specific).
+  - `app/lib/`: Utility functions (blog helpers, scroll hooks, etc.).
+  - `public/`: Static assets (images, fonts, SVG icons).
+
+### TypeScript & React
+
+- **Strict mode**: keep `tsconfig` strict; no `any` unless absolutely necessary.
+- **ESM only**: use modern ESM imports; no CommonJS.
+- **Naming**: descriptive, self-explanatory names; avoid 1–2 char identifiers.
+- **Components**: server components by default; add `"use client"` only when needed.
+- **Control flow**: prefer early returns; avoid unnecessary try/catch.
+
+### MDX Authoring
+
+- Blog posts use standard Markdown in MDX files.
+- Frontmatter required: `title`, `description`, `date`, `author`, `tags`, `image`.
+- Optional: `featured`, `modifiedDate`, `readingTime`.
+- Custom components available: `BlogEntry`, `ArticleImage`, styled headings.
+- Images: Use Markdown `![Alt](...)` syntax.
+
+### Blog Post Structure
+
+```mdx
+---
+title: Post Title
+description: Post description
+date: 2024-01-01
+author: author-id
+tags: [tag1, tag2]
+image: /path/to/image.webp
+featured: true
+---
+
+Content here...
+```
+
+### Styling
+
+- Tailwind CSS for all styling.
+- Use Radix UI components for accessible primitives.
+- Custom design system components in `app/components/`.
+- Follow existing patterns for consistency.
+
+### Build & Validation
+
+- Builds must pass `pnpm run build`; TypeScript must compile cleanly.
+- Blog posts are compiled at build time via `next-mdx-remote/rsc`.
+- Always verify the site builds after edits.
+
+### SEO Focus
+
+- This is a product landing page with blog for SEO.
+- Include proper metadata in pages (title, description, OG tags).
+- Blog posts should be keyword-rich and well-structured.
+- Use semantic HTML and proper heading hierarchy.

@@ -68,6 +68,34 @@ export const Navigation: FC<NavigationProps> = ({ sticky = true }) => {
             <BrandLogo size={40} />
             <span className="sr-only">{siteConfig.name} logo</span>
           </Link>
+          <nav className="hidden md:absolute md:left-1/2 md:top-1/2 md:block md:-translate-x-1/2 md:-translate-y-1/2 md:transform">
+            <div className="flex items-center gap-10 font-medium">
+              <Link
+                href="https://www.spigotmc.org/resources/oraxen.72448/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-2 py-1 dark:text-gray-50"
+              >
+                Spigot
+              </Link>
+              <Link
+                href="https://polymart.org/resource/oraxen.629"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-2 py-1 dark:text-gray-50"
+              >
+                Polymart
+              </Link>
+              <Link
+                href="https://git.io/oraxen"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-2 py-1 dark:text-gray-50"
+              >
+                GitHub
+              </Link>
+            </div>
+          </nav>
           <div className="flex items-center gap-x-2">
             <Button
               asChild
@@ -77,8 +105,9 @@ export const Navigation: FC<NavigationProps> = ({ sticky = true }) => {
                 href={siteConfig.mainCta}
                 target="_blank"
                 rel="noopener noreferrer"
+                className="no-underline"
               >
-                Try for free
+                View Docs
               </Link>
             </Button>
             <Button
@@ -102,10 +131,40 @@ export const Navigation: FC<NavigationProps> = ({ sticky = true }) => {
         >
           <li onClick={() => setOpen(false)}>
             <Link
-              className="block py-2 text-text transition-colors hover:text-primary"
+              className="block py-2 font-medium dark:text-gray-50"
               href={siteConfig.baseLinks.blog}
             >
               Blog
+            </Link>
+          </li>
+          <li onClick={() => setOpen(false)}>
+            <Link
+              className="px-2 py-1 dark:text-gray-50"
+              href="https://www.spigotmc.org/resources/oraxen.72448/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Spigot
+            </Link>
+          </li>
+          <li onClick={() => setOpen(false)}>
+            <Link
+              className="px-2 py-1 dark:text-gray-50"
+              href="https://polymart.org/resource/oraxen.629"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Polymart
+            </Link>
+          </li>
+          <li onClick={() => setOpen(false)}>
+            <Link
+              className="px-2 py-1 dark:text-gray-50"
+              href="https://git.io/oraxen"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub
             </Link>
           </li>
           <ul className="space-y-4 font-medium">
@@ -118,8 +177,9 @@ export const Navigation: FC<NavigationProps> = ({ sticky = true }) => {
                   href={siteConfig.mainCta}
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="no-underline"
                 >
-                  Try for free
+                  View Docs
                 </Link>
               </Button>
             </li>

@@ -36,14 +36,14 @@ export function Faqs({ items, jsonLd }: FaqsProps) {
           </h2>
           <p className="dark:text-secondary-light mt-4 text-base leading-7 text-[var(--foreground-secondary)]">
             Can&rsquo;t find the answer you&rsquo;re looking for? Don&rsquo;t
-            hesitate to get in touch with our{" "}
+            hesitate to join our{" "}
             <a
-              href="mailto:contact@lfglabs.dev"
+              href="https://discord.gg/gKKUAR3nmu"
               className="font-medium text-primary hover:text-primary/90"
             >
-              customer support
+              discord
             </a>{" "}
-            team.
+            .
           </p>
         </motion.div>
         <motion.div

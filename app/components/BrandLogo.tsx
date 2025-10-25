@@ -9,9 +9,12 @@ export function BrandLogo({
   className?: string;
 }) {
   return (
-    <span className={`flex items-center gap-2 sm:gap-3 ${className}`}>
+    <span
+      className={`flex items-center gap-2 sm:gap-3 ${className}`}
+      style={{ opacity: "90%" }}
+    >
       <BrandLogoSmall size={size} className="h-8 w-8 sm:h-10 sm:w-10" />
-      <span className="font-satoshi text-[var(--foreground)] text-xl font-bold tracking-tight sm:text-4xl">
+      <span className="font-bold tracking-tight sm:text-3xl">
         {siteConfig.name}
       </span>
     </span>

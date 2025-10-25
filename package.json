@@ -1,20 +1,19 @@
 {
-  "name": "graphgpt-app",
+  "name": "oraxen-website",
   "version": "0.1.0",
   "private": true,
-  "description": "Create charts and visualize data inside ChatGPT using GraphGPT (line, bar, area, pie).",
+  "description": "Official Oraxen website - Custom items & blocks for Minecraft servers.",
   "keywords": [
-    "GraphGPT",
-    "ChatGPT charts",
-    "ChatGPT graphs",
-    "visualize data in ChatGPT",
-    "create chart in ChatGPT",
-    "create graph in ChatGPT",
-    "MCP",
-    "OpenAI Apps SDK",
-    "Recharts"
+    "Oraxen",
+    "Minecraft plugin",
+    "custom items",
+    "custom blocks",
+    "Spigot",
+    "Paper",
+    "resource pack",
+    "minecraft server"
   ],
-  "homepage": "https://graphgpt.app",
+  "homepage": "https://oraxen.com",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

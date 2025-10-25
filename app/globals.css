@@ -73,8 +73,8 @@ code .line::before {
 
 a {
   @apply scroll-my-24 transition-all;
-  color: var(--primary-color);
-  text-decoration-color: var(--primary-color);
+  color: inherit;
+  text-decoration-color: currentColor;
 }
 
 .anchor-link {
