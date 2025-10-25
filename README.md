@@ -1,162 +1,174 @@
-# ChatGPT Apps SDK Next.js Starter
+# GraphGPT — Create Charts in ChatGPT | Visualize Data with AI
 
-A minimal Next.js application demonstrating how to build an [OpenAI Apps SDK](https://developers.openai.com/apps-sdk) compatible MCP server with widget rendering in ChatGPT.
+**Create beautiful, responsive charts and graphs directly inside ChatGPT.** GraphGPT is the easiest way to visualize data in ChatGPT. Generate line charts, bar graphs, pie charts, and area charts from your conversations without leaving the chat interface.
 
-## Overview
+**[Try GraphGPT Now →](https://graphgpt.app)** | **[Installation Guide →](https://graphgpt.app/#how-it-works)**
 
-This project shows how to integrate a Next.js application with the ChatGPT Apps SDK using the Model Context Protocol (MCP). It includes a working MCP server that exposes tools and resources that can be called from ChatGPT, with responses rendered natively in ChatGPT.
+![GraphGPT creating a chart in ChatGPT - Data visualization tool](https://graphgpt.app/tutorial/graphGPT_installation_step3.webp)
 
-## Key Components
+---
 
-### 1. MCP Server Route (`app/mcp/route.ts`)
+## Features
 
-The core MCP server implementation that exposes tools and resources to ChatGPT.
+- **Visualize Data Instantly**: Generate charts from pasted tables, CSV files, or natural language descriptions—perfect for ChatGPT data visualization.
+- **Multiple Chart Types**: Supports line charts, bar graphs, pie charts, and area charts for comprehensive data analysis.
+- **Simple Install**: Connect to the MCP server in seconds with no authentication required—works with any ChatGPT account.
+- **Interactive & Responsive**: Charts are rendered with Recharts in a secure iframe and adapt to desktop, tablet, and mobile screens.
+- **Customizable**: Tweak the title, colors, dimensions, axes labels, and data keys to match your brand or analysis needs.
 
-**Key features:**
-- **Tool registration** with OpenAI-specific metadata
-- **Resource registration** that serves HTML content for iframe rendering
-- **Cross-linking** between tools and resources via `templateUri`
+---
 
-**OpenAI-specific metadata:**
-```typescript
+## How to Use GraphGPT
+
+GraphGPT can visualize data from your prompts. Simply describe what you want to chart in ChatGPT:
+
+- "Plot monthly revenue from this table."
+- "Show revenue vs expenses as a multi-line chart."
+- "Create a pie chart of category shares."
+- "Visualize sales data as a bar graph."
+- "Turn this CSV into a line chart showing trends over time."
+
+**Learn more:** [Browse example use cases →](https://graphgpt.app)
+
+---
+
+## How to Install GraphGPT in ChatGPT
+
+Get GraphGPT set up in under 2 minutes:
+
+1.  In ChatGPT, navigate to **Settings → Apps & Connectors**.
+2.  Click **Create** → **Advanced settings**.
+3.  Create a new developer connector with these details:
+    -   **Name**: `GraphGPT`
+    -   **MCP Server URL**: `https://graphgpt.app/mcp`
+    -   **Authentication**: `No authentication`
+
+Once connected, select **GraphGPT** from the `+` menu in the message composer and ask it to create a chart.
+
+> **Example Prompt:**  
+> _"Create a line chart of monthly revenue: Jan 10, Feb 14, Mar 18. Set xKey to 'month' and yKey to 'value'."_
+
+**📖 Full installation guide:** [Step-by-step tutorial with screenshots →](https://graphgpt.app)
+
+---
+
+## Frequently Asked Questions
+
+### What is GraphGPT?
+GraphGPT is a ChatGPT app that enables you to create charts and graphs directly inside your ChatGPT conversations. Simply describe your data, and GraphGPT generates beautiful visualizations.
+
+### What chart types does GraphGPT support?
+GraphGPT supports four chart types: **line charts**, **bar graphs**, **pie charts**, and **area charts**. Each chart type is fully customizable with custom colors, titles, and data keys.
+
+### How do I add GraphGPT to ChatGPT?
+Navigate to Settings → Apps & Connectors → Create → Advanced settings, then add GraphGPT using the MCP URL `https://graphgpt.app/mcp`. No authentication required.
+
+### Can I visualize data from files or tables?
+Yes! GraphGPT can generate charts from pasted tables, CSV data, or natural language descriptions. Just paste your data into ChatGPT and ask GraphGPT to visualize it.
+
+### Is GraphGPT free to use?
+Yes, GraphGPT is completely free. Simply install the MCP connector and start creating charts in ChatGPT.
+
+### Does GraphGPT work on mobile?
+Yes, all charts are responsive and adapt to mobile, tablet, and desktop screens. GraphGPT works seamlessly across all devices.
+
+**More questions?** [Visit our FAQ page →](https://graphgpt.app)
+
+---
+
+## Technical Overview
+
+This repository contains a Next.js application that provides the charting widget and the MCP server.
+
+-   **MCP Server (`app/mcp/route.ts`)**: Exposes a `render_chart` tool that accepts chart parameters.
+-   **Chart Widget (`app/chart/page.tsx`)**: A client page that renders a Recharts chart from `window.openai.toolOutput`.
+-   **Host Integration (`app/layout.tsx`)**: Includes bootstrap scripts to ensure correct asset loading and navigation inside the ChatGPT iframe.
+-   **CORS Middleware (`middleware.ts`)**: Handles cross-origin requests required for client-side navigation.
+
+The `render_chart` tool returns `structuredContent` with fields like `chartType`, `data`, `xKey`, `yKey`, and other options, which the widget page consumes to render the visualization.
+
+---
+
+### Example Tool Payload
+
+```json
 {
-  "openai/outputTemplate": widget.templateUri,      // Links to resource
-  "openai/toolInvocation/invoking": "Loading...",   // Loading state text
-  "openai/toolInvocation/invoked": "Loaded",        // Completion state text
-  "openai/widgetAccessible": false,                 // Widget visibility
-  "openai/resultCanProduceWidget": true            // Enable widget rendering
+  "chartType": "line",
+  "title": "Monthly Revenue",
+  "xKey": "month",
+  "yKey": "revenue",
+  "height": 360,
+  "colors": ["#4f46e5"],
+  "data": [
+    { "month": "Jan", "revenue": 10 },
+    { "month": "Feb", "revenue": 14 },
+    { "month": "Mar", "revenue": 18 }
+  ]
 }
 ```
 
-Full configuration options: [OpenAI Apps SDK MCP Documentation](https://developers.openai.com/apps-sdk/build/mcp-server)
+---
 
-### 2. Asset Configuration (`next.config.ts`)
+## Local Development
 
-**Critical:** Set `assetPrefix` to ensure `/_next/` static assets are fetched from the correct origin:
+1.  Clone the repository.
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
+3.  Run the development server:
+    ```bash
+    npm run dev
+    ```
 
-```typescript
-const nextConfig: NextConfig = {
-  assetPrefix: baseURL,  // Prevents 404s on /_next/ files in iframe
-};
-```
+The application will be available at `http://localhost:3000`, and the MCP server will be at `http://localhost:3000/mcp`.
 
-Without this, Next.js will attempt to load assets from the iframe's URL, causing 404 errors.
+---
 
-### 3. CORS Middleware (`middleware.ts`)
+## Deployment
 
-Handles browser OPTIONS preflight requests required for cross-origin RSC (React Server Components) fetching during client-side navigation:
+This project is optimized for deployment on [Vercel](https://vercel.com). The production deployment at **graphgpt.app** demonstrates the full ChatGPT chart visualization capabilities.
 
-```typescript
-export function middleware(request: NextRequest) {
-  if (request.method === "OPTIONS") {
-    // Return 204 with CORS headers
-  }
-  // Add CORS headers to all responses
-}
-```
+The repository includes:
+-   `baseUrl.ts` and `next.config.ts` for correct asset origins in iframes.
+-   `middleware.ts` for handling CORS on client-side RSC fetches.
+-   `app/sitemap.ts` and `public/robots.txt` configured for SEO.
 
-### 4. SDK Bootstrap (`app/layout.tsx`)
+After deploying, connect ChatGPT to your production MCP URL: `https://your-app.vercel.app/mcp`. Live example: [GraphGPT Production →](https://graphgpt.app)
 
-The `<NextChatSDKBootstrap>` component patches browser APIs to work correctly within the ChatGPT iframe:
-
-**What it patches:**
-- `history.pushState` / `history.replaceState` - Prevents full-origin URLs in history
-- `window.fetch` - Rewrites same-origin requests to use the correct base URL
-- `<html>` attribute observer - Prevents ChatGPT from modifying the root element
-
-**Required configuration:**
-```tsx
-<html lang="en" suppressHydrationWarning>
-  <head>
-    <NextChatSDKBootstrap baseUrl={baseURL} />
-  </head>
-  <body>{children}</body>
-</html>
-```
-
-**Note:** `suppressHydrationWarning` is currently required because ChatGPT modifies the initial HTML before the Next.js app hydrates, causing hydration mismatches.
-
-### 5. Recharts Chart Widget (`app/chart/page.tsx` and MCP tool `render_chart`)
-
-- `app/chart/page.tsx` renders charts using Recharts. It reads `window.openai.toolOutput` set by the MCP tool and supports `line`, `bar`, `area`, and `pie` types.
-- The MCP tool `render_chart` returns `structuredContent` with fields like `chartType`, `data`, `xKey`, `yKey`, `nameKey`, `valueKey`, `title`, `height`, `width`, and `colors`.
-- The widget resource is registered with `templateUri` `ui://widget/chart-template.html` and serves the `/chart` HTML for iframe rendering.
-
-## Getting Started
-
-### Installation
-
-```bash
-npm install
-# or
-pnpm install
-```
-
-### Development
-
-```bash
-npm run dev
-# or
-pnpm dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) to see the app.
-
-### Testing the MCP Server
-
-The MCP server is available at:
-```
-http://localhost:3000/mcp
-```
-
-### Connecting from ChatGPT
-
-1. [Deploy your app to Vercel](https://vercel.com/new/clone?demo-description=Ship%20an%20ChatGPT%20app%20on%20Vercel%20with%20Next.js%20and%20Model%20Context%20Protocol%20%28MCP%29.%0A&demo-image=%2F%2Fimages.ctfassets.net%2Fe5382hct74si%2F5TdbPy0tev8hh3rTOsdfMm%2F155b970ca5e75adb74206db26493efc7%2Fimage.png&demo-title=ChatGPT%20app%20with%20Next.js&demo-url=https%3A%2F%2Fchatgpt-apps-sdk-nextjs-starter.labs.vercel.dev%2F&from=templates&project-name=ChatGPT%20app%20with%20Next.js&project-names=Comma%20separated%20list%20of%20project%20names%2Cto%20match%20the%20root-directories&repository-name=chatgpt-app-with-next-js&repository-url=https%3A%2F%2Fgithub.com%2Fvercel-labs%2Fchatgpt-apps-sdk-nextjs-starter&root-directories=List%20of%20directory%20paths%20for%20the%20directories%20to%20clone%20into%20projects&skippable-integrations=1&teamSlug=vercel)
-3. In ChatGPT, navigate to **Settings → [Connectors](https://chatgpt.com/#settings/Connectors) → Create** and add your MCP server URL with the `/mcp` path (e.g., `https://your-app.vercel.app/mcp`)
-
-**Note:** Connecting MCP servers to ChatGPT requires developer mode access. See the [connection guide](https://developers.openai.com/apps-sdk/deploy/connect-chatgpt) for setup instructions.
-
+---
 
 ## Project Structure
 
 ```
 app/
-    ├── chart/
-    │   └── page.tsx          # Client page rendering Recharts charts
-├── mcp/
-│   └── route.ts          # MCP server with tool/resource registration
-├── layout.tsx            # Root layout with SDK bootstrap
-├── page.tsx              # Homepage content
-└── globals.css           # Global styles
-middleware.ts             # CORS handling for RSC
-next.config.ts            # Asset prefix configuration
+  chart/              # Client page that renders Recharts from tool output
+  mcp/                # MCP server exposing tools and resources
+  layout.tsx          # Root layout with metadata & iframe bootstrap
+  page.tsx            # Landing page with install steps and FAQs
+middleware.ts         # CORS handling for RSC
+next.config.ts        # Asset prefixing for iframe compatibility
 ```
 
-## How It Works
+---
 
-1. **Tool Invocation**: ChatGPT calls a tool registered in `app/mcp/route.ts`
-2. **Resource Reference**: Tool response includes `templateUri` pointing to a registered resource
-3. **Widget Rendering**: ChatGPT fetches the resource HTML and renders it in an iframe
-4. **Client Hydration**: Next.js hydrates the app inside the iframe with patched APIs
-5. **Navigation**: Client-side navigation uses patched `fetch` to load RSC payloads
-6. **Chart Rendering**: The chart page reads the tool's `structuredContent` and renders a Recharts chart accordingly
+## Why GraphGPT?
 
-## Learn More
+**GraphGPT** is the **simplest way to create charts in ChatGPT**. Unlike external chart tools that require you to leave your conversation, GraphGPT renders visualizations directly inside ChatGPT's interface using the Model Context Protocol (MCP).
+
+**Perfect for:**
+- 📊 **Data analysts** who want quick visualizations during ChatGPT conversations
+- 💼 **Business professionals** creating charts from reports and tables
+- 🎓 **Students** visualizing data for projects and presentations
+- 🧪 **Researchers** turning data into insights without switching tools
+
+**[Get started with GraphGPT →](https://graphgpt.app)**
+
+---
+
+## Related Resources
 
 - [OpenAI Apps SDK Documentation](https://developers.openai.com/apps-sdk)
-- [OpenAI Apps SDK - MCP Server Guide](https://developers.openai.com/apps-sdk/build/mcp-server)
-- [Model Context Protocol](https://modelcontextprotocol.io)
+- [Model Context Protocol (MCP)](https://modelcontextprotocol.io)
 - [Next.js Documentation](https://nextjs.org/docs)
-
-## Deployment
-
-This project is designed to work seamlessly with [Vercel](https://vercel.com) deployment. The `baseUrl.ts` configuration automatically detects Vercel environment variables and sets the correct asset URLs.
-
-### Deploy to Vercel
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel-labs/chatgpt-apps-sdk-nextjs-starter)
-
-The configuration automatically handles:
-- Production URLs via `VERCEL_PROJECT_PRODUCTION_URL`
-- Preview/branch URLs via `VERCEL_BRANCH_URL`
-- Asset prefixing for correct resource loading in iframes
+- [Recharts Documentation](https://recharts.org)

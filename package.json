@@ -1,7 +1,20 @@
 {
-  "name": "openai-apps-minimal-nextjs",
+  "name": "graphgpt-app",
   "version": "0.1.0",
   "private": true,
+  "description": "Create charts and visualize data inside ChatGPT using GraphGPT (line, bar, area, pie).",
+  "keywords": [
+    "GraphGPT",
+    "ChatGPT charts",
+    "ChatGPT graphs",
+    "visualize data in ChatGPT",
+    "create chart in ChatGPT",
+    "create graph in ChatGPT",
+    "MCP",
+    "OpenAI Apps SDK",
+    "Recharts"
+  ],
+  "homepage": "https://graphgpt.app",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
