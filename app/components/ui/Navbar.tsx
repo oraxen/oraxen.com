@@ -32,7 +32,8 @@ export const Navigation: FC<NavigationProps> = ({ sticky = true }) => {
 
   useEffect(() => {
     const mediaQuery: MediaQueryList = window.matchMedia("(min-width: 768px)");
-    const handleMediaQueryChange = () => {
+    const handleMediaQueryChange = ()
+ => {
       setOpen(false);
       // setSolutionsOpen(false)
     };
@@ -87,7 +88,7 @@ export const Navigation: FC<NavigationProps> = ({ sticky = true }) => {
                 Polymart
               </Link>
               <Link
-                href="https://git.io/oraxen"
+                href="https://github.com/oraxen/oraxen"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-2 py-1 dark:text-gray-50"
