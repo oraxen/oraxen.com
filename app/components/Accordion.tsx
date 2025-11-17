@@ -20,9 +20,9 @@ const AccordionTrigger = React.forwardRef<
         // base
         "group flex flex-1 cursor-pointer items-center justify-between py-3 text-left text-sm font-medium leading-none",
         // text color
-        "text-text-secondary-dark dark:text-gray-50",
+        "text-[var(--foreground)]",
         // disabled
-        "data-[disabled]:text-secondary-light data-[disabled]:cursor-default dark:data-[disabled]:text-text-secondary",
+        "data-[disabled]:text-[var(--foreground-secondary)] data-[disabled]:cursor-default",
         //focus
         "focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-500",
         className
@@ -36,9 +36,9 @@ const AccordionTrigger = React.forwardRef<
           // base
           "size-5 shrink-0 transition-transform duration-150 ease-[cubic-bezier(0.87,_0,_0.13,_1)] group-data-[state=open]:-rotate-45",
           // text color
-          "text-secondary-light dark:text-text-secondary",
+          "text-[var(--foreground-secondary)]",
           // disabled
-          "group-data-[disabled]:dark:text-secondary-dark group-data-[disabled]:text-gray-300"
+          "group-data-[disabled]:text-gray-400"
         )}
         aria-hidden="true"
         focusable="false"
@@ -65,7 +65,7 @@ const AccordionContent = React.forwardRef<
         // base
         "overflow-hidden pb-4 text-sm",
         // text color
-        "text-secondary-dark dark:text-light",
+        "text-[var(--foreground-secondary)]",
         className
       )}
     >

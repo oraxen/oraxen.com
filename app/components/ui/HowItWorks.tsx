@@ -44,7 +44,7 @@ export default function HowItWorks({
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               viewport={{ once: true }}
-              className="mt-2 inline-block bg-gradient-to-br from-[var(--foreground)] to-[var(--foreground-secondary)] bg-clip-text py-2 text-3xl font-bold tracking-tighter text-transparent sm:text-5xl dark:from-gray-50 dark:to-gray-300"
+              className="mt-2 inline-block bg-gradient-to-br from-[var(--foreground)] to-[var(--foreground-secondary)] bg-clip-text py-2 text-3xl font-bold tracking-tighter text-transparent sm:text-5xl"
             >
               {title}
             </motion.h2>
@@ -76,15 +76,16 @@ export default function HowItWorks({
                     height={500}
                     className="block rounded-xl shadow-2xl sepia-[0.05] dark:shadow-indigo-600/10"
                     sizes="(max-width: 768px) 100vw, 50vw"
+                    unoptimized
                   />
                 </div>
               </div>
             </div>
             <div className="order-2">
-              <h3 className="text-2xl font-semibold bg-gradient-to-br from-[var(--foreground)] to-[var(--foreground-secondary)] bg-clip-text text-transparent sm:text-3xl dark:from-gray-50 dark:to-gray-300">
+              <h3 className="text-2xl font-semibold bg-gradient-to-br from-[var(--foreground)] to-[var(--foreground-secondary)] bg-clip-text text-transparent sm:text-3xl">
                 {step.title}
               </h3>
-              <p className="mt-4 max-w-md text-justify leading-7 text-[var(--foreground)]">
+              <p className="mt-4 max-w-md text-justify leading-7 text-[var(--foreground-secondary)]">
                 {step.description}
               </p>
               {(step.ctaText || step.ctaLink) && (

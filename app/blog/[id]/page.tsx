@@ -112,11 +112,11 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         <header className="mb-8 text-center">
           <div className="flex flex-col items-center justify-center">
             <Badge>Article</Badge>
-            <h1 className="mb-4 inline-block bg-gradient-to-br from-text to-text-secondary bg-clip-text py-2 text-4xl font-bold tracking-tighter text-transparent sm:text-6xl md:text-6xl dark:from-gray-50 dark:to-gray-300">
+            <h1 className="mb-4 inline-block bg-gradient-to-br from-[var(--foreground)] to-[var(--foreground-secondary)] bg-clip-text py-2 text-4xl font-bold tracking-tighter text-transparent sm:text-6xl md:text-6xl">
               {post.frontmatter.title}
             </h1>
           </div>
-          <div className="mb-6 flex items-center justify-center gap-4 text-sm text-text-secondary">
+          <div className="mb-6 flex items-center justify-center gap-4 text-sm text-[var(--foreground-secondary)]">
             <time dateTime={post.frontmatter.date}>
               {new Date(post.frontmatter.date).toLocaleDateString("en-US", {
                 year: "numeric",
@@ -144,40 +144,49 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 height={630}
                 className="rounded-lg"
                 priority
+                unoptimized={
+                  post.frontmatter.image.includes("/assets/demo.png") ||
+                  post.frontmatter.image.includes("/assets/beautiful_items.png")
+                }
               />
-              <figcaption className="mt-2 text-center text-text-secondary">
+              <figcaption className="mt-2 text-center text-[var(--foreground-secondary)]">
                 {post.frontmatter.title}
               </figcaption>
             </figure>
           )}
         </header>
 
-        <div className="prose prose-lg max-w-none">{post.content}</div>
+        {/* Article body */}
+        <div className="prose prose-lg max-w-none dark:prose-invert">
+          {post.content}
+        </div>
 
-        <footer className="mt-12 border-t border-light pt-8">
+        <footer className="mt-12 border-t border-[var(--border-subtle)] pt-8">
           <div className="mb-6 flex flex-wrap justify-between gap-2">
             <div className="flex flex-wrap gap-2">
               {post.frontmatter.tags.map((tag: string) => (
                 <span
                   key={tag}
-                  className="rounded-full bg-light px-3 py-1 text-sm"
+                  className="rounded-full border border-[var(--border-subtle)] bg-[var(--bg-subtle)] px-3 py-1 text-sm text-[var(--foreground-secondary)]"
                 >
                   {tag}
                 </span>
               ))}
             </div>
 
-            <div className="text-sm text-text-secondary">
-              Last updated:{" "}
-              {new Date(post.frontmatter.modifiedDate).toLocaleDateString(
-                "en-US",
-                {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                }
-              )}
-            </div>
+            {post.frontmatter.modifiedDate && (
+              <div className="text-sm text-[var(--foreground-secondary)]">
+                Last updated:{" "}
+                {new Date(post.frontmatter.modifiedDate).toLocaleDateString(
+                  "en-US",
+                  {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  }
+                )}
+              </div>
+            )}
           </div>
 
           {author && (

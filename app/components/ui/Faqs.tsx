@@ -30,11 +30,11 @@ export function Faqs({ items, jsonLd }: FaqsProps) {
         >
           <h2
             id="faq-title"
-            className="inline-block w-full scroll-my-24 bg-gradient-to-br from-[var(--foreground)] to-[var(--foreground-secondary)] bg-clip-text py-2 pr-2 text-left text-2xl font-bold tracking-tighter text-transparent lg:text-3xl dark:from-gray-50 dark:to-gray-300"
+            className="inline-block w-full scroll-my-24 bg-gradient-to-br from-[var(--foreground)] to-[var(--foreground-secondary)] bg-clip-text py-2 pr-2 text-left text-2xl font-bold tracking-tighter text-transparent lg:text-3xl"
           >
             Frequently Asked Questions
           </h2>
-          <p className="dark:text-secondary-light mt-4 text-base leading-7 text-[var(--foreground-secondary)]">
+          <p className="mt-4 text-base leading-7 text-[var(--foreground-secondary)]">
             Can&rsquo;t find the answer you&rsquo;re looking for? Don&rsquo;t
             hesitate to join our{" "}
             <a
@@ -67,7 +67,7 @@ export function Faqs({ items, jsonLd }: FaqsProps) {
                   className="py-3 first:pb-3 first:pt-0"
                 >
                   <AccordionTrigger>
-                    <span className="w-full text-center sm:text-left bg-gradient-to-br from-[var(--foreground)] to-[var(--foreground-secondary)] bg-clip-text text-transparent dark:from-gray-50 dark:to-gray-300">
+                    <span className="w-full text-center sm:text-left bg-gradient-to-br from-[var(--foreground)] to-[var(--foreground-secondary)] bg-clip-text text-transparent">
                       {item.question}
                     </span>
                   </AccordionTrigger>

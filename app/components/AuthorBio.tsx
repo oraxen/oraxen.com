@@ -18,7 +18,7 @@ export function AuthorBio({
   linkedin,
 }: AuthorBioProps) {
   return (
-    <div className="mt-10 flex items-start gap-4 rounded-lg p-6">
+    <div className="mt-10 flex items-start gap-4 rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)] p-6">
       {image && (
         <div className="flex-shrink-0 cursor-pointer">
           <Link
@@ -35,14 +35,16 @@ export function AuthorBio({
         </div>
       )}
       <div className="flex-1">
-        <h3 className="mb-2 cursor-pointer text-lg font-bold uppercase tracking-wide text-text-secondary-dark">
+        <h3 className="mb-2 cursor-pointer text-lg font-bold uppercase tracking-wide text-[var(--foreground)]">
           <Link
             href={`/blog/author/${name.toLowerCase().replace(/\s+/g, "-")}`}
           >
             {name}
           </Link>
         </h3>
-        <p className="text-secondary-dark mb-3 leading-relaxed">{bio}</p>
+        <p className="mb-3 leading-relaxed text-[var(--foreground-secondary)]">
+          {bio}
+        </p>
 
         <SocialLinks twitter={twitter} linkedin={linkedin} size="small" />
       </div>

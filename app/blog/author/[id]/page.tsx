@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SocialLinks } from "../../../components/SocialLinks";
 import { siteConfig } from "../../../siteConfig";
@@ -12,6 +13,7 @@ interface Author {
   bio: string;
   jobTitle: string;
   profilePicture: string;
+  website?: string;
   email?: string;
   twitter?: string;
   linkedin?: string;
@@ -96,7 +98,7 @@ export default async function AuthorPage({
     url: canonicalUrl,
     image: authorImageUrl,
     email: author.email,
-    sameAs: [author.twitter, author.linkedin].filter(Boolean),
+    sameAs: [author.website, author.twitter, author.linkedin].filter(Boolean),
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": canonicalUrl,
@@ -113,8 +115,8 @@ export default async function AuthorPage({
 
       <div className="mx-auto max-w-4xl px-4 py-8">
         {/* Author Header Section */}
-        <header className="mb-12 text-center">
-          <div className="mb-6">
+        <header className="mb-12 text-center rounded-3xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)] p-8">
+          <div className="mb-6 flex justify-center">
             <Image
               src={author.profilePicture}
               alt={`${author.name} - Author Photo`}
@@ -125,15 +127,28 @@ export default async function AuthorPage({
             />
           </div>
 
-          <h1 className="mb-4 text-4xl font-bold text-text-secondary-dark">
+          <h1 className="mb-4 text-4xl font-bold tracking-tight text-[var(--foreground)]">
             {author.name}
           </h1>
 
-          <p className="mb-4 text-xl font-medium text-text-secondary">
+          <p className="mb-2 text-xl font-medium text-[var(--foreground-secondary)]">
             {author.jobTitle}
           </p>
 
-          <p className="text-secondary-dark mx-auto max-w-3xl text-lg leading-relaxed">
+          {author.website && (
+            <p className="mb-4 text-sm text-[var(--foreground-secondary)]">
+              <Link
+                href={author.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-primary hover:underline"
+              >
+                {author.website}
+              </Link>
+            </p>
+          )}
+
+          <p className="mx-auto max-w-3xl text-lg leading-relaxed text-[var(--foreground-secondary)]">
             {author.bio}
           </p>
         </header>

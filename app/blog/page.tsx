@@ -79,7 +79,6 @@ export default async function BlogPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPageJsonLd) }}
       />
       <div id="main-content" className="mx-auto max-w-7xl px-4 py-8">
-        {/* Page Header - Similar to Pricing */}
         <header
           aria-labelledby="blog-title"
           className="mb-16 animate-slide-up-fade"
@@ -91,11 +90,11 @@ export default async function BlogPage() {
           <Badge>Blog</Badge>
           <h1
             id="blog-title"
-            className="mt-2 inline-block bg-gradient-to-br from-[var(--foreground)] to-[var(--foreground-secondary)] bg-clip-text py-2 text-4xl font-bold tracking-tighter text-transparent sm:text-6xl md:text-6xl dark:from-gray-50 dark:to-gray-300"
+            className="mt-2 inline-block bg-gradient-to-br from-[var(--foreground)] to-[var(--foreground-secondary)] bg-clip-text py-2 text-4xl font-bold tracking-tighter text-transparent sm:text-6xl md:text-6xl"
           >
             {siteConfig.blogTitle}
           </h1>
-          <p className="text-secondary-dark dark:text-secondary-light mt-6 max-w-2xl text-lg">
+          <p className="mt-6 max-w-2xl text-lg text-[var(--foreground-secondary)]">
             {siteConfig.blogDescription}
           </p>
         </header>

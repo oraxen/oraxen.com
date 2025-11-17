@@ -38,7 +38,7 @@ function CustomHeading(props: any) {
 
 export const H1 = ({ children }: React.HTMLProps<HTMLHeadingElement>) => (
   <CustomHeading
-    className="text-3xl font-bold normal-case tracking-tight text-text-secondary-dark sm:text-4xl dark:text-gray-50"
+    className="text-3xl font-bold normal-case tracking-tight text-[var(--foreground)] sm:text-4xl"
     level={1}
   >
     {children}
@@ -47,7 +47,7 @@ export const H1 = ({ children }: React.HTMLProps<HTMLHeadingElement>) => (
 
 export const H2 = ({ children }: React.HTMLProps<HTMLHeadingElement>) => (
   <CustomHeading
-    className="mb-4 text-lg font-semibold normal-case tracking-tight text-text-secondary-dark dark:text-gray-50"
+    className="mb-4 text-lg font-semibold normal-case tracking-tight text-[var(--foreground)]"
     level={2}
   >
     {children}
@@ -56,7 +56,7 @@ export const H2 = ({ children }: React.HTMLProps<HTMLHeadingElement>) => (
 
 export const H3 = ({ children }: React.HTMLProps<HTMLHeadingElement>) => (
   <CustomHeading
-    className="mb-2 font-semibold normal-case tracking-tight text-text-secondary-dark dark:text-gray-50"
+    className="mb-2 font-semibold normal-case tracking-tight text-[var(--foreground)]"
     level={3}
   >
     {children}
@@ -99,7 +99,7 @@ export const P = (props: React.HTMLProps<HTMLParagraphElement>) => {
     <p
       {...rest}
       className={clsx(
-        "dark:text-secondary-light mb-8 leading-7 text-text-secondary",
+        "mb-8 leading-7 text-[var(--foreground-secondary)]",
         className
       )}
     >
@@ -110,16 +110,13 @@ export const P = (props: React.HTMLProps<HTMLParagraphElement>) => {
 
 export const Ul = (props: React.HTMLAttributes<HTMLUListElement>) => (
   <ul
-    className="dark:text-secondary-light mb-10 ml-[30px] list-['–__'] space-y-1 leading-8 text-text-secondary"
+    className="mb-10 ml-[30px] list-['–__'] space-y-1 leading-8 text-[var(--foreground-secondary)]"
     {...props}
   />
 );
 
 export const Bold = (props: React.HTMLAttributes<HTMLSpanElement>) => (
-  <span
-    className="font-semibold text-text-secondary-dark dark:text-gray-50"
-    {...props}
-  />
+  <span className="font-semibold text-[var(--foreground)]" {...props} />
 );
 
 export function CustomLink(props: any) {
@@ -177,7 +174,7 @@ export const BlogEntry = ({
   };
 
   return (
-    <article className="relative my-20 flex flex-col justify-center gap-x-14 border-b border-light md:flex-row dark:border-gray-800">
+    <article className="relative my-20 flex flex-col justify-center gap-x-14 border-b border-[var(--border-subtle)] md:flex-row">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostSchema) }}

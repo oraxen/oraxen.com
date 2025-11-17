@@ -13,7 +13,7 @@ export function FeaturedPost({ post }: FeaturedPostProps) {
   }
   return (
     <section className="mb-20">
-      <article className="group cursor-pointer overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-xl transition-shadow hover:shadow-2xl">
+      <article className="group cursor-pointer overflow-hidden rounded-3xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)] shadow-xl transition-colors transition-shadow hover:border-[var(--border-strong)] hover:shadow-2xl">
         <Link href={`/blog/${post?.slug}`} className="block">
           <div className="lg:flex">
             <div className="lg:w-1/2">
@@ -28,11 +28,11 @@ export function FeaturedPost({ post }: FeaturedPostProps) {
             <div className="flex flex-col justify-center p-10 lg:w-1/2 lg:p-12">
               <Badge>Featured</Badge>
 
-              <h2 className="mb-6 mt-4 text-4xl font-bold leading-tight text-text-secondary-dark transition-colors group-hover:text-primary lg:text-5xl">
+              <h2 className="mb-6 mt-4 text-4xl font-bold leading-tight text-[var(--foreground)] transition-colors group-hover:text-primary lg:text-5xl">
                 {post?.title}
               </h2>
 
-              <p className="mb-8 text-xl leading-relaxed text-text-secondary">
+              <p className="mb-8 text-xl leading-relaxed text-[var(--foreground-secondary)]">
                 {post?.description}
               </p>
 
@@ -47,7 +47,7 @@ export function FeaturedPost({ post }: FeaturedPostProps) {
                   />
                 ) : (
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-300">
-                    <span className="text-secondary-dark text-sm font-medium">
+                    <span className="text-sm font-medium text-[var(--foreground)]">
                       {post.author.name
                         .split(" ")
                         .map((n) => n[0])
@@ -56,10 +56,10 @@ export function FeaturedPost({ post }: FeaturedPostProps) {
                   </div>
                 )}
                 <div>
-                  <span className="block font-semibold text-text-secondary-dark transition-colors group-hover:text-primary">
+                  <span className="block font-semibold text-[var(--foreground)]">
                     {post.author.name}
                   </span>
-                  <p className="text-sm text-text-secondary-semi-light">
+                  <p className="text-sm text-[var(--foreground-secondary)]">
                     {post.readingTime}
                   </p>
                 </div>

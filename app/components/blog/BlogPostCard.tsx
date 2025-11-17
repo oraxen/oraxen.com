@@ -9,7 +9,7 @@ interface BlogPostCardProps {
 
 export function BlogPostCard({ post }: BlogPostCardProps) {
   return (
-    <article className="group cursor-pointer overflow-hidden rounded-2xl bg-white shadow-lg transition-shadow hover:shadow-xl">
+    <article className="group cursor-pointer overflow-hidden rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)] shadow-lg transition-colors transition-shadow hover:border-[var(--border-strong)] hover:shadow-xl">
       <Link href={`/blog/${post.slug}`} className="block">
         <div className="aspect-video">
           <Image
@@ -24,11 +24,11 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
         <div className="p-6">
           {post.tags.length > 0 && <Badge size="sm">{post.tags[0]}</Badge>}
 
-          <h3 className="mb-3 mt-2 text-xl font-bold leading-tight text-text-secondary-dark transition-colors group-hover:text-primary">
+          <h3 className="mb-3 mt-2 text-xl font-bold leading-tight text-[var(--foreground)] transition-colors group-hover:text-primary">
             {post.title}
           </h3>
 
-          <p className="mb-4 leading-relaxed text-text-secondary">
+          <p className="mb-4 leading-relaxed text-[var(--foreground-secondary)]">
             {post.description}
           </p>
 
@@ -44,7 +44,7 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
                 />
               ) : (
                 <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-300">
-                  <span className="text-secondary-dark text-xs font-medium">
+                  <span className="text-xs font-medium text-[var(--foreground)]">
                     {post.author.name
                       .split(" ")
                       .map((n) => n[0])
@@ -53,16 +53,16 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
                 </div>
               )}
               <div>
-                <span className="text-sm font-medium text-text-secondary-dark transition-colors group-hover:text-primary">
+                <span className="text-sm font-medium text-[var(--foreground)] transition-colors group-hover:text-primary">
                   {post.author.name}
                 </span>
-                <p className="text-xs text-text-secondary-semi-light">
+                <p className="text-xs text-[var(--foreground-secondary)]">
                   {post.readingTime}
                 </p>
               </div>
             </div>
 
-            <div className="text-secondary-light transition-colors group-hover:text-text-secondary">
+            <div className="text-[var(--foreground-secondary)] transition-colors group-hover:text-[var(--foreground)]">
               <svg
                 className="h-5 w-5"
                 viewBox="0 0 24 24"

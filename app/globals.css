@@ -3,16 +3,42 @@
 @tailwind utilities;
 
 :root {
+  /* Light theme */
   --background: #ffffff;
-  --foreground: #171717;
-  --foreground-secondary: #707069;
+  --foreground: #111827; /* text-primary light */
+  --foreground-secondary: #6b7280; /* muted light */
+
+  /* Surface + border palette */
+  --bg-elevated: #ffffff;
+  --bg-subtle: #f3f4f6;
+  --border-subtle: #e5e7eb;
+  --border-strong: #d1d5db;
+
+  /* Text palette */
+  --text-primary: #111827;
+  --text-muted: #6b7280;
+  --text-subtle: #9ca3af;
+  --text-inverted: #f9fafb;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --foreground-secondary: #d4d7da;
+    /* Page background (neutral dark gray, lighter than pure black) */
+    --background: #050505;
+
+    /* Text palette (from provided dark theme) */
+    --foreground: #e5e7eb; /* text-primary */
+    --foreground-secondary: #9ca3af; /* text-muted */
+
+    --bg-elevated: #111111;
+    --bg-subtle: #050505;
+    --border-subtle: #27272a;
+    --border-strong: #3f3f46;
+
+    --text-primary: #e5e7eb;
+    --text-muted: #9ca3af;
+    --text-subtle: #6b7280;
+    --text-inverted: #020617;
   }
 }
 
@@ -64,7 +90,8 @@ code {
 code .line::before {
   content: counter(step);
   counter-increment: step;
-  @apply mr-8 inline-block w-4 text-right text-text-secondary;
+  @apply mr-8 inline-block w-4 text-right;
+  color: var(--foreground-secondary);
 }
 
 .mask {
