@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import {
   LineChart,
   Line,
@@ -56,86 +56,19 @@ const DEFAULT_PIE_DATA = [
 ];
 
 export default function ChartPage() {
-  const [config, setConfig] = useState<ChartConfig | null>(null);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const anyWindow = window as any;
-
-    if (!anyWindow.openai) {
-      anyWindow.openai = {};
-    }
-
-    let currentValue = anyWindow.openai.toolOutput;
-
-    Object.defineProperty(anyWindow.openai, "toolOutput", {
-      get() {
-        return currentValue;
-      },
-      set(newValue: any) {
-        currentValue = newValue;
-        applyToolOutput(newValue);
-      },
-      configurable: true,
-      enumerable: true,
-    });
-
-    applyToolOutput(currentValue);
-  }, []);
-
-  const applyToolOutput = (value: any) => {
-    if (!value) return;
-
-    // Accept either nested structuredContent or direct payload
-    console.log("Value ==>", value);
-    const payload = value?.result?.structuredContent ?? value;
-
-    console.log("Structured Content ==>", payload.structuredContent);
-
-    const chartType: ChartType = (payload.chartType as ChartType) ?? "line";
-    const xKey = (payload.xKey as string) ?? "name";
-    const yKey = (payload.yKey as string) ?? "value";
-    const yKeys = (payload.yKeys as string[] | undefined) ?? undefined;
-    const nameKey = (payload.nameKey as string) ?? "name";
-    const valueKey = (payload.valueKey as string) ?? "value";
-    const width = (payload.width as number) ?? undefined;
-    const height = (payload.height as number) ?? 360;
-    const title = (payload.title as string) ?? undefined;
-    const colors = (payload.colors as string[]) ?? [
-      "#8884d8",
-      "#82ca9d",
-      "#ffc658",
-      "#ff8042",
-      "#a4de6c",
-      "#d0ed57",
-    ];
-
-    let data = Array.isArray(payload.data)
-      ? (payload.data as GenericRecord[])
-      : [];
-    if (data.length === 0) {
-      data = chartType === "pie" ? DEFAULT_PIE_DATA : DEFAULT_LINE_DATA;
-    }
-
-    setConfig({
-      chartType,
-      data,
-      xKey,
-      yKey,
-      yKeys,
-      nameKey,
-      valueKey,
-      width,
-      height,
-      title,
-      colors,
-    });
-  };
+  const [config] = useState<ChartConfig>({
+    chartType: "line",
+    data: DEFAULT_LINE_DATA,
+    xKey: "name",
+    yKey: "value",
+    nameKey: "name",
+    valueKey: "value",
+    height: 360,
+    title: "Chart",
+    colors: ["#8884d8", "#82ca9d", "#ffc658", "#ff8042", "#a4de6c", "#d0ed57"],
+  });
 
   const content = useMemo(() => {
-    if (!config) return null;
-
     const chartType = config.chartType;
     const data = config.data;
     const height = config.height;
