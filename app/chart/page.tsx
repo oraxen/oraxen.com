@@ -61,13 +61,15 @@ export default function ChartPage() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    if (!window.openai) {
-      (window as any).openai = {};
+    const anyWindow = window as any;
+
+    if (!anyWindow.openai) {
+      anyWindow.openai = {};
     }
 
-    let currentValue = (window as any).openai.toolOutput;
+    let currentValue = anyWindow.openai.toolOutput;
 
-    Object.defineProperty((window as any).openai, "toolOutput", {
+    Object.defineProperty(anyWindow.openai, "toolOutput", {
       get() {
         return currentValue;
       },
