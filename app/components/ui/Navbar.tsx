@@ -32,8 +32,7 @@ export const Navigation: FC<NavigationProps> = ({ sticky = true }) => {
 
   useEffect(() => {
     const mediaQuery: MediaQueryList = window.matchMedia("(min-width: 768px)");
-    const handleMediaQueryChange = ()
- => {
+    const handleMediaQueryChange = () => {
       setOpen(false);
       // setSolutionsOpen(false)
     };
