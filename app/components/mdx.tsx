@@ -99,7 +99,7 @@ export const P = (props: React.HTMLProps<HTMLParagraphElement>) => {
   return (
     <p
       {...rest}
-      className={clsx("mb-8 leading-7 text-[var(--foreground)]", className)}
+      className={clsx("mb-4 leading-7 text-[var(--foreground)]", className)}
     >
       {children}
     </p>
@@ -108,7 +108,7 @@ export const P = (props: React.HTMLProps<HTMLParagraphElement>) => {
 
 export const Ul = (props: React.HTMLAttributes<HTMLUListElement>) => (
   <ul
-    className="mb-10 ml-[30px] list-['–__'] space-y-1 leading-8 text-[var(--foreground-secondary)]"
+    className="mb-10 ml-[30px] list-['–__'] space-y-4 leading-8 text-[var(--foreground-secondary)]"
     {...props}
   />
 );
