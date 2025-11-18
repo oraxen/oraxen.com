@@ -12,7 +12,6 @@ export const siteConfig = {
     blog: "/blog",
   },
   mainCta: "https://docs.oraxen.com/",
-  relensUrl: "https://relens.ai/",
   chatgptPages: ["/chart", "/index.html"],
   blogTitle: "Oraxen Blog",
   blogDescription: "Discover insights on Oraxen and how to use it.",

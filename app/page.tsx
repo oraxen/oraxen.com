@@ -106,25 +106,25 @@ export default function Home() {
           title={"Why choose " + siteConfig.name}
           steps={[
             {
-              title: "🎨 Premium Artist-Made Textures",
+              title: "Premium Artist-Made Textures",
               description:
                 "Access hundreds of dollars worth of beautiful, professionally crafted textures created by talented artists. Transform your server with high-quality custom items that stand out from the crowd.",
               imagePath: "/assets/beautiful_items.png",
             },
             {
-              title: "🖥️ Custom Menus & GUI",
+              title: "Custom Menus & GUI",
               description:
                 "Create stunning custom menus and user interfaces for your server. Build immersive experiences with fully customizable GUIs that guide and engage your players.",
               imagePath: "/assets/custom_menu.jpg",
             },
             {
-              title: "🪑 Furniture & Custom Blocks",
+              title: "Furniture & Custom Blocks",
               description:
                 "Enhance your server world with custom furniture and decorative blocks. Place interactive items, create immersive environments, and bring your server's aesthetic to life.",
               imagePath: "/assets/furnitures.png",
             },
             {
-              title: "⚡ Easy, Modular & Open Source",
+              title: "Easy, Modular & Open Source",
               description:
                 "Oraxen is designed to be easy to configure with simple YAML files. It's fully modular, allowing you to enable only what you need. Best of all, it's completely open source, giving you full control and transparency.",
               ctaText: "View Documentation",

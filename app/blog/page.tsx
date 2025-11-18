@@ -6,20 +6,18 @@ import { getBlogPosts } from "../lib/blog";
 import { siteConfig } from "../siteConfig";
 
 export const metadata: Metadata = {
-  title: "Blog - ReLens",
+  title: `Blog - ${siteConfig.name}`,
   description:
     "Discover insights on AI, generative search, content strategy, and the future of digital marketing. Stay ahead with expert analysis and practical guides.",
   keywords: [
     "AI",
     "Generative Search",
-    "Artificial Intelligence",
-    "ReLens",
-    "AI visibility",
-    "AI tracking",
-    "brand monitoring",
-    "AI SEO",
-    "AEO",
-    "GEO",
+    "Minecraft",
+    "Minecraft plugin",
+    "Oraxen",
+    "custom items",
+    "custom blocks",
+    "resource pack",
   ],
   alternates: {
     canonical: `${siteConfig.url}/blog`,
@@ -33,10 +31,10 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     images: [
       {
-        url: `${siteConfig.url}/images/preview.png`,
+        url: `${siteConfig.url}/logo_lowres.png`,
         width: 1200,
         height: 630,
-        alt: "ReLens AI - Get Your Product Mentioned by LLMs",
+        alt: `${siteConfig.name} - Custom Items & Blocks for Minecraft`,
       },
     ],
   },
@@ -62,7 +60,7 @@ const blogPageJsonLd = {
     url: siteConfig.url,
     logo: {
       "@type": "ImageObject",
-      url: `${siteConfig.url}/relens/logo-relens.png`,
+      url: `${siteConfig.url}/logo.svg`,
     },
   },
 };

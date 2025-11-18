@@ -18,7 +18,7 @@ export function FeaturedPost({ post }: FeaturedPostProps) {
           <div className="lg:flex">
             <div className="lg:w-1/2">
               <Image
-                src={post?.image || "/blog/introducing-relens.webp"}
+                src={post?.image || "/assets/demo.png"}
                 alt={`Cover image for ${post?.title}`}
                 width={700}
                 height={500}

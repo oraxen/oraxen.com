@@ -4,40 +4,41 @@ import Balancer from "react-wrap-balancer";
 import { siteConfig } from "../siteConfig";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy - ReLens AI | Data Protection & Privacy",
+  title: `Privacy Policy - ${siteConfig.name}`,
   description:
-    "Learn how ReLens AI protects your data and privacy. Our comprehensive privacy policy explains data collection, usage, and your rights under GDPR and Swiss data protection laws.",
+    "Learn how we handle data on the Oraxen website. This privacy policy explains what is collected, how it is used, and your rights.",
   keywords: [
     "privacy policy",
     "data protection",
     "GDPR",
     "privacy rights",
-    "ReLens AI privacy",
     "data security",
     "user privacy",
     "data processing",
+    "Oraxen",
+    "Minecraft plugin",
   ],
   openGraph: {
-    title: "Privacy Policy - ReLens AI | Data Protection & Privacy",
+    title: `Privacy Policy - ${siteConfig.name}`,
     description:
-      "Learn how ReLens AI protects your data and privacy. Our comprehensive privacy policy explains data collection, usage, and your rights under GDPR and Swiss data protection laws.",
+      "Learn how we handle data on the Oraxen website. This privacy policy explains what is collected, how it is used, and your rights.",
     url: `${siteConfig.url}/privacy`,
     type: "website",
     images: [
       {
-        url: `${siteConfig.url}/images/preview.png`,
+        url: `${siteConfig.url}/logo_lowres.png`,
         width: 1200,
         height: 630,
-        alt: "ReLens AI Privacy Policy",
+        alt: `${siteConfig.name} Privacy Policy`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Privacy Policy - ReLens AI | Data Protection & Privacy",
+    title: `Privacy Policy - ${siteConfig.name}`,
     description:
-      "Learn how ReLens AI protects your data and privacy. Our comprehensive privacy policy explains data collection, usage, and your rights under GDPR and Swiss data protection laws.",
-    images: [`${siteConfig.url}/images/preview.png`],
+      "Learn how we handle data on the Oraxen website. This privacy policy explains what is collected, how it is used, and your rights.",
+    images: [`${siteConfig.url}/logo_lowres.png`],
   },
   alternates: {
     canonical: `${siteConfig.url}/privacy`,
@@ -49,7 +50,7 @@ export default function Privacy() {
     <div className="mt-36 flex flex-col overflow-hidden px-3">
       <section
         aria-labelledby="privacy-overview"
-        className="animate-slide-up-fade"
+        className="animate-slide-up-fade flex flex-col items-center text-center"
         style={{
           animationDuration: "600ms",
           animationFillMode: "backwards",
@@ -75,13 +76,13 @@ export default function Privacy() {
       <section className="mx-auto mt-16 max-w-4xl">
         <div className="prose prose-gray max-w-none dark:prose-invert">
           <p>
-            We, LFG Labs (&ldquo;ReLens AI/we&rdquo;), welcome your use of our
-            website and web app (&ldquo;Our Services&rdquo;). In the following
-            provisions, we inform you about the type, scope, and purposes of the
-            collection and use of your personal data when using our services.
-            Personal data refers to any information that relates to an
-            identified or identifiable natural person. This includes, in
-            particular, your name and email address.
+            We welcome your use of the Oraxen website and any related services
+            (&ldquo;Our Services&rdquo;). In the following provisions, we inform
+            you about the type, scope, and purposes of the collection and use of
+            your personal data when using our services. Personal data refers to
+            any information that relates to an identified or identifiable
+            natural person. This includes, in particular, your name and email
+            address.
           </p>
           <p>
             In addition to the General Data Protection Regulation (GDPR), we
@@ -99,13 +100,9 @@ export default function Privacy() {
           </p>
           <div className="p-4">
             <p className="mb-2">
-              <strong>LFG Labs</strong>
+              <strong>Oraxen Project</strong>
             </p>
-            <p>c/o Sielva Management SA</p>
-            <p>Gubelstrasse 11</p>
-            <p>6300 Zug, Switzerland</p>
-            <p>CHE-392.547.093 MWST</p>
-            <p>Email: contact@relens.ai</p>
+            <p>Email: support@oraxen.com</p>
           </div>
 
           <h3 className="mb-6 mt-12 text-xl font-bold text-text-secondary-dark dark:text-gray-50">
@@ -174,59 +171,10 @@ export default function Privacy() {
             4. Data Processing for Service Optimization
           </h3>
           <p>
-            Our services use cookies to ensure functionality and analyze user
-            behavior. Some cookies are necessary for website functionality
-            (e.g., session cookies), while others are used for analysis. You can
-            manage or disable cookies via your browser settings, but this may
-            limit the website&rsquo;s functionality.
-          </p>
-          <p>
-            The storage of necessary and functional cookies is based on Art. 6
-            para. 1 lit. f GDPR, while all others are based on your consent
-            under Art. 6 para. 1 lit. a GDPR. Where applicable, consent for
-            cookies is obtained in accordance with both the GDPR and the Swiss
-            nFADP. You can adjust your cookie preferences at any time via the
-            cookie banner and may revoke this consent at any time.
-          </p>
-          <p>
-            For additional privacy, you can use browser plugins like AdBlock or
-            Ghostery to prevent tracking.
-          </p>
-
-          <h3 className="mb-4 mt-8 text-lg font-semibold text-text-secondary-dark dark:text-gray-50">
-            4.1. PostHog Analytics
-          </h3>
-          <p>
-            Our website uses &ldquo;PostHog&rdquo; to analyze website usage.
-            Data is stored in pseudonymized user profiles, using cookies.
-            PostHog collects information about page views, user interactions,
-            and technical information about your device and browser.
-          </p>
-          <p>
-            PostHog uses this data to evaluate website usage and create reports.
-            Data is not linked to personal data without your consent. For more
-            information, see:{" "}
-            <a
-              href="https://posthog.com/privacy"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary hover:text-primary/80"
-            >
-              PostHog Privacy Policy
-            </a>
-            .
-          </p>
-          <p>
-            The legal basis for data processing is your consent under Art. 6
-            para. 1 lit. a GDPR, which you provide via our cookie banner.
-            PostHog processes data in accordance with GDPR requirements and
-            maintains appropriate data protection standards.
-          </p>
-          <p>
-            Data collected by PostHog may be processed on servers located
-            outside Switzerland or the EU. In such cases, we ensure appropriate
-            safeguards, such as Standard Contractual Clauses (SCCs), are in
-            place.
+            Our services may use cookies to ensure basic functionality. Some
+            cookies are necessary for website functionality (e.g., session
+            cookies). You can manage or disable cookies via your browser
+            settings, but this may limit the website&rsquo;s functionality.
           </p>
 
           <h3 className="mb-6 mt-12 text-xl font-bold text-text-secondary-dark dark:text-gray-50">

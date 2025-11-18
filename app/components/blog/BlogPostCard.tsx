@@ -13,7 +13,7 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
       <Link href={`/blog/${post.slug}`} className="block">
         <div className="aspect-video">
           <Image
-            src={post.image || "/preview.png"}
+            src={post.image || "/assets/demo.png"}
             alt={`Cover image for ${post.title}`}
             width={400}
             height={250}
