@@ -86,9 +86,12 @@ export const P = (props: React.HTMLProps<HTMLParagraphElement>) => {
     return (
       <figure className="mb-8">
         {React.cloneElement(imgEl, {
-          className: clsx(imgEl.props?.className, "mx-auto"),
+          className: clsx(
+            imgEl.props?.className,
+            "mx-auto text-[var(--foreground)]"
+          ),
         })}
-        <figcaption className="mt-2 text-center italic text-text-secondary">
+        <figcaption className="mt-2 text-center italic text-[var(--text-muted)]">
           {emEl.props.children}
         </figcaption>
       </figure>
@@ -98,10 +101,7 @@ export const P = (props: React.HTMLProps<HTMLParagraphElement>) => {
   return (
     <p
       {...rest}
-      className={clsx(
-        "mb-8 leading-7 text-[var(--foreground-secondary)]",
-        className
-      )}
+      className={clsx("mb-8 leading-7 text-[var(--foreground)]", className)}
     >
       {children}
     </p>
