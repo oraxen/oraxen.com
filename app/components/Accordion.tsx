@@ -85,8 +85,8 @@ const AccordionItem = React.forwardRef<
     className={cx(
       // base
       "overflow-hidden border-b first:mt-0",
-      // border color
-      "border-light dark:border-gray-800",
+      // border color (use theme subtle border for both light and dark)
+      "border-[var(--border-subtle)]",
       className
     )}
     tremor-id="tremor-raw"
