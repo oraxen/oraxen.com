@@ -36,12 +36,12 @@ export function Faqs({ items, jsonLd }: FaqsProps) {
           </h2>
           <p className="mt-4 text-base leading-7 text-[var(--foreground-secondary)]">
             Can&rsquo;t find the answer you&rsquo;re looking for? Don&rsquo;t
-            hesitate to join our{" "}
+            hesitate to join the{" "}
             <a
-              href="https://discord.gg/gKKUAR3nmu"
+              href="https://discord.gg/2ng6q3JNQ7"
               className="font-medium text-primary hover:text-primary/90"
             >
-              discord
+              HackedServer Discord
             </a>{" "}
             .
           </p>

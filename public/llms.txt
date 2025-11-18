@@ -1,36 +1,37 @@
-# Oraxen
+# HackedServer
 
-Oraxen is a Minecraft plugin that allows the creation of custom items & blocks using custom textures and models. It handles resourcepack generation, upload and storage automatically, and is entirely open source with an extensible API.
+HackedServer is a premium Minecraft plugin that detects hacked clients, cheats, and unwanted mods as players connect to your server. It uses advanced packet-based checks at connection time so you can catch cheaters early and keep your community fair.
 
 ---
 
 ## Overview
 
-Oraxen empowers Minecraft server owners to create unlimited custom content including items, blocks, furniture, armor, glyphs, and more. With automatic resourcepack generation and distribution, Oraxen makes adding custom content to your server simple and efficient.
+HackedServer helps Minecraft server owners automatically detect players using suspicious clients and mods (Forge, Fabric, WorldDownloader, Labymod, Vape Cracked, and more depending on version). It runs lightweight checks at join time, logs detections, and can alert staff or run automatic punishments.
 
 ---
 
 ## Product & Features
 
-- **Custom Items & Blocks**: Create unlimited custom items and blocks with custom textures and models.
-- **Automatic Resourcepack**: Oraxen generates resource packs automatically and uploads them to Polymath or your own hosting.
-- **Custom Furniture**: Build custom furniture with precise positioning and display-entity support.
-- **Custom Armor**: Create custom armor with component-based or trim-based systems.
-- **Glyphs & Emoji**: Add custom glyphs and emoji to enhance server communication.
-- **Extensible API**: Full API support for developers to create custom mechanics and integrations.
+- **Early detection**: Run checks when players connect, before they can toggle cheats.
+- **Wide client coverage**: Detect many popular hacked clients and mod loaders.
+- **Automatic alerts & actions**: Notify staff or trigger custom punishments.
+- **Proxy support**: Works with Bungeecord-style setups when installed on both backend servers and proxy.
+- **Extensible checks**: Add your own custom checks for special use cases.
 
 ---
 
 ## How it works
 
-1. Install Oraxen and CommandAPI on your Spigot/Paper server.
-2. Configure custom items using YAML files in `/plugins/oraxen/items/`.
-3. Oraxen generates models and texture mappings automatically.
-4. A resource pack is created and distributed to players automatically via Polymath.
+1. Install HackedServer, HackedCore, and (for 1.17+) ProtocolLib on your Spigot/Paper servers.
+2. Configure detection rules and actions in the plugin configuration.
+3. (For Bungeecord/Waterfall) Install HackedServer on the proxy as well and enable the relevant options.
+4. Monitor alerts, logs, and automated actions as players join.
 
 ---
 
 ## Learn more
 
-- Website: https://oraxen.com
-- Documentation: https://docs.oraxen.com
+- Website: https://hackedserver.org
+- Documentation: https://docs.hackedserver.org
+- Spigot: https://www.spigotmc.org/resources/%E2%98%A0%EF%B8%8F-hackedserver-mods-clients-detector-1-16-1-21-8.46485/
+- Polymart: https://polymart.org/product/630/hackedserver

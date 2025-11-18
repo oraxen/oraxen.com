@@ -6,25 +6,25 @@ import { siteConfig } from "../siteConfig";
 export const metadata: Metadata = {
   title: `Terms of Use - ${siteConfig.name}`,
   description:
-    "Read the terms of use for the Oraxen website. Understand your rights and obligations when using our informational content and resources.",
+    "Read the terms of use for the HackedServer website. Understand your rights and obligations when using our informational content and resources.",
   keywords: [
     "terms of use",
     "terms of service",
     "service agreement",
     "user terms",
     "legal terms",
-    "Oraxen",
+    "HackedServer",
     "Minecraft plugin",
   ],
   openGraph: {
     title: `Terms of Use - ${siteConfig.name}`,
     description:
-      "Read the terms of use for the Oraxen website. Understand your rights and obligations when using our informational content and resources.",
+      "Read the terms of use for the HackedServer website. Understand your rights and obligations when using our informational content and resources.",
     url: `${siteConfig.url}/terms`,
     type: "website",
     images: [
       {
-        url: `${siteConfig.url}/logo_lowres.png`,
+        url: `${siteConfig.url}/logo.svg`,
         width: 1200,
         height: 630,
         alt: `${siteConfig.name} Terms of Use`,
@@ -35,8 +35,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `Terms of Use - ${siteConfig.name}`,
     description:
-      "Read the terms of use for the Oraxen website. Understand your rights and obligations when using our informational content and resources.",
-    images: [`${siteConfig.url}/logo_lowres.png`],
+      "Read the terms of use for the HackedServer website. Understand your rights and obligations when using our informational content and resources.",
+    images: [`${siteConfig.url}/logo.svg`],
   },
   alternates: {
     canonical: `${siteConfig.url}/terms`,
@@ -81,7 +81,7 @@ export default function Terms() {
 
           <p>
             <strong>1.1</strong> These Terms of Use (&ldquo;Terms&rdquo;) govern
-            your use of the Oraxen website and any related content, downloads,
+            your use of the HackedServer website and any related content, downloads,
             or resources (&ldquo;Service&rdquo;). By using the Service, you
             accept these Terms. If you do not agree with these Terms, you should
             not use the Service.
@@ -90,7 +90,7 @@ export default function Terms() {
           <p>
             <strong>1.2</strong> For the purposes of these Terms,
             &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo; refers to
-            the maintainers of the Oraxen project. &ldquo;You&rdquo; or
+            the maintainers of the HackedServer project. &ldquo;You&rdquo; or
             &ldquo;User&rdquo; refers to any person accessing or using the
             Service.
           </p>
@@ -107,7 +107,7 @@ export default function Terms() {
 
           <p>
             <strong>2.1 Core Service:</strong> We provide an informational
-            website about the Oraxen Minecraft plugin, along with related
+            website about the HackedServer Minecraft plugin, along with related
             content and resources. The exact features of our Service are
             described on our website and may change over time.
           </p>
@@ -302,8 +302,8 @@ export default function Terms() {
           </h3>
 
           <p>
-            We may publicly refer to Oraxen and its community in marketing or
-            informational materials, but we will not use your personal name,
+            We may publicly refer to HackedServer and its community in marketing
+            or informational materials, but we will not use your personal name,
             logo, or branding as a reference client without your prior consent.
           </p>
 
@@ -343,7 +343,7 @@ export default function Terms() {
           <p>
             <strong>10.5 Contact and Legal Notice:</strong> If you have any
             questions or communications regarding these Terms, you may contact
-            us at support@oraxen.com. Our Privacy Policy can be found on our
+            us at support@hackedserver.org. Our Privacy Policy can be found on our
             website.
           </p>
         </div>

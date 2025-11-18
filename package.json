@@ -1,10 +1,10 @@
 {
-  "name": "oraxen-website",
+  "name": "hackedserver-website",
   "version": "0.1.0",
   "private": true,
-  "description": "Official Oraxen website - Custom items & blocks for Minecraft servers.",
+  "description": "Official HackedServer website - Mods & clients detector for Minecraft servers.",
   "keywords": [
-    "Oraxen",
+    "HackedServer",
     "Minecraft plugin",
     "custom items",
     "custom blocks",
@@ -13,7 +13,7 @@
     "resource pack",
     "minecraft server"
   ],
-  "homepage": "https://oraxen.com",
+  "homepage": "https://hackedserver.org",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

@@ -8,16 +8,16 @@ import { siteConfig } from "../siteConfig";
 export const metadata: Metadata = {
   title: `Blog - ${siteConfig.name}`,
   description:
-    "Discover insights on AI, generative search, content strategy, and the future of digital marketing. Stay ahead with expert analysis and practical guides.",
+    "Stories, guides, and technical deep dives about detecting hacked clients and keeping your Minecraft server fair.",
   keywords: [
-    "AI",
-    "Generative Search",
     "Minecraft",
     "Minecraft plugin",
-    "Oraxen",
-    "custom items",
-    "custom blocks",
-    "resource pack",
+    "HackedServer",
+    "cheat detection",
+    "hacked clients",
+    "mods detector",
+    "Spigot",
+    "Paper",
   ],
   alternates: {
     canonical: `${siteConfig.url}/blog`,
@@ -26,15 +26,15 @@ export const metadata: Metadata = {
     type: "website",
     title: `Blog | ${siteConfig.name}`,
     description:
-      "Discover insights on AI, generative search, content strategy, and the future of digital marketing.",
+      "Learn how to detect hacked clients, configure HackedServer, and keep your Minecraft community fair and fun.",
     url: `${siteConfig.url}/blog`,
     siteName: siteConfig.name,
     images: [
       {
-        url: `${siteConfig.url}/logo_lowres.png`,
+        url: `${siteConfig.url}/logo.svg`,
         width: 1200,
         height: 630,
-        alt: `${siteConfig.name} - Custom Items & Blocks for Minecraft`,
+        alt: `${siteConfig.name} - Mods & Clients Detector for Minecraft`,
       },
     ],
   },
@@ -42,8 +42,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `Blog | ${siteConfig.name}`,
     description:
-      "Discover insights on AI, generative search, content strategy, and the future of digital marketing.",
-    images: [`${siteConfig.url}/images/preview.png`],
+      "Stories, guides, and technical deep dives about detecting hacked clients and keeping your Minecraft server fair.",
+    images: [`${siteConfig.url}/logo.svg`],
   },
 };
 
@@ -52,7 +52,7 @@ const blogPageJsonLd = {
   "@type": "Blog",
   name: `${siteConfig.name} Blog`,
   description:
-    "Discover insights on AI, generative search, content strategy, and the future of digital marketing.",
+    "Stories, guides, and technical deep dives about detecting hacked clients and keeping your Minecraft server fair.",
   url: `${siteConfig.url}/blog`,
   publisher: {
     "@type": "Organization",

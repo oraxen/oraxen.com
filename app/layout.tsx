@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   title: siteConfig.metaTitle,
   description: siteConfig.metaDescription,
   icons: {
-    icon: "/favicon.ico",
+    icon: ["/favicon.png", "/favicon.ico"],
   },
 };
 

@@ -1,24 +1,47 @@
 ---
-title: Example Blog Post
-description: This is a minimal example blog post to demonstrate the structure
+title: Detecting Hacked Clients at Connection Time
+description: Learn how HackedServer detects hacked clients and mods as players connect, helping you keep your server fair without burning out your staff.
 date: 2024-01-15
 author: ava-from-relens
-tags: [example, tutorial]
-image: /assets/demo.png
-featured: false
+tags: [hacked clients, mods, detection, tutorial]
+image: /thread/screenshots/classify.png
+featured: true
 ---
 
-# Example Blog Post
+# Detecting Hacked Clients at Connection Time
 
-This is a minimal example blog post. You can write your content here using standard Markdown syntax.
+Running a public Minecraft server means dealing with cheaters, hacked clients and unfair mods.  
+**HackedServer** is built to catch them as early as possible: at the moment they connect.
 
-## Subheading
+## Why detect at connection time?
 
-You can add paragraphs, lists, and other Markdown elements.
+Instead of relying only on classic in-game anticheats, HackedServer inspects specific packets exchanged when the player joins.  
+This allows it to:
 
-- Item one
-- Item two
-- Item three
+- Detect many clients before they have time to toggle any cheat
+- Reduce noise for your staff (fewer false-positives from movement checks)
+- Give you a clear list of suspicious clients and mods
+
+## What can HackedServer detect?
+
+Depending on your server version, HackedServer can detect:
+
+- Forge and many Forge mods
+- Fabric and Rift-based clients
+- WorldDownloader
+- Labymod, BetterSprintingMod, Liteloader
+- 5ZigMod, PX Mod
+- Vape Cracked and more
+
+You can also add your own custom checks to extend detection as new clients appear.
+
+## Getting started
+
+1. Drop `HackedServer.jar`, `HackedCore.jar` and (for 1.17+) `ProtocolLib` into your `/plugins/` folder.  
+2. Restart your server.  
+3. Follow the configuration guide in the docs.
+
+You can read the full installation guide at [`https://docs.hackedserver.org`](https://docs.hackedserver.org).
 
 That's it! This is a minimal example to get you started.
 

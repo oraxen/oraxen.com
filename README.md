@@ -1,85 +1,57 @@
-# Oraxen | Minecraft Custom Items Plugin
+# HackedServer | Mods & Clients Detector for Minecraft
 
-**Oraxen** is a free, open-source Minecraft plugin for Spigot and Paper servers. Create unlimited custom items, blocks, furniture, and armor with automatic resource pack generation. No manual resource pack creation required.
+**HackedServer** is a premium Spigot/Paper plugin that detects hacked clients, cheats, and unwanted mods as players connect to your server using advanced packet-based checks.
 
-**[Download Free →](https://oraxen.com)** | **[Documentation →](https://docs.oraxen.com)**
+**[Buy on Spigot →](https://www.spigotmc.org/resources/%E2%98%A0%EF%B8%8F-hackedserver-mods-clients-detector-1-16-1-21-8.46485/)** · **[Buy on Polymart →](https://polymart.org/product/630/hackedserver)** · **[Documentation →](https://docs.hackedserver.org/)**
 
-![Oraxen showcase](https://oraxen.com/assets/demo.png)
+![HackedServer alerts screenshot](public/thread/screenshots/alerts.png)
 
 ## Features
 
-- ✅ **Custom Items & Blocks** — Create items with custom textures and models via YAML
-- ✅ **Automatic Resource Packs** — Auto-generated and hosted for players
-- ✅ **Custom Furniture** — Build furniture with precise positioning and models
-- ✅ **Custom Armor** — Component-based (1.21.2+) or trim-based (1.20-1.21.1)
-- ✅ **Glyphs & Emoji** — Custom communication tools
-- ✅ **Open Source** — Free with full API for developers
+- ✅ **Detect hacked clients early** — Run checks when players connect, before they have time to toggle cheats.
+- ✅ **Wide mod & client coverage** — Detect Forge/Fabric clients, WorldDownloader, Labymod, Vape Cracked, and more (version-dependent).
+- ✅ **Automatic alerts & punishments** — Alert staff or run automatic actions when suspicious clients are detected.
+- ✅ **Supports modern server stacks** — Compatible with Spigot, Paper, and Bungeecord-style proxies.
+- ✅ **Extensible checks** — Add your own client checks for custom setups.
 
 ## Quick Start
 
 ### Installation
 
-1. Download [CommandAPI](https://commandapi.jorel.dev/downloads) (required)
-2. Download [Oraxen](https://www.spigotmc.org/resources/oraxen.72448/) from Spigot or [Polymart](https://polymart.org/resource/oraxen.629)
-3. Place both `.jar` files in `/plugins/`
-4. Restart server
-5. Configure items in `/plugins/oraxen/items/`
+1. Download `HackedServer.jar` and `HackedCore.jar` (dependency).  
+2. (For 1.17+) Download `ProtocolLib`.  
+3. Place the `.jar` files in your `/plugins/` folder.  
+4. Restart your server.  
+5. Follow the configuration guide in the docs.
 
-**Compatibility:** Minecraft 1.18 - 1.21.4 | Spigot & Paper | ProtocolLib optional
+**Compatibility:** Minecraft 1.16–1.21.x | Spigot & Paper (and compatible forks) | Bungeecord / Waterfall / Travertine (with proxy install)
 
-### Usage
+## Website
 
-Create YAML files in `/plugins/oraxen/items/`:
+This repository contains the **HackedServer** marketing website built with:
 
-```yaml
-items:
-  custom_sword:
-    displayname: "<i:bold>Custom Sword</i>"
-    material: GOLDEN_SWORD
-    texture: items/my_sword
-    generate_model: GENERATE_ITEM
-```
+- Next.js 15 (App Router)
+- React 19
+- TypeScript 5
+- Tailwind CSS
+- MDX for the blog
 
-Players automatically receive the resource pack when joining.
-
-## FAQ
-
-**What is Oraxen?**  
-A Minecraft plugin for creating custom items, blocks, furniture, and armor with automatic resource pack generation.
-
-**Is it free?**  
-Yes, Oraxen is completely free and open source.
-
-**What versions are supported?**  
-Minecraft 1.18 through 1.21.4 on Spigot and Paper servers.
-
-**What's required?**  
-CommandAPI (required) and ProtocolLib (recommended).
-
-**Does it work with other plugins?**  
-Yes, integrates with BossShopPro, MythicMobs, ModelEngine, MMoItems, and more.
-
-## Development
-
-This is the Oraxen website built with Next.js 15, Tailwind CSS, and TypeScript.
-
-### Setup
+### Local Setup
 
 ```bash
 pnpm install
 pnpm run dev
 ```
 
-Visit `http://localhost:3000`
+Visit `http://localhost:3000`.
 
 ### Deploy
 
-Optimized for Vercel. Configured with SEO, sitemap, and robots.txt.
+Optimized for Vercel, with SEO metadata, sitemap, and robots.txt.
 
 ## Links
 
-- 🌐 **Website:** [oraxen.com](https://oraxen.com)
-- 📚 **Docs:** [docs.oraxen.com](https://docs.oraxen.com)
-- 📦 **Spigot:** [Download](https://www.spigotmc.org/resources/oraxen.72448/)
-- 🛒 **Polymart:** [Download](https://polymart.org/resource/oraxen.629)
-- 💻 **GitHub:** [Source Code](https://git.io/oraxen)
+- ☠️ **Spigot:** [HackedServer on Spigot](https://www.spigotmc.org/resources/%E2%98%A0%EF%B8%8F-hackedserver-mods-clients-detector-1-16-1-21-8.46485/)
+- ☠️ **Polymart:** [HackedServer on Polymart](https://polymart.org/product/630/hackedserver)
+- 📚 **Docs:** [docs.hackedserver.org](https://docs.hackedserver.org/)
+- 💻 **Plugin GitHub:** [oraxen/HackedServer](https://github.com/oraxen/hackedserver)

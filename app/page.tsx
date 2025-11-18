@@ -10,54 +10,54 @@ import { buildFaqJsonLd } from "./lib/utils";
 export default function Home() {
   const faqItems = [
     {
-      question: "What is Oraxen?",
+      question: "What is HackedServer?",
       answer:
-        "Oraxen is a Minecraft plugin that allows the creation of custom items & blocks using custom textures and models. It handles resourcepack generation, upload and storage automatically, and is entirely open source with an extensible API.",
+        "HackedServer is a Spigot and Bungeecord plugin that detects hacked clients, cheats, and unwanted mods right when players connect to your server using advanced packet-based checks.",
     },
     {
       question: "What servers are supported?",
       answer:
-        "Oraxen works with Spigot and Paper servers running Minecraft 1.18 through 1.21.4. For Minecraft 1.21.2+, using the latest version of Oraxen is advised.",
+        "HackedServer works with Spigot, CraftBukkit, Paper, TacoSpigot, and Akarin across a wide range of Minecraft versions. It also supports Bungeecord-style proxies when installed on both the backend servers and the proxy.",
     },
     {
       question: "What dependencies are required?",
       answer:
-        "CommandAPI is required. ProtocolLib is recommended but optional. Simply drop the Oraxen and CommandAPI .jar files into your /plugins/ folder and restart your server.",
+        "HackedServer depends on HackedCore and, for modern versions, ProtocolLib. Simply drop HackedServer.jar, HackedCore.jar (and ProtocolLib if applicable) into your /plugins/ folder and restart your server.",
     },
     {
-      question: "What features does Oraxen support?",
+      question: "What clients and mods can HackedServer detect?",
       answer:
-        "Oraxen supports custom items, custom blocks, custom armor, custom furniture, glyphs, emoji, custom GUI, custom HUD, and various mechanics like farming, note blocks, string blocks, and more.",
+        "Depending on your server version, HackedServer can detect Forge, Fabric, Rift, Labymod, PX Mod, 5ZigMod, WorldDownloader, Vape Cracked, Liteloader, BetterSprintingMod, many Forge mods, and more. It can also tell you which Minecraft version players are using.",
     },
     {
-      question: "Does Oraxen support resource packs?",
+      question: "Does HackedServer automatically punish cheaters?",
       answer:
-        "Yes! Oraxen automatically generates resource packs using your custom textures and models, then uploads them to a Polymath instance (or your own) and distributes them to players automatically.",
+        "Yes. HackedServer can automatically alert your staff, block connections, or run custom punishments when a suspicious client or mod is detected, helping your team focus on legitimate players instead of chasing cheaters.",
     },
     {
-      question: "Is Oraxen free?",
+      question: "Is HackedServer premium?",
       answer:
-        "Oraxen is open source and available for free. You can download it from Spigot or Polymart. The default Polymath instance is free, or you can host your own.",
+        "HackedServer is a premium plugin available on Spigot and Polymart. Once purchased, you can use it on your network according to the license terms and receive updates and support.",
     },
     {
-      question: "Can I customize furniture and items?",
+      question: "Can I add my own checks?",
       answer:
-        "Absolutely! Oraxen allows you to create custom furniture with custom models, position them precisely, and even create display-entity furniture. You can also customize item appearance, make dyeable items, and more.",
+        "Yes. HackedServer allows you to add your own client checks so you can extend detection for custom use cases or new hacked clients as they appear.",
     },
     {
-      question: "Does Oraxen work with other plugins?",
+      question: "Does HackedServer impact server performance?",
       answer:
-        "Yes! Oraxen integrates with many popular plugins including BossShopPro, CrateReloaded, MythicMobs, ModelEngine, TrMenu, HappyHUD, MMoItems, and various world generators.",
+        "HackedServer is designed to be extremely light on resources. It focuses on checks at connection time, so it runs smoothly on most servers without noticeable performance impact.",
     },
     {
       question: "How do I get started?",
       answer:
-        "Install CommandAPI and Oraxen in your /plugins/ folder, restart your server, then configure your items in the /plugins/oraxen/items/ directory. Check the documentation for detailed guides!",
+        "Drop HackedServer.jar, HackedCore.jar, and ProtocolLib (for 1.17+) into your /plugins/ folder, restart your server, and follow the configuration guide. For Bungeecord setups, install HackedServer on every Spigot server and on the proxy as described in the docs.",
     },
     {
-      question: "Is there an API for developers?",
+      question: "Where can I find documentation and support?",
       answer:
-        "Yes! Oraxen has a comprehensive API for developers. You can create custom mechanics, add compatibility with other plugins, and even create custom hosting services. See the developer documentation for details.",
+        "You can read the full documentation at docs.hackedserver.org, and join the community Discord to ask questions, share feedback, and get help with your setup.",
     },
   ];
   return (
@@ -70,17 +70,17 @@ export default function Home() {
           >
             <Button className="h-10 font-semibold bg-primary hover:bg-primary/90">
               <Link
-                href="https://www.spigotmc.org/resources/oraxen.72448/"
+                href="https://www.spigotmc.org/resources/%E2%98%A0%EF%B8%8F-hackedserver-mods-clients-detector-1-16-1-21-8.46485/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white no-underline"
               >
-                Get on Spigot
+                Buy on Spigot
               </Link>
             </Button>
             <Button className="h-10 font-semibold border-2 border-primary bg-transparent text-primary hover:bg-primary/10">
               <Link
-                href="https://polymart.org/resource/oraxen.629"
+                href="https://polymart.org/product/630/hackedserver"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="no-underline"
@@ -102,34 +102,34 @@ export default function Home() {
           </div>
         </Hero>
         <HowItWorks
-          badgeText="features"
-          title={"Why choose " + siteConfig.name}
+          badgeText="Features"
+          title={"Why choose " + siteConfig.name + "?"}
           steps={[
             {
-              title: "Premium Artist-Made Textures",
+              title: "Detect cheats before they strike",
               description:
-                "Access hundreds of dollars worth of beautiful, professionally crafted textures created by talented artists. Transform your server with high-quality custom items that stand out from the crowd.",
-              imagePath: "/assets/beautiful_items.png",
+                "HackedServer runs lightweight checks when players connect, detecting hacked clients and suspicious mods before they even have a chance to cheat on your server.",
+              imagePath: "/thread/screenshots/check.png",
             },
             {
-              title: "Custom Menus & GUI",
+              title: "Wide client & mod coverage",
               description:
-                "Create stunning custom menus and user interfaces for your server. Build immersive experiences with fully customizable GUIs that guide and engage your players.",
-              imagePath: "/assets/custom_menu.jpg",
+                "From Forge and Fabric to Labymod, WorldDownloader, Vape Cracked and more, HackedServer covers a large set of popular hacked clients and mods across many Minecraft versions.",
+              imagePath: "/thread/screenshots/classify.png",
             },
             {
-              title: "Furniture & Custom Blocks",
+              title: "Alerts and automatic punishments",
               description:
-                "Enhance your server world with custom furniture and decorative blocks. Place interactive items, create immersive environments, and bring your server's aesthetic to life.",
-              imagePath: "/assets/furnitures.png",
+                "Automatically alert your staff, log suspicious activity, or run custom punishments when a bad client is detected, so your team can focus on your community instead of chasing cheaters.",
+              imagePath: "/thread/screenshots/alerts.png",
             },
             {
-              title: "Easy, Modular & Open Source",
+              title: "Proven in real servers over years",
               description:
-                "Oraxen is designed to be easy to configure with simple YAML files. It's fully modular, allowing you to enable only what you need. Best of all, it's completely open source, giving you full control and transparency.",
-              ctaText: "View Documentation",
-              ctaLink: "https://docs.oraxen.com/",
-              imagePath: "/assets/demo.png",
+                "HackedServer has been battle-tested for years on real servers, evolving through community feedback to stay effective even as new hacked clients appear.",
+              ctaText: "Read the documentation",
+              ctaLink: "https://docs.hackedserver.org/",
+              imagePath: "/thread/screenshots/forge_check.png",
             },
           ]}
         />

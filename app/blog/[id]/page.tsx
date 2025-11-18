@@ -28,7 +28,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: post.frontmatter.title,
+    title: `${post.frontmatter.title} - HackedServer Blog`,
     description: post.frontmatter.description,
     alternates: {
       canonical: `${siteConfig.url}/blog/${id}`,

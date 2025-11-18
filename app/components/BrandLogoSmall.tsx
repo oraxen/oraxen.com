@@ -9,8 +9,8 @@ export function BrandLogoSmall({
 }: BrandLogoSmallProps) {
   return (
     <img
-      src="/logo_lowres.png"
-      alt="Brand Logo"
+      src="/logo.svg"
+      alt="HackedServer logo"
       className={className}
       width={size}
       height={size}

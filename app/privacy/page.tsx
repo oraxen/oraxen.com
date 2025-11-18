@@ -6,7 +6,7 @@ import { siteConfig } from "../siteConfig";
 export const metadata: Metadata = {
   title: `Privacy Policy - ${siteConfig.name}`,
   description:
-    "Learn how we handle data on the Oraxen website. This privacy policy explains what is collected, how it is used, and your rights.",
+    "Learn how we handle data on the HackedServer website. This privacy policy explains what is collected, how it is used, and your rights.",
   keywords: [
     "privacy policy",
     "data protection",
@@ -15,18 +15,18 @@ export const metadata: Metadata = {
     "data security",
     "user privacy",
     "data processing",
-    "Oraxen",
+    "HackedServer",
     "Minecraft plugin",
   ],
   openGraph: {
     title: `Privacy Policy - ${siteConfig.name}`,
     description:
-      "Learn how we handle data on the Oraxen website. This privacy policy explains what is collected, how it is used, and your rights.",
+      "Learn how we handle data on the HackedServer website. This privacy policy explains what is collected, how it is used, and your rights.",
     url: `${siteConfig.url}/privacy`,
     type: "website",
     images: [
       {
-        url: `${siteConfig.url}/logo_lowres.png`,
+        url: `${siteConfig.url}/logo.svg`,
         width: 1200,
         height: 630,
         alt: `${siteConfig.name} Privacy Policy`,
@@ -37,8 +37,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `Privacy Policy - ${siteConfig.name}`,
     description:
-      "Learn how we handle data on the Oraxen website. This privacy policy explains what is collected, how it is used, and your rights.",
-    images: [`${siteConfig.url}/logo_lowres.png`],
+      "Learn how we handle data on the HackedServer website. This privacy policy explains what is collected, how it is used, and your rights.",
+    images: [`${siteConfig.url}/logo.svg`],
   },
   alternates: {
     canonical: `${siteConfig.url}/privacy`,
@@ -76,7 +76,7 @@ export default function Privacy() {
       <section className="mx-auto mt-16 max-w-4xl">
         <div className="prose prose-gray max-w-none dark:prose-invert">
           <p>
-            We welcome your use of the Oraxen website and any related services
+            We welcome your use of the HackedServer website and any related services
             (&ldquo;Our Services&rdquo;). In the following provisions, we inform
             you about the type, scope, and purposes of the collection and use of
             your personal data when using our services. Personal data refers to
@@ -100,9 +100,9 @@ export default function Privacy() {
           </p>
           <div className="p-4">
             <p className="mb-2">
-              <strong>Oraxen Project</strong>
+              <strong>HackedServer Project</strong>
             </p>
-            <p>Email: support@oraxen.com</p>
+            <p>Email: support@hackedserver.org</p>
           </div>
 
           <h3 className="mb-6 mt-12 text-xl font-bold text-text-secondary-dark dark:text-gray-50">
