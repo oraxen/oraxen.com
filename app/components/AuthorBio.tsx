@@ -35,7 +35,7 @@ export function AuthorBio({
         </div>
       )}
       <div className="flex-1">
-        <h3 className="mb-2 cursor-pointer text-lg font-bold uppercase tracking-wide text-[var(--foreground)]">
+        <h3 className="mb-2 cursor-pointer text-lg font-bold tracking-wide text-[var(--foreground)]">
           <Link
             href={`/blog/author/${name.toLowerCase().replace(/\s+/g, "-")}`}
           >

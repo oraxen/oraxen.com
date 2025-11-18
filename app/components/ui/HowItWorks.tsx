@@ -82,7 +82,7 @@ export default function HowItWorks({
               </div>
             </div>
             <div className="order-2">
-              <h3 className="text-2xl font-semibold bg-gradient-to-br from-[var(--foreground)] to-[var(--foreground-secondary)] bg-clip-text text-transparent sm:text-3xl">
+              <h3 className="text-2xl font-semibold text-slate-800 dark:text-slate-100 sm:text-3xl">
                 {step.title}
               </h3>
               <p className="mt-4 max-w-md text-justify leading-7 text-[var(--foreground-secondary)]">
