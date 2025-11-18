@@ -20,10 +20,7 @@ function CustomHeading(props: any) {
     `h${props.level}`,
     {
       id: slug,
-      className: clsx(
-        "scroll-mt-36 md:scroll-mt-24 inline-flex",
-        props.className
-      ),
+      className: clsx("scroll-mt-36 md:scroll-mt-24 flex", props.className),
     },
     [
       React.createElement("a", {
@@ -47,7 +44,7 @@ export const H1 = ({ children }: React.HTMLProps<HTMLHeadingElement>) => (
 
 export const H2 = ({ children }: React.HTMLProps<HTMLHeadingElement>) => (
   <CustomHeading
-    className="mb-4 text-lg font-semibold normal-case tracking-tight text-[var(--foreground)]"
+    className="mt-10 mb-4 text-3xl font-semibold normal-case tracking-tight text-[var(--foreground)]"
     level={2}
   >
     {children}
@@ -56,7 +53,7 @@ export const H2 = ({ children }: React.HTMLProps<HTMLHeadingElement>) => (
 
 export const H3 = ({ children }: React.HTMLProps<HTMLHeadingElement>) => (
   <CustomHeading
-    className="mb-2 font-semibold normal-case tracking-tight text-[var(--foreground)]"
+    className="mt-6 mb-3 text-2xl font-semibold normal-case tracking-tight text-[var(--foreground)]"
     level={3}
   >
     {children}
