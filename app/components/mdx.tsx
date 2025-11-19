@@ -36,7 +36,7 @@ function CustomHeading(props: any) {
 
 export const H1 = ({ children }: React.HTMLProps<HTMLHeadingElement>) => (
   <CustomHeading
-    className="text-3xl font-bold normal-case tracking-tight text-[var(--foreground)] sm:text-4xl"
+    className="text-3xl font-bold tracking-tighter text-[var(--foreground)] opacity-90 sm:text-4xl"
     level={1}
   >
     {children}
@@ -45,7 +45,7 @@ export const H1 = ({ children }: React.HTMLProps<HTMLHeadingElement>) => (
 
 export const H2 = ({ children }: React.HTMLProps<HTMLHeadingElement>) => (
   <CustomHeading
-    className="mt-10 mb-4 text-3xl font-semibold normal-case tracking-tight text-[var(--foreground)]"
+    className="mt-10 mb-4 text-3xl font-bold tracking-tighter text-[var(--foreground)] opacity-90"
     level={2}
   >
     {children}
@@ -54,7 +54,7 @@ export const H2 = ({ children }: React.HTMLProps<HTMLHeadingElement>) => (
 
 export const H3 = ({ children }: React.HTMLProps<HTMLHeadingElement>) => (
   <CustomHeading
-    className="mt-6 mb-3 text-2xl font-semibold normal-case tracking-tight text-[var(--foreground)]"
+    className="mt-6 mb-3 text-2xl font-bold tracking-tighter text-[var(--foreground)] opacity-90"
     level={3}
   >
     {children}
@@ -114,7 +114,7 @@ export const Ul = (props: React.HTMLAttributes<HTMLUListElement>) => (
 );
 
 export const Bold = (props: React.HTMLAttributes<HTMLSpanElement>) => (
-  <span className="font-semibold text-[var(--foreground)]" {...props} />
+  <span className="font-bold text-[var(--foreground)]" {...props} />
 );
 
 export function CustomLink(props: any) {
