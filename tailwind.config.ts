@@ -35,11 +35,14 @@ const config: Config = {
               borderLeftColor: primary,
             },
             "ul > li::marker": {
-              color: "#141413",
+              color: "var(--foreground)",
             },
-            color: "#141413",
+            color: "var(--foreground)",
             h2: {
-              color: "#483c33",
+              color: "var(--foreground)",
+            },
+            strong: {
+              color: "var(--foreground)",
             },
           },
         },

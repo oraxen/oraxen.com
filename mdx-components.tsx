@@ -19,7 +19,7 @@ export let customComponents = {
   h2: H2,
   h3: H3,
   p: P,
-  Bold: Bold,
+  strong: Bold,
   ul: Ul,
   a: CustomLink,
   BlogEntry: BlogEntry,
