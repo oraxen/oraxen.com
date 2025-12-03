@@ -4,7 +4,7 @@ export const siteConfig = {
   description:
     "A Minecraft plugin that allows the creation of custom items & blocks using custom textures and models. Open source with extensible API.",
   heroTitle: "Create custom items & blocks in Minecraft",
-  metaTitle: "Oraxen — Custom Items & Blocks for Minecraft Servers",
+  metaTitle: "Oraxen",
   metaDescription:
     "Powerful Minecraft plugin for creating custom items, blocks, furniture, glyphs, and more. Fully open source with automatic resourcepack generation.",
   baseLinks: {
