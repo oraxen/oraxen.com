@@ -4,7 +4,7 @@ alwaysApply: true
 
 ## Project Conventions
 
-- **Tech Stack**: Next.js 15.1.4 (App Router), React 19, TypeScript 5, pnpm.
+- **Tech Stack**: Next.js 15.5.7 (App Router), React 19, TypeScript 5, pnpm.
 - **Run commands**: use pnpm
   - `pnpm run dev`, `pnpm run build`, `pnpm run start`.
 - **Directory layout**:
