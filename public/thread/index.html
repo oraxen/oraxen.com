@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oraxen - Thread Design</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --accent: #2eff8a;
+        --accent-glow: rgba(46, 255, 138, 0.6);
+        --accent-soft: rgba(46, 255, 138, 0.15);
+        --accent-border: rgba(46, 255, 138, 0.5);
+        --accent-line: rgba(46, 255, 138, 0.3);
+        --accent-glow-outer: rgba(46, 255, 138, 0.4);
+        --panel-shadow: rgba(46, 255, 138, 0.1);
+        --text-color: rgba(255, 255, 255, 0.94);
+        --panel-a: rgba(8, 18, 12, 0.95);
+        --panel-b: rgba(12, 28, 18, 0.92);
+        --panel-c: rgba(8, 22, 14, 0.9);
+        --bg-brightness: 0.85;
+        --gold: #ffd700;
+        --bg-dark: #080d0a;
+        --bg-panel: rgba(8, 18, 12, 0.92);
+        --vignette-strength: 0.28;
+        --vignette-color-rgb: 0, 0, 0;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        background: var(--bg-dark);
+        color: white;
+        overflow: hidden;
+      }
+
+      .slides-container {
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+      }
+
+      .slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.6s ease, visibility 0.6s ease;
+      }
+
+      .slide.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .slide-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        filter: brightness(var(--bg-brightness));
+      }
+      /* Subtle vignette overlay for readability */
+      .slide-bg::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: radial-gradient(
+            circle at 50% 50%,
+            rgba(0, 0, 0, 0) 45%,
+            rgba(
+                var(--vignette-color-rgb, 0, 0, 0),
+                var(--vignette-strength, 0.28)
+              )
+              100%
+          ),
+          linear-gradient(
+            to right,
+            rgba(
+                var(--vignette-color-rgb, 0, 0, 0),
+                calc(var(--vignette-strength, 0.28) * 0.4)
+              )
+              0%,
+            rgba(0, 0, 0, 0) 25%,
+            rgba(0, 0, 0, 0) 75%,
+            rgba(
+                var(--vignette-color-rgb, 0, 0, 0),
+                calc(var(--vignette-strength, 0.28) * 0.4)
+              )
+              100%
+          );
+        z-index: 1;
+      }
+
+      /* Decorative frame overlay */
+      .slide::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border: 3px solid var(--accent-soft);
+        pointer-events: none;
+        z-index: 50;
+      }
+
+      /* Corner accents */
+      .corner-accent {
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        z-index: 60;
+        pointer-events: none;
+      }
+
+      .corner-accent::before,
+      .corner-accent::after {
+        content: "";
+        position: absolute;
+        background: linear-gradient(90deg, var(--accent), transparent);
+      }
+
+      .corner-accent.top-left {
+        top: 15px;
+        left: 15px;
+      }
+      .corner-accent.top-left::before {
+        top: 0;
+        left: 0;
+        width: 60px;
+        height: 3px;
+      }
+      .corner-accent.top-left::after {
+        top: 0;
+        left: 0;
+        width: 3px;
+        height: 60px;
+        background: linear-gradient(180deg, var(--accent), transparent);
+      }
+
+      .corner-accent.top-right {
+        top: 15px;
+        right: 15px;
+      }
+      .corner-accent.top-right::before {
+        top: 0;
+        right: 0;
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(-90deg, var(--accent), transparent);
+      }
+      .corner-accent.top-right::after {
+        top: 0;
+        right: 0;
+        width: 3px;
+        height: 60px;
+        background: linear-gradient(180deg, var(--accent), transparent);
+      }
+
+      .corner-accent.bottom-left {
+        bottom: 15px;
+        left: 15px;
+      }
+      .corner-accent.bottom-left::before {
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 3px;
+      }
+      .corner-accent.bottom-left::after {
+        bottom: 0;
+        left: 0;
+        width: 3px;
+        height: 60px;
+        background: linear-gradient(0deg, var(--accent), transparent);
+      }
+
+      .corner-accent.bottom-right {
+        bottom: 15px;
+        right: 15px;
+      }
+      .corner-accent.bottom-right::before {
+        bottom: 0;
+        right: 0;
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(-90deg, var(--accent), transparent);
+      }
+      .corner-accent.bottom-right::after {
+        bottom: 0;
+        right: 0;
+        width: 3px;
+        height: 60px;
+        background: linear-gradient(0deg, var(--accent), transparent);
+      }
+
+      .slide-content {
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        width: 42%;
+        max-width: 560px;
+        min-width: 480px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 3rem 2.5rem;
+        background: linear-gradient(
+          135deg,
+          var(--panel-a) 0%,
+          var(--panel-b) 50%,
+          var(--panel-c) 100%
+        );
+        backdrop-filter: blur(16px);
+        border-left: 3px solid var(--accent-border);
+        box-shadow: -20px 0 60px var(--panel-shadow),
+          inset 1px 0 0 rgba(255, 255, 255, 0.05);
+        color: var(--text-color);
+      }
+
+      .slide-content.left {
+        right: auto;
+        left: 0;
+        border-left: none;
+        border-right: 3px solid var(--accent-border);
+        box-shadow: 20px 0 60px var(--panel-shadow),
+          inset -1px 0 0 rgba(255, 255, 255, 0.05);
+        background: linear-gradient(
+          225deg,
+          var(--panel-a) 0%,
+          var(--panel-b) 50%,
+          var(--panel-c) 100%
+        );
+      }
+
+      /* Decorative line above content */
+      .slide-content::before {
+        content: "";
+        position: absolute;
+        top: 2rem;
+        left: 2rem;
+        right: 2rem;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--accent-line),
+          transparent
+        );
+      }
+
+      /* Decorative line below content */
+      .slide-content::after {
+        content: "";
+        position: absolute;
+        bottom: 2rem;
+        left: 2rem;
+        right: 2rem;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--accent-line),
+          transparent
+        );
+      }
+
+      .slide-number {
+        font-family: "Cinzel", serif;
+        font-size: 0.75rem;
+        color: var(--gold);
+        letter-spacing: 4px;
+        margin-bottom: 0.75rem;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-weight: 600;
+      }
+
+      .slide-number::before {
+        content: "✦";
+        font-size: 0.6rem;
+        color: var(--accent);
+      }
+
+      .slide-title {
+        font-family: "Cinzel", serif;
+        font-size: 1.6rem;
+        line-height: 1.6;
+        color: var(--accent);
+        text-shadow: 0 0 30px var(--accent-glow),
+          0 0 60px var(--accent-glow-outer);
+        margin-bottom: 2rem;
+        letter-spacing: 2px;
+        font-weight: 600;
+      }
+
+      .slide-bullets {
+        list-style: none;
+      }
+
+      .slide-bullets li {
+        position: relative;
+        padding-left: 1.75rem;
+        margin-bottom: 1.5rem;
+        font-size: 1.2rem;
+        line-height: 1.75;
+        color: var(--text-color);
+        font-weight: 500;
+      }
+
+      .slide-bullets li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.65rem;
+        width: 10px;
+        height: 10px;
+        background: var(--accent);
+        box-shadow: 0 0 10px var(--accent-glow),
+          0 0 20px var(--accent-glow-outer);
+        clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+      }
+
+      .slide-bullets li strong {
+        color: var(--accent);
+        font-weight: 700;
+      }
+
+      .slide-bullets li code {
+        font-family: "Cinzel", serif;
+        font-size: 0.7rem;
+        background: var(--accent-soft);
+        padding: 0.25rem 0.6rem;
+        border-radius: 3px;
+        color: var(--accent);
+        border: 1px solid var(--accent-border);
+        letter-spacing: 1px;
+      }
+
+      /* Studio previews gallery (Slide 5) */
+      .studio-previews {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.75rem;
+        margin-top: 1rem;
+      }
+      .studio-previews img {
+        width: 100%;
+        height: auto;
+        border-radius: 6px;
+        border: 1px solid var(--accent-border);
+        background: rgba(0, 0, 0, 0.2);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35),
+          0 0 12px var(--accent-glow-outer);
+      }
+      /* Single hero image for Studio (Slide 5) */
+      .studio-hero-frame {
+        position: relative;
+        margin-top: 1rem;
+        border-radius: 10px 10px 0 0; /* keep top rounded, bottom square */
+        overflow: visible; /* allow bottom fade to extend beyond container */
+        border: 1px solid var(--accent-border);
+        background: rgba(0, 0, 0, 0.2);
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35),
+          0 0 14px var(--accent-glow-outer);
+      }
+      .studio-hero-frame::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          transparent 0%,
+          var(--accent) 10%,
+          var(--accent) 90%,
+          transparent 100%
+        );
+        box-shadow: 0 0 10px var(--accent-glow);
+        pointer-events: none;
+        z-index: 2;
+      }
+      .studio-hero-frame::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin-bottom: 100 vh;
+        height: 45vh; /* extend fade toward the page bottom */
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.06) 0%,
+          rgba(0, 0, 0, 0.025) 20%,
+          rgba(0, 0, 0, 0.01) 40%,
+          rgba(0, 0, 0, 0) 100%
+        ); /* rapid decrease from previous stop */
+        pointer-events: none;
+        z-index: 2;
+      }
+      .studio-hero {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      /* Brand badge */
+      .brand-badge {
+        position: fixed;
+        bottom: 1.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.6rem 1.25rem;
+        background: var(--panel-b);
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--accent-border);
+        border-radius: 6px;
+        transition: opacity 0.3s ease;
+      }
+
+      .brand-badge .diamond {
+        width: 12px;
+        height: 12px;
+        background: var(--accent);
+        clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        box-shadow: 0 0 10px var(--accent-glow);
+      }
+
+      .brand-badge span {
+        font-family: "Cinzel", serif;
+        font-size: 0.7rem;
+        color: var(--text-color);
+        letter-spacing: 3px;
+        font-weight: 600;
+      }
+
+      /* Slide indicator */
+      .slide-indicator {
+        position: fixed;
+        top: 1.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: "Cinzel", serif;
+        font-size: 0.75rem;
+        color: var(--accent-line);
+        z-index: 100;
+        padding: 0.5rem 1.25rem;
+        background: var(--panel-b);
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--accent-border);
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        letter-spacing: 2px;
+      }
+
+      .slide-indicator .current {
+        color: var(--accent);
+        text-shadow: 0 0 10px var(--accent-glow);
+      }
+      .slide-indicator .sep {
+        color: var(--accent-border);
+        opacity: 0.95;
+      }
+      .slide-indicator .total {
+        color: var(--gold);
+        font-weight: 700;
+        text-shadow: 0 0 10px var(--accent-glow),
+          0 0 12px rgba(255, 215, 0, 0.35);
+        letter-spacing: 3px;
+      }
+
+      /* Glowing orbs decoration */
+      .glow-orb {
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 5;
+      }
+
+      .glow-orb.orb-1 {
+        width: 300px;
+        height: 300px;
+        top: -100px;
+        right: 30%;
+        background: radial-gradient(
+          circle,
+          rgba(46, 255, 138, 0.08) 0%,
+          transparent 70%
+        );
+      }
+
+      .glow-orb.orb-2 {
+        width: 200px;
+        height: 200px;
+        bottom: 10%;
+        left: 10%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 215, 0, 0.06) 0%,
+          transparent 70%
+        );
+      }
+
+      /* Animations */
+      .slide.active .slide-title {
+        animation: fadeSlideIn 0.6s ease 0.2s both;
+      }
+
+      .slide.active .slide-bullets li {
+        animation: fadeSlideIn 0.5s ease both;
+      }
+
+      .slide.active .slide-bullets li:nth-child(1) {
+        animation-delay: 0.3s;
+      }
+      .slide.active .slide-bullets li:nth-child(2) {
+        animation-delay: 0.45s;
+      }
+      .slide.active .slide-bullets li:nth-child(3) {
+        animation-delay: 0.6s;
+      }
+
+      @keyframes fadeSlideIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Subtle grain effect for fantasy vibe */
+      .grain {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 200;
+        opacity: 0.03;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      }
+
+      /* Per-slide themes */
+      .slide.theme-gray {
+        --accent: #a7b0b9;
+        --accent-glow: rgba(167, 176, 185, 0.6);
+        --accent-soft: rgba(167, 176, 185, 0.16);
+        --accent-border: rgba(167, 176, 185, 0.5);
+        --accent-line: rgba(167, 176, 185, 0.3);
+        --accent-glow-outer: rgba(167, 176, 185, 0.4);
+        --panel-shadow: rgba(167, 176, 185, 0.1);
+        --text-color: rgba(238, 241, 244, 0.96);
+        --panel-a: rgba(20, 24, 28, 0.96);
+        --panel-b: rgba(26, 32, 36, 0.93);
+        --panel-c: rgba(18, 22, 26, 0.9);
+        --bg-brightness: 0.9;
+        --vignette-strength: 0.26;
+      }
+
+      .slide.theme-brown {
+        --accent: #8b4513;
+        --accent-glow: rgba(139, 69, 19, 0.6);
+        --accent-soft: rgba(139, 69, 19, 0.15);
+        --accent-border: rgba(139, 69, 19, 0.5);
+        --accent-line: rgba(139, 69, 19, 0.3);
+        --accent-glow-outer: rgba(139, 69, 19, 0.4);
+        --panel-shadow: rgba(139, 69, 19, 0.1);
+        --text-color: rgba(247, 236, 222, 0.96);
+        --panel-a: rgba(33, 22, 14, 0.95);
+        --panel-b: rgba(44, 30, 18, 0.92);
+        --panel-c: rgba(28, 18, 10, 0.9);
+        --bg-brightness: 0.82;
+      }
+
+      .slide.theme-lightblue {
+        --accent: #5ec8e9;
+        --accent-glow: rgba(94, 200, 233, 0.6);
+        --accent-soft: rgba(94, 200, 233, 0.16);
+        --accent-border: rgba(94, 200, 233, 0.5);
+        --accent-line: rgba(94, 200, 233, 0.3);
+        --accent-glow-outer: rgba(94, 200, 233, 0.4);
+        --panel-shadow: rgba(94, 200, 233, 0.1);
+        --text-color: rgba(232, 244, 255, 0.96);
+        --panel-a: rgba(10, 18, 28, 0.96);
+        --panel-b: rgba(12, 28, 44, 0.93);
+        --panel-c: rgba(8, 22, 38, 0.9);
+        --bg-brightness: 0.92;
+        --vignette-strength: 0.22;
+      }
+
+      .slide.theme-indigo {
+        --accent: #5b5bd6;
+        --accent-glow: rgba(91, 91, 214, 0.6);
+        --accent-soft: rgba(91, 91, 214, 0.16);
+        --accent-border: rgba(91, 91, 214, 0.5);
+        --accent-line: rgba(91, 91, 214, 0.3);
+        --accent-glow-outer: rgba(91, 91, 214, 0.4);
+        --panel-shadow: rgba(91, 91, 214, 0.1);
+        --text-color: rgba(236, 240, 255, 0.97);
+        --panel-a: rgba(16, 14, 36, 0.96);
+        --panel-b: rgba(20, 18, 44, 0.93);
+        --panel-c: rgba(14, 12, 34, 0.9);
+        --bg-brightness: 0.9;
+        --vignette-strength: 0.26;
+      }
+
+      /* Slide-specific refinements */
+      .slide[data-slide="3"] {
+        --accent: #b87333;
+        --accent-glow: rgba(184, 115, 51, 0.6);
+        --accent-soft: rgba(184, 115, 51, 0.15);
+        --accent-border: rgba(184, 115, 51, 0.5);
+        --accent-line: rgba(184, 115, 51, 0.3);
+        --accent-glow-outer: rgba(184, 115, 51, 0.4);
+        --text-color: rgba(248, 242, 235, 0.97);
+        --panel-a: rgba(36, 22, 14, 0.96);
+        --panel-b: rgba(44, 26, 16, 0.93);
+        --panel-c: rgba(30, 18, 12, 0.9);
+        --bg-brightness: 0.86;
+        --vignette-strength: 0.3;
+      }
+      .slide[data-slide="4"] .slide-content {
+        backdrop-filter: blur(18px);
+      }
+      /* Slide 5: add tasteful gold with indigo */
+      .slide[data-slide="5"] .slide-title {
+        text-shadow: 0 0 30px var(--accent-glow),
+          0 0 26px var(--accent-glow-outer);
+      }
+      .slide[data-slide="5"] .slide-bullets li strong {
+        color: var(--accent);
+      }
+      .slide[data-slide="5"] .slide-bullets li::before {
+        background: var(--accent);
+        box-shadow: 0 0 10px var(--accent-glow),
+          0 0 20px var(--accent-glow-outer);
+      }
+      .slide[data-slide="6"] {
+        --accent: #d69e2e;
+        --accent-glow: rgba(214, 158, 46, 0.6);
+        --accent-soft: rgba(214, 158, 46, 0.16);
+        --accent-border: rgba(214, 158, 46, 0.48);
+        --accent-line: rgba(214, 158, 46, 0.3);
+        --accent-glow-outer: rgba(214, 158, 46, 0.4);
+        --text-color: rgba(243, 230, 208, 0.96);
+        --panel-a: rgba(24, 20, 12, 0.96);
+        --panel-b: rgba(28, 22, 14, 0.93);
+        --panel-c: rgba(20, 16, 10, 0.9);
+        --bg-brightness: 0.84;
+        --vignette-strength: 0.3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grain"></div>
+
+    <div class="slides-container">
+      <!-- Corner accents (shared) -->
+      <div class="corner-accent top-left"></div>
+      <div class="corner-accent top-right"></div>
+      <div class="corner-accent bottom-left"></div>
+      <div class="corner-accent bottom-right"></div>
+
+      <!-- Glow orbs -->
+      <div class="glow-orb orb-1"></div>
+      <div class="glow-orb orb-2"></div>
+
+      <!-- Slide 1 - Title Banner -->
+      <div class="slide active" data-slide="1">
+        <div
+          class="slide-bg"
+          style="background-image: url('header.webp'); filter: brightness(1)"
+        ></div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="slide theme-gray" data-slide="2">
+        <div
+          class="slide-bg"
+          style="background-image: url('background1.jpg')"
+        ></div>
+        <div class="slide-content left">
+          <div class="slide-number">Chapter I</div>
+          <h2 class="slide-title">Stop Looking Like<br />Every Other Server</h2>
+          <ul class="slide-bullets">
+            <li>
+              Most servers look the same, and you have seconds to stand out.
+            </li>
+            <li>
+              Oraxen gives you custom items, blocks, armors, GUIs and chat
+              glyphs in one plugin.
+            </li>
+            <li>
+              Players join and instantly see a world that reflects your vision.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="slide theme-brown" data-slide="3">
+        <div
+          class="slide-bg"
+          style="background-image: url('background2.jpg')"
+        ></div>
+        <div class="slide-content">
+          <div class="slide-number">Chapter II</div>
+          <h2 class="slide-title">
+            Turn Visuals into<br />Retention & Revenue
+          </h2>
+          <ul class="slide-bullets">
+            <li>
+              <strong>Seamless resource-pack UX:</strong> players join once,
+              accept, and everything just works.
+            </li>
+            <li>
+              Unique cosmetics and GUIs make ranks, crates, and passes feel
+              <strong>premium, not pay-to-win</strong>.
+            </li>
+            <li>
+              A better first impression leads to more returning players and more
+              people
+              <strong>buying from your store</strong>.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Slide 4 -->
+      <div class="slide theme-lightblue" data-slide="4">
+        <div
+          class="slide-bg"
+          style="background-image: url('background4.jpg')"
+        ></div>
+        <div class="slide-content left">
+          <div class="slide-number">Chapter III</div>
+          <h2 class="slide-title">
+            Professional Tooling<br />for Serious Networks
+          </h2>
+          <ul class="slide-bullets">
+            <li>
+              <strong>Automatic pack generation,</strong> optimization and
+              delivery. No zips, merges, or broken textures.
+            </li>
+            <li>
+              Lightweight, production-proven core running on real servers for
+              <strong>5+ years</strong>.
+            </li>
+            <li>
+              Fully <strong>open source</strong> with clean APIs: no lock-in and
+              a workflow your developers can trust.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Slide 5 -->
+      <div class="slide theme-indigo" data-slide="5">
+        <div
+          class="slide-bg"
+          style="background-image: url('background3.jpg')"
+        ></div>
+        <div class="slide-content">
+          <div class="slide-number">Chapter IV</div>
+          <h2 class="slide-title">
+            Express Your Vision<br />Without Writing Code
+          </h2>
+          <ul class="slide-bullets">
+            <li>
+              No coding needed. Create items, blocks, and armors in your browser
+              with
+              <strong>Oraxen Studio</strong>.
+            </li>
+            <li>Private beta. Request access on our Discord.</li>
+          </ul>
+          <div class="studio-hero-frame">
+            <img
+              class="studio-hero"
+              src="./generation.png"
+              alt="Oraxen Studio – AI texture generation"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 6 -->
+      <div class="slide theme-brown" data-slide="6">
+        <div
+          class="slide-bg"
+          style="background-image: url('background5.jpg')"
+        ></div>
+        <div class="slide-content left">
+          <div class="slide-number">Chapter V</div>
+          <h2 class="slide-title">Build a Server<br />Players Remember</h2>
+          <ul class="slide-bullets">
+            <li>
+              Install Oraxen, open <strong>Oraxen Studio</strong>, create
+              content, reload. That's your pipeline.
+            </li>
+            <li>
+              Give your team a single tool that makes the server feel like a
+              <strong>custom game</strong>, not a preset.
+            </li>
+            <li>
+              If you want a server that grows, earns money, and showcases your
+              creativity, <strong>build it on Oraxen</strong>.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Brand badge -->
+    <div class="brand-badge" style="opacity: 0">
+      <div class="diamond"></div>
+      <span>ORAXEN</span>
+      <div class="diamond"></div>
+    </div>
+
+    <!-- Slide indicator -->
+    <div class="slide-indicator">
+      <span class="current" id="currentSlide">1</span>
+      <span class="sep">/</span>
+      <span class="total" id="totalSlides">6</span>
+    </div>
+
+    <script>
+      let currentSlide = 0;
+      const slides = document.querySelectorAll(".slide");
+      const totalSlides = slides.length;
+      const root = document.documentElement;
+      const THEME_VARS = [
+        "--accent",
+        "--accent-glow",
+        "--accent-soft",
+        "--accent-border",
+        "--accent-line",
+        "--accent-glow-outer",
+        "--panel-shadow",
+        "--text-color",
+        "--panel-a",
+        "--panel-b",
+        "--panel-c",
+      ];
+      const DEFAULT_THEME = {};
+      (function cacheDefaults() {
+        const cs = getComputedStyle(root);
+        THEME_VARS.forEach(
+          (v) => (DEFAULT_THEME[v] = cs.getPropertyValue(v).trim())
+        );
+      })();
+
+      function syncThemeToRoot() {
+        if (currentSlide === 0) {
+          THEME_VARS.forEach((v) =>
+            root.style.setProperty(v, DEFAULT_THEME[v])
+          );
+          return;
+        }
+        const active = slides[currentSlide];
+        const cs = getComputedStyle(active);
+        THEME_VARS.forEach((v) => {
+          const val = cs.getPropertyValue(v).trim();
+          if (val) root.style.setProperty(v, val);
+        });
+      }
+
+      function updateSlide() {
+        slides.forEach((slide, index) => {
+          slide.classList.toggle("active", index === currentSlide);
+        });
+        document.getElementById("currentSlide").textContent = currentSlide + 1;
+        // Reflect current slide in the URL for shareability
+        try {
+          const url = new URL(window.location.href);
+          url.searchParams.set("slide", String(currentSlide + 1));
+          history.replaceState(null, "", url.toString());
+        } catch (e) {}
+        // Hide brand badge and slide indicator on first slide (banner)
+        document.querySelector(".brand-badge").style.opacity =
+          currentSlide === 0 ? "0" : "1";
+        document.querySelector(".slide-indicator").style.opacity =
+          currentSlide === 0 ? "0" : "1";
+        syncThemeToRoot();
+      }
+
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateSlide();
+      }
+
+      function prevSlide() {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        updateSlide();
+      }
+
+      function goToSlide(index) {
+        currentSlide = index;
+        updateSlide();
+      }
+
+      // Keyboard navigation (for easy screenshot capture)
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight" || e.key === " ") {
+          nextSlide();
+        } else if (e.key === "ArrowLeft") {
+          prevSlide();
+        } else if (e.key >= "1" && e.key <= "6") {
+          goToSlide(parseInt(e.key) - 1);
+        }
+      });
+
+      // Initialize on page load
+      // Support URL param ?slide=1..N (1-based) to choose initial slide
+      (function initFromUrlParam() {
+        const params = new URLSearchParams(window.location.search);
+        const slideParam = params.get("slide") || params.get("s");
+        if (slideParam != null) {
+          const parsed = parseInt(slideParam, 10);
+          if (!Number.isNaN(parsed)) {
+            const clamped = Math.min(Math.max(parsed, 1), totalSlides);
+            currentSlide = clamped - 1; // convert to 0-based index
+          }
+        }
+      })();
+      // Set dynamic total slide count in indicator
+      (function setTotalSlides() {
+        const totalEl = document.getElementById("totalSlides");
+        if (totalEl) {
+          totalEl.textContent = String(totalSlides);
+        }
+      })();
+      updateSlide();
+    </script>
+  </body>
+</html>

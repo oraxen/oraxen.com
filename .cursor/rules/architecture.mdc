@@ -4,8 +4,8 @@ alwaysApply: true
 
 ## Product Website Architecture
 
-- **Framework**: Next.js 15.1.4 (App Router) + React 19 + TypeScript 5.
-- **Runtime/PM**: pnpm (see `package.json`). Prefer `pnpm run` for scripts.
+- **Framework**: Next.js 15 (App Router) + React 19 + TypeScript 5.
+- **Runtime/PM**: Bun (see `bun.lock`). Prefer `bun run` for scripts.
 - **Purpose**: Product landing page with purchase links, documentation links, and blog for SEO.
 
 ### Routing & Rendering
@@ -62,7 +62,7 @@ alwaysApply: true
 
 ### Build & Commands
 
-- Scripts: `pnpm run dev`, `pnpm run build`, `pnpm run start`.
+- Scripts: `bun run dev`, `bun run build`, `bun run start`.
 - Build generates static pages from MDX posts.
 
 ### Notes

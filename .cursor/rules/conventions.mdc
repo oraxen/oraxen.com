@@ -4,9 +4,9 @@ alwaysApply: true
 
 ## Project Conventions
 
-- **Tech Stack**: Next.js 15.1.4 (App Router), React 19, TypeScript 5, pnpm.
-- **Run commands**: use pnpm
-  - `pnpm run dev`, `pnpm run build`, `pnpm run start`.
+- **Tech Stack**: Next.js 15 (App Router), React 19, TypeScript 5, Bun.
+- **Run commands**: use Bun
+  - `bun run dev`, `bun run build`, `bun run start`.
 - **Directory layout**:
   - `app/`: Next App Router routes and components.
   - `app/blog/posts/`: MDX blog posts.
@@ -55,7 +55,7 @@ Content here...
 
 ### Build & Validation
 
-- Builds must pass `pnpm run build`; TypeScript must compile cleanly.
+- Builds must pass `bun run build`; TypeScript must compile cleanly.
 - Blog posts are compiled at build time via `next-mdx-remote/rsc`.
 - Always verify the site builds after edits.
 
