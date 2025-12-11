@@ -5,7 +5,7 @@ const background = "#edf2f5";
 const light = "#e6f6ff";
 
 const config: Config = {
-  darkMode: "selector",
+  darkMode: "media",
   content: [
     "./app/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/components/**/*.{js,ts,jsx,tsx,mdx}",

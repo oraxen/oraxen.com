@@ -582,6 +582,14 @@
       const slides = document.querySelectorAll(".slide");
       const totalSlides = slides.length;
 
+      function notifyParent() {
+        window.parent.postMessage({
+          type: 'slideChange',
+          currentSlide: currentSlide,
+          totalSlides: totalSlides
+        }, '*');
+      }
+
       function updateSlide() {
         slides.forEach((slide, index) => {
           slide.classList.toggle("active", index === currentSlide);
@@ -592,6 +600,7 @@
           currentSlide === 0 ? "0" : "1";
         document.querySelector(".slide-indicator").style.opacity =
           currentSlide === 0 ? "0" : "1";
+        notifyParent();
       }
 
       function nextSlide() {
@@ -608,6 +617,14 @@
         currentSlide = index;
         updateSlide();
       }
+
+      // Listen for commands from parent
+      window.addEventListener('message', (e) => {
+        if (e.data.type === 'next') nextSlide();
+        else if (e.data.type === 'prev') prevSlide();
+        else if (e.data.type === 'goTo') goToSlide(e.data.index);
+        else if (e.data.type === 'getState') notifyParent();
+      });
 
       // Keyboard navigation (for easy screenshot capture)
       document.addEventListener("keydown", (e) => {
