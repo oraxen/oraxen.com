@@ -1,7 +1,6 @@
 import { Button } from "./components/Button";
 import Link from "next/link";
 import { siteConfig } from "./siteConfig";
-import Hero from "./components/ui/Hero";
 import HeroImage from "./components/ui/HeroImage";
 import HowItWorks from "./components/ui/HowItWorks";
 import { Faqs } from "./components/ui/Faqs";
@@ -63,10 +62,24 @@ export default function Home() {
   return (
     <>
       <main className="flex flex-col overflow-hidden">
-        <Hero title={siteConfig.heroTitle} description={siteConfig.description}>
+        {/* Hero Section - Thread first, then CTA buttons */}
+        <section className="mt-24 flex flex-col items-center justify-center sm:mt-32">
+          {/* Thread Slideshow */}
           <div
-            className="mt-8 flex animate-slide-up-fade flex-col justify-center gap-3 px-3 sm:flex-row"
-            style={{ animationDuration: "1100ms" }}
+            className="relative mx-auto w-full max-w-6xl animate-slide-up-fade px-3 sm:px-6"
+            style={{ animationDuration: "700ms" }}
+          >
+            <div
+              className="absolute inset-x-0 -bottom-12 -mx-10 h-1/3 bg-gradient-to-t from-[var(--background)] via-[var(--background)] to-transparent opacity-80 lg:h-1/5 dark:from-gray-950 dark:via-gray-950"
+              aria-hidden="true"
+            />
+            <HeroImage />
+          </div>
+
+          {/* CTA Buttons - Below the thread */}
+          <div
+            className="mt-10 flex animate-slide-up-fade flex-col justify-center gap-3 px-3 sm:flex-row"
+            style={{ animationDuration: "900ms" }}
           >
             <Button className="h-10 font-semibold bg-primary hover:bg-primary/90">
               <Link
@@ -89,18 +102,8 @@ export default function Home() {
               </Link>
             </Button>
           </div>
+        </section>
 
-          <div
-            className="relative mx-auto ml-3 mt-20 h-fit max-w-6xl animate-slide-up-fade sm:ml-auto sm:w-full sm:px-2"
-            style={{ animationDuration: "1400ms" }}
-          >
-            <div
-              className="absolute inset-x-0 -bottom-12 -mx-10 h-1/3 bg-gradient-to-t from-[var(--background)] via-[var(--background)] to-transparent opacity-80 lg:h-1/5 dark:from-gray-950 dark:via-gray-950"
-              aria-hidden="true"
-            />
-            <HeroImage />
-          </div>
-        </Hero>
         <HowItWorks
           badgeText="Features"
           title={"Why choose " + siteConfig.name + "?"}

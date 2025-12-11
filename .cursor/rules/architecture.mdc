@@ -4,7 +4,7 @@ alwaysApply: true
 
 ## Product Website Architecture
 
-- **Framework**: Next.js 15.5.7 (App Router) + React 19 + TypeScript 5.
+- **Framework**: Next.js 15 (App Router) + React 19 + TypeScript 5.
 - **Runtime/PM**: Bun (see `bun.lock`). Prefer `bun run` for scripts.
 - **Purpose**: Product landing page with purchase links, documentation links, and blog for SEO.
 

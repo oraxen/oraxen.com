@@ -44,7 +44,7 @@ export default function HowItWorks({
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               viewport={{ once: true }}
-              className="mt-2 inline-block bg-gradient-to-br from-[var(--foreground)] to-[var(--foreground-secondary)] bg-clip-text py-2 text-3xl font-bold tracking-tighter text-transparent sm:text-5xl"
+              className="mt-2 inline-block bg-gradient-to-br from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 bg-clip-text py-2 text-3xl font-bold tracking-tighter text-transparent sm:text-5xl"
             >
               {title}
             </motion.h2>
@@ -82,10 +82,10 @@ export default function HowItWorks({
               </div>
             </div>
             <div className="order-2">
-              <h3 className="text-2xl font-semibold text-slate-800 dark:text-slate-100 sm:text-3xl">
+              <h3 className="text-2xl font-semibold text-gray-900 dark:text-white sm:text-3xl">
                 {step.title}
               </h3>
-              <p className="mt-4 max-w-md text-justify leading-7 text-[var(--foreground-secondary)]">
+              <p className="mt-4 max-w-md text-justify leading-7 text-gray-600 dark:text-gray-300">
                 {step.description}
               </p>
               {(step.ctaText || step.ctaLink) && (
