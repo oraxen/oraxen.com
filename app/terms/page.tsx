@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: `${siteConfig.url}/logo.svg`,
+        url: `${siteConfig.url}/opengraph-image.png`,
         width: 1200,
         height: 630,
         alt: `${siteConfig.name} Terms of Use`,
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     title: `Terms of Use - ${siteConfig.name}`,
     description:
       "Read the terms of use for the HackedServer website. Understand your rights and obligations when using our informational content and resources.",
-    images: [`${siteConfig.url}/logo.svg`],
+    images: [`${siteConfig.url}/opengraph-image.png`],
   },
   alternates: {
     canonical: `${siteConfig.url}/terms`,
@@ -81,10 +81,10 @@ export default function Terms() {
 
           <p>
             <strong>1.1</strong> These Terms of Use (&ldquo;Terms&rdquo;) govern
-            your use of the HackedServer website and any related content, downloads,
-            or resources (&ldquo;Service&rdquo;). By using the Service, you
-            accept these Terms. If you do not agree with these Terms, you should
-            not use the Service.
+            your use of the HackedServer website and any related content,
+            downloads, or resources (&ldquo;Service&rdquo;). By using the
+            Service, you accept these Terms. If you do not agree with these
+            Terms, you should not use the Service.
           </p>
 
           <p>
@@ -343,8 +343,8 @@ export default function Terms() {
           <p>
             <strong>10.5 Contact and Legal Notice:</strong> If you have any
             questions or communications regarding these Terms, you may contact
-            us at support@hackedserver.org. Our Privacy Policy can be found on our
-            website.
+            us at support@hackedserver.org. Our Privacy Policy can be found on
+            our website.
           </p>
         </div>
       </section>

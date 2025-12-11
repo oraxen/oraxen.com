@@ -166,7 +166,7 @@ export const BlogEntry = ({
       name: siteConfig.name,
       logo: {
         "@type": "ImageObject",
-        url: `${siteConfig.url}/logo.svg`,
+        url: `${siteConfig.url}/logo.png`,
       },
     },
   };

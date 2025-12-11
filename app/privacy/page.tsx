@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: `${siteConfig.url}/logo.svg`,
+        url: `${siteConfig.url}/opengraph-image.png`,
         width: 1200,
         height: 630,
         alt: `${siteConfig.name} Privacy Policy`,
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     title: `Privacy Policy - ${siteConfig.name}`,
     description:
       "Learn how we handle data on the HackedServer website. This privacy policy explains what is collected, how it is used, and your rights.",
-    images: [`${siteConfig.url}/logo.svg`],
+    images: [`${siteConfig.url}/opengraph-image.png`],
   },
   alternates: {
     canonical: `${siteConfig.url}/privacy`,
@@ -76,13 +76,13 @@ export default function Privacy() {
       <section className="mx-auto mt-16 max-w-4xl">
         <div className="prose prose-gray max-w-none dark:prose-invert">
           <p>
-            We welcome your use of the HackedServer website and any related services
-            (&ldquo;Our Services&rdquo;). In the following provisions, we inform
-            you about the type, scope, and purposes of the collection and use of
-            your personal data when using our services. Personal data refers to
-            any information that relates to an identified or identifiable
-            natural person. This includes, in particular, your name and email
-            address.
+            We welcome your use of the HackedServer website and any related
+            services (&ldquo;Our Services&rdquo;). In the following provisions,
+            we inform you about the type, scope, and purposes of the collection
+            and use of your personal data when using our services. Personal data
+            refers to any information that relates to an identified or
+            identifiable natural person. This includes, in particular, your name
+            and email address.
           </p>
           <p>
             In addition to the General Data Protection Regulation (GDPR), we

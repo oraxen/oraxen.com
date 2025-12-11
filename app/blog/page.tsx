@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     images: [
       {
-        url: `${siteConfig.url}/logo.svg`,
+        url: `${siteConfig.url}/opengraph-image.png`,
         width: 1200,
         height: 630,
         alt: `${siteConfig.name} - Mods & Clients Detector for Minecraft`,
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     title: `Blog | ${siteConfig.name}`,
     description:
       "Stories, guides, and technical deep dives about detecting hacked clients and keeping your Minecraft server fair.",
-    images: [`${siteConfig.url}/logo.svg`],
+    images: [`${siteConfig.url}/opengraph-image.png`],
   },
 };
 
@@ -60,7 +60,7 @@ const blogPageJsonLd = {
     url: siteConfig.url,
     logo: {
       "@type": "ImageObject",
-      url: `${siteConfig.url}/logo.svg`,
+      url: `${siteConfig.url}/logo.png`,
     },
   },
 };

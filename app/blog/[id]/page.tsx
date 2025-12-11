@@ -86,7 +86,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       name: siteConfig.name,
       logo: {
         "@type": "ImageObject",
-        url: `${siteConfig.url}/logo.svg`,
+        url: `${siteConfig.url}/logo.png`,
       },
     },
     about: [
