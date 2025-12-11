@@ -7,12 +7,15 @@ export function BrandLogoSmall({
   size = 48,
   className = "",
 }: BrandLogoSmallProps) {
+  // Original aspect ratio is 27:24
+  const width = Math.round(size * (27 / 24));
+  
   return (
     <img
-      src="/logo.svg"
+      src="/logo_lowres.png"
       alt="HackedServer logo"
       className={className}
-      width={size}
+      width={width}
       height={size}
       style={{ imageRendering: "pixelated" }}
     />
