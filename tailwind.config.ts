@@ -1,8 +1,9 @@
 import type { Config } from "tailwindcss";
 
-const primary = "#3090fe";
-const background = "#edf2f5";
-const light = "#e6f6ff";
+// Cyberpunk-cyan leaning palette (aligned with thread vibe)
+const primary = "#0e7490"; // cyan-700 (keeps good contrast with white text)
+const background = "#f6fbff"; // soft cool-white
+const light = "#e0f7ff"; // subtle cyan tint for light button variant
 
 const config: Config = {
   darkMode: "media",

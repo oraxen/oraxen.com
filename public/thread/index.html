@@ -581,12 +581,15 @@
       let currentSlide = 0;
       const slides = document.querySelectorAll(".slide");
       const totalSlides = slides.length;
+      const params = new URLSearchParams(window.location.search);
+      const mode = params.get("mode") || "embedded";
 
       function notifyParent() {
         window.parent.postMessage({
           type: 'slideChange',
           currentSlide: currentSlide,
-          totalSlides: totalSlides
+          totalSlides: totalSlides,
+          mode: mode
         }, '*');
       }
 
@@ -638,6 +641,18 @@
       });
 
       // Initialize on page load
+      // Support URL param ?slide=1..N (1-based) to choose initial slide
+      (function initFromUrlParam() {
+        const params = new URLSearchParams(window.location.search);
+        const slideParam = params.get("slide") || params.get("s");
+        if (slideParam != null) {
+          const parsed = parseInt(slideParam, 10);
+          if (!Number.isNaN(parsed)) {
+            const clamped = Math.min(Math.max(parsed, 1), totalSlides);
+            currentSlide = clamped - 1; // convert to 0-based index
+          }
+        }
+      })();
       updateSlide();
     </script>
   </body>
