@@ -860,6 +860,8 @@
       let currentSlide = 0;
       const slides = document.querySelectorAll(".slide");
       const totalSlides = slides.length;
+      const params = new URLSearchParams(window.location.search);
+      const mode = params.get("mode") || "embedded";
       const root = document.documentElement;
       const THEME_VARS = [
         "--accent",
@@ -901,7 +903,8 @@
         window.parent.postMessage({
           type: 'slideChange',
           currentSlide: currentSlide,
-          totalSlides: totalSlides
+          totalSlides: totalSlides,
+          mode: mode
         }, '*');
       }
 

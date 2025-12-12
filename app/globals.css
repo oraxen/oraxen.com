@@ -3,41 +3,49 @@
 @tailwind utilities;
 
 :root {
-  /* Light theme */
-  --background: #ffffff;
-  --foreground: #111827; /* text-primary light */
-  --foreground-secondary: #6b7280; /* muted light */
+  /* Light theme (warm parchment, fantasy-leaning) */
+  --background: #fbfaf6;
+  --foreground: #0b1220;
+  --foreground-secondary: #475569;
+
+  /* Accent */
+  --primary-color: #047857; /* emerald-700 (matches Tailwind `primary`) */
+  --gold: #d69e2e;
 
   /* Surface + border palette */
   --bg-elevated: #ffffff;
-  --bg-subtle: #f3f4f6;
-  --border-subtle: #e5e7eb;
-  --border-strong: #d1d5db;
+  --bg-subtle: #f3f2ea;
+  --border-subtle: #e7e5dc;
+  --border-strong: #d6d3c7;
 
   /* Text palette */
-  --text-primary: #111827;
-  --text-muted: #6b7280;
-  --text-subtle: #9ca3af;
-  --text-inverted: #f9fafb;
+  --text-primary: #0b1220;
+  --text-muted: #475569;
+  --text-subtle: #94a3b8;
+  --text-inverted: #f8fafc;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    /* Page background (neutral dark gray, lighter than pure black) */
-    --background: #050505;
+    /* Dark theme (forest-ink, emerald glow) */
+    --background: #070d0a;
 
-    /* Text palette (from provided dark theme) */
-    --foreground: #e5e7eb; /* text-primary */
-    --foreground-secondary: #9ca3af; /* text-muted */
+    /* Text palette */
+    --foreground: #e5e7eb;
+    --foreground-secondary: #a3b0c2;
 
-    --bg-elevated: #111111;
-    --bg-subtle: #050505;
-    --border-subtle: #27272a;
-    --border-strong: #3f3f46;
+    /* Accent */
+    --primary-color: #047857;
+    --gold: #d69e2e;
+
+    --bg-elevated: #0b1410;
+    --bg-subtle: #070d0a;
+    --border-subtle: #163026;
+    --border-strong: #24513d;
 
     --text-primary: #e5e7eb;
-    --text-muted: #9ca3af;
-    --text-subtle: #6b7280;
+    --text-muted: #a3b0c2;
+    --text-subtle: #64748b;
     --text-inverted: #020617;
   }
 }
@@ -50,7 +58,24 @@
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
+  background-image:
+    radial-gradient(
+      1100px 700px at 50% -220px,
+      rgba(46, 255, 138, 0.14),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 600px at 100% 0%,
+      rgba(255, 215, 0, 0.1),
+      transparent 55%
+    ),
+    radial-gradient(
+      900px 700px at 0% 30%,
+      rgba(46, 255, 138, 0.08),
+      transparent 55%
+    );
+  background-attachment: fixed;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -64,10 +89,7 @@ body {
   src: url("/fonts/NanumPenScript.woff2") format("woff2");
 }
 
-body {
-  background-color: var(--background);
-  color: var(--foreground);
-}
+/* (Body styles are defined above) */
 
 .backdrop-blur {
   -webkit-backdrop-filter: blur(3px);
