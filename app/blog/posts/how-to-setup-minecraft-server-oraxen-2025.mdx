@@ -1,0 +1,123 @@
+---
+title: "How to Set Up a Minecraft Server for Custom Items in 2025"
+description: "Complete guide to setting up a Minecraft server ready for custom items and resource packs. Learn how to install Paper, configure your server, and prepare for Oraxen."
+author: "thomas-marchand"
+date: "2025-01-10"
+tags: ["minecraft server", "server setup", "paper", "custom items", "oraxen"]
+image: ""
+---
+
+Setting up a Minecraft server for custom content requires the right foundation. This guide walks you through the entire process, from downloading your server software to configuring it for plugins like Oraxen.
+
+## Choosing Your Server Software
+
+Before installing any plugins, you need to choose the right server software. For custom items and resource packs, you want a server that supports plugins and handles resource pack distribution well.
+
+### Recommended: Paper
+
+[Paper](https://mcserverjars.com/paper) is the most popular choice for plugin servers. It offers excellent performance, full plugin compatibility, and active development.
+
+Paper benefits for custom content servers:
+- Fast chunk loading for large resource packs
+- Optimized entity handling for custom mobs
+- Full Bukkit and Spigot plugin support
+- Regular updates and bug fixes
+
+### Alternative: Purpur
+
+If you want even more customization options, [Purpur](https://mcserverjars.com/purpur) extends Paper with additional configuration. It includes fun features and more control over game mechanics.
+
+## Step 1: Download Your Server
+
+Head to [MCServerJars.com](https://mcserverjars.com) to download the latest server jar. The site provides direct downloads for Paper, Spigot, Purpur, and other server software.
+
+1. Go to [mcserverjars.com/paper](https://mcserverjars.com/paper)
+2. Select your Minecraft version (latest stable recommended)
+3. Download the server jar
+
+## Step 2: Set Up Your Server
+
+Create a new folder for your server and place the downloaded jar inside. Create a start script:
+
+**Windows (start.bat):**
+```
+java -Xmx4G -Xms4G -jar server.jar --nogui
+pause
+```
+
+**Linux/Mac (start.sh):**
+```bash
+#!/bin/bash
+java -Xmx4G -Xms4G -jar server.jar --nogui
+```
+
+Run the script once. It will generate files and ask you to accept the EULA. Open `eula.txt` and change `eula=false` to `eula=true`.
+
+## Step 3: Configure for Custom Content
+
+For servers running custom items and resource packs, optimize these settings:
+
+### server.properties
+
+```properties
+# Allow custom resource packs
+resource-pack=
+resource-pack-sha1=
+require-resource-pack=false
+
+# Increase view distance if you have the resources
+view-distance=10
+simulation-distance=8
+```
+
+### paper-global.yml
+
+Paper has options for resource pack handling. Oraxen will handle most of this automatically, but you can adjust timeouts if needed.
+
+## Step 4: Install Required Plugins
+
+For Oraxen, you need:
+
+1. **CommandAPI** - Download from the [CommandAPI releases page](https://github.com/JorelAli/CommandAPI/releases)
+2. **ProtocolLib** (optional but recommended) - Enhances packet handling
+
+Place both in your `plugins` folder before adding Oraxen.
+
+## Step 5: Add Oraxen
+
+Download Oraxen and place it in your `plugins` folder. Restart the server.
+
+Oraxen will generate its configuration files and start handling resource pack distribution. Check the console for the Polymath URL that players will use to download the pack.
+
+## Server Hardware Recommendations
+
+For a server with custom content:
+
+| Players | RAM | CPU |
+|---------|-----|-----|
+| 1-10 | 4GB | 2 cores |
+| 10-30 | 6GB | 4 cores |
+| 30-50 | 8GB | 4+ cores |
+| 50+ | 12GB+ | 6+ cores |
+
+Custom items and resource packs add minimal overhead. Most of the work is done client-side after the pack downloads.
+
+## Hosting Options
+
+You can run your server on:
+- **Home computer** - Free but requires port forwarding
+- **VPS** - Full control, $5-20/month
+- **Minecraft hosting** - Easy setup, $5-30/month
+
+For production servers with custom content, a VPS or dedicated Minecraft host is recommended for reliable uptime.
+
+## Next Steps
+
+With your server running Paper and the prerequisites installed:
+
+1. Install Oraxen from [Polymart](https://polymart.org/resource/oraxen.629) or [SpigotMC](https://www.spigotmc.org/resources/oraxen.72448/)
+2. Check the [Oraxen documentation](https://docs.oraxen.com) for configuration
+3. Create your first custom item
+
+Your server is now ready for custom items, blocks, furniture, and armor with automatic resource pack generation.
+
