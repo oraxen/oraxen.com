@@ -1,0 +1,127 @@
+---
+title: "Best Minecraft Server Software for Security and Anti-Cheat in 2025"
+description: "Choosing the right server software matters for security. Compare Paper, Spigot, and Purpur for running anti-cheat plugins and protecting your Minecraft server."
+author: "thomas-marchand"
+date: "2025-01-10"
+tags: ["minecraft server", "server security", "anti-cheat", "paper", "server software"]
+image: ""
+---
+
+Your choice of server software affects how well anti-cheat plugins work. Some servers handle packet-level detection better than others, and performance directly impacts detection accuracy.
+
+This guide compares server software options from a security perspective.
+
+## Why Server Software Matters for Security
+
+Anti-cheat plugins like HackedServer work by analyzing player packets and behavior. The server software you choose affects:
+
+- **Packet handling speed** - Faster processing means more accurate detection
+- **TPS stability** - Lag causes false positives in movement checks
+- **Plugin compatibility** - Some anti-cheats need specific APIs
+- **Exploit fixes** - Patched servers close attack vectors
+
+## Recommended: Paper
+
+[Paper](https://mcserverjars.com/paper) is the best choice for servers running anti-cheat plugins. It provides:
+
+### Performance Benefits
+
+Paper handles packets more efficiently than Spigot or Vanilla. This matters for anti-cheats that analyze movement and combat at the packet level.
+
+Higher TPS means:
+- Fewer false positives from lag
+- More accurate reach and speed detection
+- Better handling of player data
+
+### Security Patches
+
+Paper fixes many Minecraft exploits that cheaters can abuse:
+- Chunk loading exploits
+- Entity tracking issues
+- Book and inventory exploits
+- Duplication glitches
+
+Running Paper means fewer attack surfaces for malicious clients.
+
+### Plugin Support
+
+Paper supports all Spigot plugins plus its own extended API. Anti-cheat plugins like HackedServer work perfectly on Paper servers.
+
+## Alternative: Purpur
+
+[Purpur](https://mcserverjars.com/purpur) is a Paper fork with additional features. For anti-cheat purposes, it performs identically to Paper.
+
+Choose Purpur if you want extra configuration options for gameplay. For pure security focus, Paper is sufficient.
+
+## Spigot
+
+[Spigot](https://mcserverjars.com/spigot) works with most anti-cheat plugins but offers less performance than Paper. The lower TPS ceiling can lead to more false positives under load.
+
+Use Spigot only if you have a specific compatibility requirement.
+
+## Server Setup for Anti-Cheat
+
+When setting up your server for HackedServer or other anti-cheat plugins:
+
+### 1. Download Paper
+
+Get the latest Paper build from [MCServerJars.com](https://mcserverjars.com/paper). Use the most recent Minecraft version for the best security patches.
+
+### 2. Allocate Sufficient RAM
+
+Anti-cheat plugins add minimal overhead, but maintaining high TPS is important:
+
+| Players | Recommended RAM |
+|---------|----------------|
+| 1-20 | 4GB |
+| 20-50 | 6GB |
+| 50-100 | 8GB |
+| 100+ | 12GB+ |
+
+### 3. Install Dependencies
+
+HackedServer requires:
+- **ProtocolLib** - For Spigot/Paper servers
+- **PacketEvents** - For Velocity proxies
+
+### 4. Configure Properly
+
+In your Paper configuration, avoid settings that reduce security:
+- Keep online-mode true unless using a proxy
+- Do not disable packet checks
+- Use the latest protocol version
+
+## Proxy Considerations
+
+If you run a network with BungeeCord or Velocity:
+
+### Velocity (Recommended)
+
+[Velocity](https://mcserverjars.com/velocity) is the modern proxy choice. It is faster and more secure than BungeeCord.
+
+HackedServer supports Velocity with the PacketEvents dependency.
+
+### BungeeCord / Waterfall
+
+[BungeeCord](https://mcserverjars.com/bungeecord) and [Waterfall](https://mcserverjars.com/waterfall) also work with HackedServer. Install the plugin on both the proxy and backend servers for full coverage.
+
+## Performance Tips
+
+To maximize anti-cheat accuracy:
+
+1. **Maintain 19+ TPS** - Use Paper's timings to identify lag sources
+2. **Limit view distance** - 8-10 chunks is usually sufficient
+3. **Use async features** - Paper's async chunk loading helps
+4. **Monitor with Spark** - Profile your server regularly
+
+## Conclusion
+
+For the best anti-cheat experience:
+
+1. Use [Paper](https://mcserverjars.com/paper) or [Purpur](https://mcserverjars.com/purpur)
+2. Keep your server updated
+3. Allocate enough RAM for stable TPS
+4. Install HackedServer from [hackedserver.org](https://hackedserver.org)
+
+The combination of good server software and proper anti-cheat configuration will protect your community from cheaters effectively.
+
