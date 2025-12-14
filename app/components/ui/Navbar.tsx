@@ -26,11 +26,13 @@ export const Navigation: FC<NavigationProps> = ({ sticky = true }) => {
   const [open, setOpen] = useState(false);
   // const [solutionsOpen, setSolutionsOpen] = useState(false)
 
-  if (anyRouteStartsWith(siteConfig.chatgptPages, pathname)) {
-    return null;
-  }
+  const shouldHideNavigation = anyRouteStartsWith(siteConfig.chatgptPages, pathname);
 
   useEffect(() => {
+    if (shouldHideNavigation) {
+      return;
+    }
+
     const mediaQuery: MediaQueryList = window.matchMedia("(min-width: 768px)");
     const handleMediaQueryChange = () => {
       setOpen(false);
@@ -43,7 +45,11 @@ export const Navigation: FC<NavigationProps> = ({ sticky = true }) => {
     return () => {
       mediaQuery.removeEventListener("change", handleMediaQueryChange);
     };
-  }, []);
+  }, [shouldHideNavigation]);
+
+  if (shouldHideNavigation) {
+    return null;
+  }
 
   return (
     <header
