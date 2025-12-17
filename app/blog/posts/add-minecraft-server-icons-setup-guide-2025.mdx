@@ -1,0 +1,69 @@
+---
+title: "How to Add Minecraft Server Icons: Complete Setup Guide for 2025"
+description: "Learn how to add custom Minecraft server icons to brand your world effectively. This 2025 guide provides exact requirements, step-by-step installation, and troubleshooting tips to ensure your icon appears perfectly in the multiplayer list, making a strong first impression on players."
+author: "ava-from-relens"
+date: "2025-12-17"
+tags: ["minecraft server icons", "server administration", "minecraft plugins", "server setup", "branding"]
+image: "/blog/add-minecraft-server-icons-setup-guide-2025-asset-1.webp"
+relens: true
+---
+
+For server administrators, branding a Minecraft world is key, but the technical side of adding a custom icon can be a real hurdle. This guide breaks down the exact specs and steps you need to get your icon showing up perfectly in the multiplayer list. A great icon makes a professional first impression and can be what convinces a player to log in.
+
+## Minecraft Server Icon Requirements
+
+For your icon to show up correctly, it needs to meet a few strict requirements:
+
+- **Dimensions**: Exactly 64x64 pixels
+- **Format**: PNG file type only
+- **Filename**: Must be named `server-icon.png` (case-sensitive)
+- **Location**: Root/main directory of your server files
+
+![Server icon example](/blog/add-minecraft-server-icons-setup-guide-2025-asset-1.webp)
+*Example of a properly formatted 64x64 pixel server icon*
+
+Before you upload, double-check your image's properties to make sure it's 64x64 pixels. If it's the wrong size, a simple tool like imageresizer.com can adjust it in seconds.
+
+## Step-by-Step Installation Process
+
+### 1. Prepare Your Icon File
+- Create or resize your image to be exactly 64x64 pixels.
+- Save it in PNG format.
+- Rename the file to `server-icon.png`.
+
+### 2. Upload to Server Directory
+Place the `server-icon.png` file into your server's main directory. This is the same root folder where you'll find:
+- `server.properties`
+- `plugins` folder
+- `world` folders
+
+### 3. Restart Your Server
+For the new icon to appear, you have to do a full restart. Simply reloading or using the `/reload` command won't work.
+
+![Server directory structure](/blog/add-minecraft-server-icons-setup-guide-2025-asset-2.webp)
+*Proper placement of server-icon.png in the server root directory*
+
+## Essential Plugin Setup for Enhanced Servers
+
+A sharp icon gets players in the door, but well-configured plugins are what make them stay. When you restart a Paper server, it automatically loads any JAR files you've placed in the `plugins` folder.
+
+When adding new plugins, keep these tips in mind:
+- Download from trusted sources like Hangar.papermc.io, SpigotMC, or BukkitDev.
+- If `/plugins` shows a red status, check `latest.log` for errors.
+- Remember that plugins have full access to your server, so verifying their source is critical.
+
+This is especially true for specialized game modes like prison, where the right mix of plugins is what creates a compelling experience from the ground up.
+
+## Troubleshooting Common Issues
+
+**Icon not appearing**: Go back and check the requirements. Is the file *exactly* 64x64 pixels, saved as a PNG, and named `server-icon.png`? Is it in the root directory?
+
+**Plugin errors**: Dive into your `latest.log` file. It will usually tell you if you're missing a dependency or if two plugins aren't playing nicely together.
+
+**Performance issues**: Keep an eye on performance as you add more plugins. Each one consumes resources, so too many can slow things down.
+
+## Next Steps for Server Enhancement
+
+Getting your server icon set up is a great first step toward building a polished, professional Minecraft community. While the icon creates the brand, it's the plugins that define the gameplay and keep players coming back for more.
+
+If you're ready to build a feature-rich world, explore our [complete guide to essential Minecraft prison server plugins](article/74e9591e-b328-44a1-8d0c-1df9b6ba905a). We'll walk you through how to select, configure, and integrate the right tools to create a robust player experience that goes far beyond the basics.
