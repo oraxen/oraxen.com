@@ -38,7 +38,7 @@ export function Faqs({ items, jsonLd }: FaqsProps) {
             Can&rsquo;t find the answer you&rsquo;re looking for? Don&rsquo;t
             hesitate to join our{" "}
             <a
-              href="https://discord.gg/gKKUAR3nmu"
+              href="https://discord.gg/2ng6q3JNQ7"
               className="font-medium text-primary hover:text-primary/90"
             >
               discord
