@@ -70,7 +70,7 @@ export default function Home() {
             style={{ animationDuration: "700ms" }}
           >
             <div
-              className="absolute inset-x-0 -bottom-12 -mx-10 h-1/3 bg-gradient-to-t from-[var(--background)] via-[var(--background)] to-transparent opacity-80 lg:h-1/5 dark:from-gray-950 dark:via-gray-950"
+              className="absolute inset-x-0 -bottom-12 -mx-10 h-1/3 bg-gradient-to-t from-[var(--background)] via-[var(--background)] to-transparent opacity-80 lg:h-1/5 dark:hidden"
               aria-hidden="true"
             />
             <HeroImage />

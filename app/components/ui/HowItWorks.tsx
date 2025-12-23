@@ -64,17 +64,17 @@ export default function HowItWorks({
           >
             <div className="order-1 relative">
               <div
-                className="absolute inset-x-0 -bottom-4 -mx-4 h-1/4 bg-gradient-to-t from-[var(--background)] via-[var(--background)] to-transparent opacity-60 dark:from-gray-950 dark:via-gray-950"
+                className="absolute inset-x-0 -bottom-4 -mx-4 h-1/4 bg-gradient-to-t from-[var(--background)] via-[var(--background)] to-transparent opacity-60 dark:hidden"
                 aria-hidden="true"
               />
-              <div className="inline-block rounded-2xl bg-slate-50/20 px-1 pt-1 pb-0 ring-1 ring-inset ring-slate-200/25 dark:bg-gray-900/40 dark:ring-white/5">
-                <div className="inline-block rounded-xl bg-white ring-1 ring-slate-900/5 dark:bg-slate-950 dark:ring-white/15">
+              <div className="inline-block rounded-2xl bg-slate-50/20 px-1 pt-1 pb-0 ring-1 ring-inset ring-slate-200/25 dark:bg-transparent dark:ring-white/5">
+                <div className="inline-block rounded-xl bg-white ring-1 ring-slate-900/5 dark:bg-transparent dark:ring-white/10">
                   <Image
                     src={step.imagePath || "/images/preview.png"}
                     alt={step.title}
                     width={800}
                     height={500}
-                    className="block rounded-xl shadow-2xl sepia-[0.05] dark:shadow-indigo-600/10"
+                    className="block rounded-xl shadow-2xl sepia-[0.05] dark:shadow-none"
                     sizes="(max-width: 768px) 100vw, 50vw"
                     unoptimized
                   />
