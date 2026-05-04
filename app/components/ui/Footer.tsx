@@ -24,6 +24,17 @@ export default function Footer() {
             </a>
             . All rights reserved.
           </div>
+          <div className="dark:text-secondary-light text-sm leading-5 text-[var(--foreground-secondary)]">
+            Powered by{" "}
+            <a
+              href="https://lfglabs.dev"
+              className="hover:underline transition-colors"
+              target="_blank"
+              rel="noopener"
+            >
+              LFG Labs
+            </a>
+          </div>
         </div>
       </div>
     </footer>
